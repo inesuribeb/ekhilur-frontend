@@ -1,0 +1,44 @@
+.map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.map {
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+    touch-action: manipulation;
+}
+
+/* Controles de zoom personalizados para mejor UX en móvil */
+.leaflet-control-zoom {
+    margin: 1rem !important;
+}
+
+.leaflet-touch .leaflet-control-zoom {
+    border: none;
+}
+
+.leaflet-popup-content {
+    margin: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Media queries para tablets y desktop */
+@media (min-width: 768px) {
+    .map {
+        height: 500px; /* Altura ajustada para tablets */
+    }
+    
+    .leaflet-control-zoom {
+        margin: 1.5rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .map {
+        height: 600px; /* Altura ajustada para desktop */
+    }
+}
