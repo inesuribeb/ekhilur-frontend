@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { LanguageContext } from '../../context/LanguageContext';
+import translate from '../../utils/language';
 import {login} from '../../utils/apiController'
 import './Login.css';
 
 const LoginForm = () => {
+    const {language, toggleLanguage} = useContext(LanguageContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -13,6 +17,7 @@ const LoginForm = () => {
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
 
     const validateForm = () => {
         const newErrors = {};
@@ -64,10 +69,11 @@ const LoginForm = () => {
     return (
         <div className="auth-page">
             <div className="login-container-dsk">
-                <h2>Iniciar Sesión</h2>
+                <h2>{translate.login[language]}</h2>
+                <button onClick={toggleLanguage} className='language-toggle-button'>{language === "Eus" ? "Castellano" : "Euskara"}</button>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group-dsk">
-                        <label htmlFor="email">Correo electrónico</label>
+                        <label htmlFor="email">{translate.email[language]}</label>
                         <input
                             type="email"
                             id="email"
@@ -79,7 +85,7 @@ const LoginForm = () => {
                         {errors.email && <span className="error">{errors.email}</span>}
                     </div>
                     <div className="form-group-dsk">
-                        <label htmlFor="password">Contraseña</label>
+                        <label htmlFor="password">{translate.password[language]}</label>
                         <input
                             type="password"
                             id="password"
@@ -92,12 +98,12 @@ const LoginForm = () => {
                     </div>
                     {errors.submit && <div className="error">{errors.submit}</div>}
                     <button className="login-button-dsk" type="submit" disabled={isLoading}>
-                        {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
+                        {isLoading ? translate.loading[language]:translate.login[language]}
                     </button>
                 </form>
                 {successMessage && <p className="success-dsk">{successMessage}</p>}
                 <p>
-                    <button className="link-button">¿Has olvidado tu contraseña?</button>
+                    <button className="link-button">{translate.loginQuestion[language]}</button>
                 </p>
             </div>
         </div>
