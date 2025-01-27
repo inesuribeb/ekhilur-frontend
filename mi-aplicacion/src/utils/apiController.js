@@ -6,7 +6,7 @@ async function fetchData(route, method = 'GET', data = null) {
 
         const fetchOptions = {
             method,
-            credentials: 'include', // Add this for cookies
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             }
