@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
 import {login} from '../../utils/apiController'
+
+import LanguageButton from '../LanguageButton/LanguageButton';
 import './Login.css';
 
 const LoginForm = () => {
-    const {language, toggleLanguage} = useContext(LanguageContext);
+    const {language} = useContext(LanguageContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -70,7 +72,7 @@ const LoginForm = () => {
         <div className="auth-page">
             <div className="login-container-dsk">
                 <h2>{translate.login[language]}</h2>
-                <button onClick={toggleLanguage} className='language-toggle-button'>{language === "Eus" ? "Castellano" : "Euskara"}</button>
+                <LanguageButton />
                 <form onSubmit={handleSubmit}>
                     <div className="form-group-dsk">
                         <label htmlFor="email">{translate.email[language]}</label>
