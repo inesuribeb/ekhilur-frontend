@@ -1,6 +1,4 @@
-import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import translate from '../utils/language';  
+import { createContext, useState, useContext } from "react";
 import { LanguageContext } from "./LanguageContext";
 import "./LoginContext.css";
 
@@ -9,8 +7,7 @@ export const LoginContext = createContext();
 export default function LoginContextProvider({children}) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const navigate = useNavigate();
-    const {language} = useContext(LanguageContext);
+    const { language } = useContext(LanguageContext);
 
     const checkAuth = () => {
         const cookies = document.cookie.split(';');
@@ -19,6 +16,7 @@ export default function LoginContextProvider({children}) {
         if (!hasToken && isLoggedIn) {
             setShowModal(true);
             setIsLoggedIn(false);
+            window.location.href = '/'; // Usamos window.location en lugar de useNavigate
         }
         
         setIsLoggedIn(hasToken);
@@ -26,7 +24,7 @@ export default function LoginContextProvider({children}) {
 
     const handleModalClose = () => {
         setShowModal(false);
-        navigate('/');
+        window.location.href = '/'; // Usamos window.location en lugar de useNavigate
     };
 
     return (
