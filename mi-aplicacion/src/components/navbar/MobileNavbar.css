@@ -26,11 +26,12 @@
     border: none;
     padding: 0.5rem;
     cursor: pointer;
-    color: #0047BA;
+    color: rgb(170, 169, 169);
     transition: color 0.3s ease;
   }
   
   .mobile-navbar__icon {
+    
     position: relative;
     transition: transform 0.3s ease;
   }
@@ -45,7 +46,7 @@
   }
   
   .mobile-navbar__item.is-active {
-    color: #FF9012
+    color: black
   }
   
   .mobile-navbar__item.is-active .mobile-navbar__icon {
@@ -70,5 +71,5 @@
   
   /* Animación al hacer hover */
   .mobile-navbar__item:hover {
-    color: #FF9012
+    color: black
   }

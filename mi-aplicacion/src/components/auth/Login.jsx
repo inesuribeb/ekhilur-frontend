@@ -1,15 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
-import {login} from '../../utils/apiController'
-
-import LanguageButton from '../LanguageButton/LanguageButton';
+import { login } from '../../utils/apiController';
 import './Login.css';
 
 const LoginForm = () => {
-    const {language} = useContext(LanguageContext);
+    const { language } = useContext(LanguageContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -19,7 +16,6 @@ const LoginForm = () => {
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
 
     const validateForm = () => {
         const newErrors = {};
@@ -56,7 +52,8 @@ const LoginForm = () => {
                         email: '',
                         password: ''
                     });
-                    navigate('/mapak');
+                    // Cambiamos la redirección a /menu
+                    navigate('/menu');
                 } else {
                     setErrors({ submit: response.message || 'Error al iniciar sesión' });
                 }
@@ -69,45 +66,42 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="auth-page">
-            <div className="login-container-dsk">
-                <h2>{translate.login[language]}</h2>
-                <LanguageButton />
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group-dsk">
-                        <label htmlFor="email">{translate.email[language]}</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            disabled={isLoading}
-                        />
-                        {errors.email && <span className="error">{errors.email}</span>}
-                    </div>
-                    <div className="form-group-dsk">
-                        <label htmlFor="password">{translate.password[language]}</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            disabled={isLoading}
-                        />
-                        {errors.password && <span className="error">{errors.password}</span>}
-                    </div>
-                    {errors.submit && <div className="error">{errors.submit}</div>}
-                    <button className="login-button-dsk" type="submit" disabled={isLoading}>
-                        {isLoading ? translate.loading[language]:translate.login[language]}
-                    </button>
-                </form>
-                {successMessage && <p className="success-dsk">{successMessage}</p>}
-                <p>
-                    <button className="link-button">{translate.loginQuestion[language]}</button>
-                </p>
-            </div>
+        <div className="login-container-dsk">
+            <h2>{translate.login[language]}</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group-dsk">
+                    <label htmlFor="email">{translate.email[language]}</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                    />
+                    {errors.email && <span className="error">{errors.email}</span>}
+                </div>
+                <div className="form-group-dsk">
+                    <label htmlFor="password">{translate.password[language]}</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                    />
+                    {errors.password && <span className="error">{errors.password}</span>}
+                </div>
+                {errors.submit && <div className="error">{errors.submit}</div>}
+                <button className="login-button-dsk" type="submit" disabled={isLoading}>
+                    {isLoading ? translate.loading[language] : translate.login[language]}
+                </button>
+            </form>
+            {successMessage && <p className="success-dsk">{successMessage}</p>}
+            <p>
+                <button className="link-button">{translate.loginQuestion[language]}</button>
+            </p>
         </div>
     );
 }
