@@ -16,9 +16,21 @@ const translate = {
         Es: "¿Has olvidado la contraseña?"
     },
     loading:{
-        Eus: "Kargatzen...", // ??????????????????
+        Eus: "Kargatzen...", 
         Es: "Cargando..."
     },
+    sessionExpired: {
+        Eus: "Saioa bukatu egin da",
+        Es: "Sesión expirada"
+    },
+    inactivityDetected: {
+        Eus: "Aktibotasun falta antzeman da. Hasi saioa berriro, mesedez.",
+        Es: "Se ha detectado inactividad. Por favor, vuelve a iniciar sesión."
+    },
+    accept: {
+        Eus: "Onartu",
+        Es: "Aceptar"
+    }
 }
 
 export default translate;
