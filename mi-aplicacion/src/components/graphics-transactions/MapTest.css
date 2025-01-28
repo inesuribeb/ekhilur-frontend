@@ -1,0 +1,122 @@
+
+.heatmap-container.loading {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+.heatmap-container {
+    background-color: rgb(17, 24, 39);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgb(31, 41, 55);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.heatmap-header {
+    padding: 20px;
+}
+
+.heatmap-title {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+.heatmap-content {
+    padding: 0 20px 20px 20px;
+}
+
+.map-wrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.map-container {
+    border-radius: 12px;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.popup-content {
+    background-color: rgb(17, 24, 39);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popup-title {
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: rgb(216, 180, 254);
+}
+
+.popup-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.popup-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.popup-label {
+    color: rgb(209, 213, 219);
+}
+
+.popup-value {
+    font-weight: 500;
+}
+
+/* Estilos para los popups de Leaflet */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background-color: rgb(17, 24, 39) !important;
+    color: white;
+    border-radius: 0.75rem !important;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    line-height: 1.4;
+}
+
+.leaflet-container {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+/* Media queries */
+@media (max-width: 640px) {
+    .heatmap-container {
+        border-radius: 0;
+    }
+    
+    .heatmap-header {
+        padding: 16px;
+    }
+    
+    .heatmap-content {
+        padding: 0 16px 16px 16px;
+    }
+    
+    .heatmap-title {
+        font-size: 18px;
+    }
+}

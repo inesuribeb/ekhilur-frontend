@@ -1,62 +1,131 @@
-// HeatMap.jsx
 import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
+import { useState, useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
+import "./MapTest.css";
 import mockDataMap from "../../utils/mockDataMap";
 
 const HeatMap = () => {
+    const [mapSize, setMapSize] = useState(0);
+    const containerRef = useRef(null);
+    const mapRef = useRef(null);
+
+    useEffect(() => {
+        const updateSize = () => {
+            if (containerRef.current) {
+                const newSize = containerRef.current.offsetWidth;
+                setMapSize(newSize);
+                
+                // Invalidate map size after setting the new size
+                if (mapRef.current) {
+                    mapRef.current.invalidateSize();
+                }
+            }
+        };
+
+        // Initial size calculation after component mount
+        updateSize();
+
+        // Set up ResizeObserver for responsive updates
+        const resizeObserver = new ResizeObserver(updateSize);
+        if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+        }
+
+        // Cleanup
+        return () => {
+            if (containerRef.current) {
+                resizeObserver.unobserve(containerRef.current);
+            }
+            resizeObserver.disconnect();
+        };
+    }, []);
+
+    const getIntensityColor = (intensity) => {
+        const colors = [
+            '#60A5FA',
+            '#818CF8',
+            '#A78BFA',
+            '#C084FC',
+        ];
+        const index = Math.floor((intensity / 100) * (colors.length - 1));
+        return colors[index];
+    };
+
+    const HERNANI_CENTER = [43.2682, -1.9757];
+    const ZOOM_LEVEL = 15;
+
     return (
-        <div className="p-4 bg-gray-900 rounded-lg shadow">
-            <h2 className="text-xl font-bold mb-4 text-white">Mapa de Transacciones en Hernani</h2>
-            <MapContainer
-                center={[43.2682, -1.9757]}
-                zoom={15}
-                style={{ height: '500px', width: '100%' }}
-                className="rounded-lg"
-            >
-                <TileLayer
-                    url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-                    attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
-                />
-                {mockDataMap.heatmapData.coordinates.map((point, idx) => (
-                    <CircleMarker 
-                        key={idx}
-                        center={[point[0], point[1]]}
-                        radius={Math.sqrt(point[2]) * 2}
-                        pathOptions={{
-                            fillColor: '#3388ff',
-                            fillOpacity: 0.6,
-                            color: '#ffffff',
-                            weight: 1
-                        }}
-                    >
-                        <Popup className="dark-popup">
-                            <div className="bg-gray-800 text-white p-2 rounded">
-                                <h3 className="font-bold mb-2">Zona {idx + 1}</h3>
-                                <p className="text-sm">Intensidad: {point[2]}%</p>
-                                <p className="text-sm">Transacciones: {Math.floor(point[2] * 15)}</p>
-                            </div>
-                        </Popup>
-                    </CircleMarker>
-                ))}
-            </MapContainer>
+        <div className="heatmap-container">
+            <div className="heatmap-header">
+                <h2 className="heatmap-title">Mapa de Actividad en Hernani</h2>
+            </div>
+            <div className="heatmap-content">
+                <div 
+                    ref={containerRef}
+                    className="map-wrapper"
+                    style={{ height: mapSize || '400px' }}
+                >
+                    {mapSize > 0 && (
+                        <MapContainer
+                            ref={mapRef}
+                            center={HERNANI_CENTER}
+                            zoom={ZOOM_LEVEL}
+                            style={{ height: '100%', width: '100%' }}
+                            className="map-container"
+                            maxBounds={[
+                                [43.2582, -1.9857],
+                                [43.2782, -1.9657]
+                            ]}
+                            zoomControl={false}
+                            dragging={false}
+                            touchZoom={false}
+                            doubleClickZoom={false}
+                            scrollWheelZoom={false}
+                            boxZoom={false}
+                            keyboard={false}
+                            bounceAtZoomLimits={false}
+                        >
+                            <TileLayer
+                                url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+                                attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
+                            />
+                            {mockDataMap.heatmapData.coordinates.map((point, idx) => (
+                                <CircleMarker 
+                                    key={idx}
+                                    center={[point[0], point[1]]}
+                                    radius={Math.sqrt(point[2]) * 1.5}
+                                    pathOptions={{
+                                        fillColor: getIntensityColor(point[2]),
+                                        fillOpacity: 0.7,
+                                        color: 'white',
+                                        weight: 0.5
+                                    }}
+                                >
+                                    <Popup>
+                                        <div className="popup-content">
+                                            <h3 className="popup-title">Zona {idx + 1}</h3>
+                                            <div className="popup-info-container">
+                                                <div className="popup-info">
+                                                    <span className="popup-label">Intensidad:</span>
+                                                    <span className="popup-value">{point[2]}%</span>
+                                                </div>
+                                                <div className="popup-info">
+                                                    <span className="popup-label">Transacciones:</span>
+                                                    <span className="popup-value">
+                                                        {Math.floor(point[2] * 15)}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Popup>
+                                </CircleMarker>
+                            ))}
+                        </MapContainer>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
-
-// Estilos para los popups oscuros
-const styles = `
-    .dark-popup .leaflet-popup-content-wrapper {
-        background-color: rgb(31, 41, 55);
-        color: white;
-    }
-    .dark-popup .leaflet-popup-tip {
-        background-color: rgb(31, 41, 55);
-    }
-`;
-
-// Añade los estilos al head
-const styleSheet = document.createElement("style");
-styleSheet.innerText = styles;
-document.head.appendChild(styleSheet);
 
 export default HeatMap;
