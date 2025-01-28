@@ -1,0 +1,20 @@
+.home-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #303030 100%);
+  }
+  
+  .login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .login-wrapper {
+      padding: 1rem;
+      padding-top: 80px;
+    }
+  }
