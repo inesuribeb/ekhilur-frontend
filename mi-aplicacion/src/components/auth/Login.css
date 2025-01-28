@@ -1,33 +1,24 @@
-.auth-page {
-    min-height: 100vh;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
 .login-container-dsk {
+    width: 100%;
     max-width: 400px;
-    margin: 60px auto;
+    background-color: transparent;
     padding: 20px;
-    padding-top: 140px;
-    background-color: white;
-}
-
-.login-container-dsk h2 {
+  }
+  
+  .login-container-dsk h2 {
     font-family: 'Arial', sans-serif;
     font-size: 24px;
     font-weight: normal;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-.form-group-dsk {
-    margin-bottom: 30px;
-}
-
-.form-group-dsk label {
+  }
+  
+  .form-group-dsk {
+    margin-bottom: 25px;
+  }
+  
+  .form-group-dsk label {
     display: block;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase;
@@ -35,9 +26,9 @@
     color: #666;
     margin-bottom: 8px;
     letter-spacing: 0.5px;
-}
-
-.form-group-dsk input {
+  }
+  
+  .form-group-dsk input {
     width: 100%;
     padding: 8px 0;
     border: none;
@@ -45,17 +36,17 @@
     font-size: 16px;
     background: transparent;
     transition: border-color 0.3s;
-}
-
-.form-group-dsk input:focus {
+  }
+  
+  .form-group-dsk input:focus {
     outline: none;
     border-bottom-color: #000;
-}
-
-.login-button-dsk {
+  }
+  
+  .login-button-dsk {
     width: 100%;
-    padding: 15px;
-    margin-top: 30px;
+    padding: 12px;
+    margin-top: 25px;
     border: 1px solid #000;
     background: transparent;
     color: #000;
@@ -64,14 +55,14 @@
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.login-button-dsk:hover {
+  }
+  
+  .login-button-dsk:hover {
     background: #000;
     color: #fff;
-}
-
-.link-button {
+  }
+  
+  .link-button {
     background: none;
     border: none;
     color: #000;
@@ -79,23 +70,23 @@
     cursor: pointer;
     font-size: 14px;
     padding: 0;
-}
-
-.error {
+  }
+  
+  .error {
     color: #ff0000;
     font-size: 12px;
     margin-top: 5px;
-}
-
-.success-dsk {
+  }
+  
+  .success-dsk {
     color: #28a745;
     text-align: center;
     margin-top: 15px;
-}
-
-.login-container-dsk p {
+  }
+  
+  .login-container-dsk p {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 14px;
     color: #666;
-}
+  }

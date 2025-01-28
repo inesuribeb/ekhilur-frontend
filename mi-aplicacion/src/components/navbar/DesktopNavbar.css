@@ -54,6 +54,77 @@
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
+/* Hamburger button */
+.hamburger-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-button:hover {
+  transform: scale(1.1);
+}
+
+/* Logout button */
+.logout-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.logout-button:hover {
+  transform: scale(1.1);
+  color: #FF4136;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: rgba(17, 17, 17, 0.95);
+  padding-top: 100px;
+  transition: right 0.3s ease;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.hamburger-menu.open {
+  right: 0;
+}
+
+.hamburger-menu-item {
+  background: none;
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hamburger-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Language buttons */
 .language-toggle-button-eus,
 .language-toggle-button-es {
   display: flex;
@@ -73,39 +144,8 @@
   transform: scale(1.05);
 }
 
-/* Login Wrapper */
-.login-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #303030 100%);
-  z-index: 1000;
-  padding-top: 100px; /* Ajustado para que no quede debajo del navbar */
-}
-
-.login-wrapper .login-container-dsk {
-  width: 100%;
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  margin-top: -100px; /* Para compensar el padding-top y centrarlo visualmente */
-}
-
-
-
 /* Mobile styles */
 @media (max-width: 768px) {
-  .menu-container {
-    display: none;
-  }
-
   .modern-navbar {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -120,13 +160,14 @@
     text-shadow: none;
   }
 
-  .language-switcher {
-    color: black;
+  .hamburger-button,
+  .logout-button,
+  .hamburger-menu {
+    display: none !important;
   }
 
-  .eye-icon {
+  .language-switcher {
     color: black;
-    filter: none;
   }
 
   .language-toggle-button-eus,
@@ -134,22 +175,15 @@
     color: black;
   }
 
-  .login-wrapper {
-    padding: 1rem;
-    padding-top: 80px;
+  .eye-icon {
+    color: black;
+    filter: none;
   }
-
-  .login-wrapper .login-container-dsk {
-    margin-top: -50px;
-  }
-}
-
-/* Utility */
-body.menu-open {
-  overflow: hidden;
 }
 
 /* Focus States */
+.hamburger-button:focus,
+.logout-button:focus,
 .language-toggle-button-eus:focus,
 .language-toggle-button-es:focus {
   outline: none;
