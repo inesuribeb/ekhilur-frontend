@@ -9,10 +9,10 @@ import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LoginContextProvider>
-      <LanguageContextProvider>
+    <LanguageContextProvider>
+      <LoginContextProvider>
         <RouterProvider router={router} />
-      </LanguageContextProvider>
-    </LoginContextProvider>
+      </LoginContextProvider>
+    </LanguageContextProvider>
   </StrictMode>
 );
