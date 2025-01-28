@@ -1,0 +1,74 @@
+.mobile-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    z-index: 50;
+  }
+  
+  .mobile-navbar__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 4rem;
+  }
+  
+  .mobile-navbar__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #0047BA;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-navbar__icon {
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .mobile-navbar__item.is-active {
+    color: #FF9012
+  }
+  
+  .mobile-navbar__item.is-active .mobile-navbar__icon {
+    transform: scale(1.2);
+  }
+  
+  .mobile-navbar__item.spinning .mobile-navbar__icon {
+    animation: spin 0.5s ease-in-out;
+  }
+  
+  .mobile-navbar__label {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+  
+  /* Media query para ocultar en desktop */
+  @media (min-width: 768px) {
+    .mobile-navbar {
+      display: none;
+    }
+  }
+  
+  /* Animación al hacer hover */
+  .mobile-navbar__item:hover {
+    color: #FF9012
+  }
