@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, Map, BarChart2, CreditCard } from 'lucide-react';
+import { Map, BarChart2, CreditCard } from 'lucide-react';
 import './MobileNavbar.css';
 
 const navigationItems = [
-  {
-    route: '/',
-    name: 'Login',
-    icon: Home
-  },
   {
     route: '/mapak',
     name: 'Mapas',
@@ -16,7 +11,7 @@ const navigationItems = [
   },
   {
     route: '/transakzioak',
-    name: 'Transaccciones',
+    name: 'Transacciones',
     icon: CreditCard
   },
   {
@@ -31,10 +26,17 @@ const MobileNavbar = () => {
   const location = useLocation();
   const [spinningItem, setSpinningItem] = useState(null);
 
+  // Verificar si estamos en la página de login o home
+  const isPublicRoute = location.pathname === '/' || location.pathname === '/login';
+
+  // Si estamos en una ruta pública, no mostramos el navbar
+  if (isPublicRoute) {
+    return null;
+  }
+
   const handleClick = (route) => {
     setSpinningItem(route);
     navigate(route);
-    
     
     setTimeout(() => {
       setSpinningItem(null);

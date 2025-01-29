@@ -1,0 +1,165 @@
+/* Menu Container */
+.menu-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.5s ease;
+    z-index: 1100;
+  }
+  
+  .menu-container.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Vertical Tabs */
+  .vertical-tabs {
+    position: relative;
+    width: 72px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    background: transparent;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  
+  .vertical-tabs:has(.tab-bar.active) {
+    width: 100%;
+    background: transparent;
+  }
+  
+  /* Back Button */
+  .back-button {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  
+  .back-button:hover {
+    opacity: 1;
+  }
+  
+  /* Tabs container */
+  .tab-bar {
+    position: relative;
+    height: 100%;
+    width: 24px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+  }
+  
+  .tab-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: white;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    justify-content: center;
+  }
+  
+  .tab-bar .page-name {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* Estado activo */
+  .vertical-tabs .tab-bar.active {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: inherit;
+  }
+  
+  .vertical-tabs .tab-bar.active .tab-content {
+    padding-left: 64px;
+    writing-mode: horizontal-tb;
+    transform: none;
+    width: 100%;
+  }
+  
+  .vertical-tabs .tab-bar.active .page-name {
+    font-size: 5rem;
+    font-weight: bold;
+  }
+  
+  /* Tabs inactivos cuando hay uno activo */
+  .vertical-tabs:has(.tab-bar.active) .tab-bar:not(.active) {
+    position: relative;
+    left: 0;
+    z-index: 4;
+  }
+  
+  /* Menu Video */
+  .menu-video {
+    width: calc(100% - 72px);
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .vertical-tabs:has(.tab-bar.active) ~ .menu-video {
+    width: 0;
+    opacity: 0;
+  }
+  
+  .menu-video iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5);
+    pointer-events: none;
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .menu-container {
+      display: none;
+    }
+  
+    .vertical-tabs {
+      width: 100%;
+    }
+  
+    .menu-video {
+      display: none;
+    }
+  }
+  
+  /* Utility */
+  body.menu-open {
+    overflow: hidden;
+    background: #111111;
+  }

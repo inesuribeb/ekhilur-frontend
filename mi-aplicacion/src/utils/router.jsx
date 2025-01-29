@@ -3,7 +3,9 @@ import Root from "../pages/Root";
 import Home from "../pages/Home";
 import Maps from "../pages/maps/Maps"
 import Transactions from "../pages/transactions/Transactions"
+import RechartGraphics from "../pages/graphics/RechartGraphics"
 import Graphics from "../pages/graphics/Graphics"
+import Menu from "../components/menu/Menu";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +15,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <Home />,
+            },
+            {
+                path: "menu",
+                element: <Menu />,
             },
             {
                 path: "mapak",
@@ -25,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: "grafikak",
                 element: <Graphics />,
+            },
+            {
+                path: "grafikak2",
+                element: <RechartGraphics />,
             },
             
         ],
