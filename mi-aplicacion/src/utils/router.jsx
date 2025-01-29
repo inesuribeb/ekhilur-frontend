@@ -21,7 +21,7 @@ const router = createBrowserRouter([
                 element: <Menu />,
             },
             {
-                path: "mapak",
+                path: "erabiltzaileak",
                 element: <Maps />,
             },
             {

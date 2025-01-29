@@ -89,9 +89,14 @@
     cursor: pointer;
 }
 
-.pie-label {
-    font-size: 12px;
+.pie-label-percent {
+    font-size: 36px;
     font-weight: 500;
+}
+
+.pie-label-payload {
+    font-size: 36px;
+    font-weight: 600;
 }
 
 /* Responsive */

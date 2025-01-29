@@ -83,10 +83,22 @@ const renderActiveShape = (props) => {
 
     return (
         <g>
-            <text x={cx} y={cy - 10} textAnchor="middle" fill="#333" className="pie-label">
+            <text 
+                x={cx} 
+                y={cy - outerRadius - 20} 
+                textAnchor="middle" 
+                fill={fill} 
+                className="pie-label-payload"
+            >
                 {payload.name}
             </text>
-            <text x={cx} y={cy + 10} textAnchor="middle" fill="#333" className="pie-label">
+            <text 
+                x={cx} 
+                y={cy + 10} 
+                textAnchor="middle" 
+                fill="#333" 
+                className="pie-label-percent"
+            >
                 {`${(percent * 100).toFixed(0)}%`}
             </text>
             <Sector
@@ -136,10 +148,17 @@ const RechartDashboard = () => {
     const BarChartComponent = ({ data }) => (
         <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
+                {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                <XAxis 
+                    dataKey="name"
+                    axisLine={false}
+                    tickLine={false}
+                />
+                <YAxis 
+                    axisLine={false}
+                    tickLine={false}
+                />
+                <Tooltip cursor={false}/>
                 <Legend />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                     {data.map((_, index) => (
@@ -159,7 +178,7 @@ const RechartDashboard = () => {
                         <stop offset="95%" stopColor="#818CF8" stopOpacity={0.2}/>
                     </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" />
+                {/* <CartesianGrid strokeDasharray="3 3" /> */}
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
