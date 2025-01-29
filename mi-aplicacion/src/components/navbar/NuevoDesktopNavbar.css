@@ -145,47 +145,4 @@
     transform: scale(1.05);
   }
   
-  /* Mobile styles */
-  @media (max-width: 768px) {
-    .modern-navbar {
-      background-color: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
   
-    .modern-navbar__container {
-      padding: 0.5rem 1rem;
-    }
-  
-    .modern-navbar__logo {
-      color: black;
-      text-shadow: none;
-    }
-  
-    .hamburger-button,
-    .logout-button,
-    .hamburger-menu {
-      display: none !important;
-    }
-  
-    .language-switcher {
-      color: black;
-    }
-  
-    .language-toggle-button-eus,
-    .language-toggle-button-es {
-      color: black;
-    }
-  
-    .eye-icon {
-      color: black;
-      filter: none;
-    }
-  }
-  
-  /* Focus States */
-  .hamburger-button:focus,
-  .logout-button:focus,
-  .language-toggle-button-eus:focus,
-  .language-toggle-button-es:focus {
-    outline: none;
-  }
