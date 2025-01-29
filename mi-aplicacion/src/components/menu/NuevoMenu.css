@@ -15,12 +15,12 @@
   .menu-right {
     width: 50%;
     height: 100%;
-    background-color: #4834D4;
+    background-color: #1542B9;
     position: relative;
     overflow: hidden;
   }
   
-  .menu-right::after {
+  /* .menu-right::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -29,7 +29,20 @@
     height: 850px;
     background-color: #FEB6B5;
     border-radius: 100% 0 0 0;
-  }
+  } */
+
+  .menu-right::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200%;  /* El doble del ancho del div azul */
+    /* height: 200%;  */
+    aspect-ratio: 1;  
+    background-color: #FEB6B5;
+    border-radius: 100%; /* Círculo completo */
+    transform: translate(50%, 50%); /* Movemos para ver solo el cuarto superior izquierdo */
+}
   
   @media (max-width: 768px) {
     .NuevoMenu {
