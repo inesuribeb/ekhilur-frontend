@@ -1,4 +1,4 @@
-.login-container-dsk {
+/* .login-container-dsk {
     width: 100%;
     max-width: 400px;
     background-color: transparent;
@@ -89,4 +89,135 @@
     margin-top: 15px;
     font-size: 14px;
     color: #666;
-  }
+  } */
+
+
+  .login-container-dsk {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    
+    padding: 30px;
+    /* border-radius: 16px; */
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Añadimos el detalle del cuarto de círculo */
+.login-container-dsk::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 160px;
+    height: 160px;
+    background-color: #FEB6B5;
+    border-radius: 0 0 0 100%;
+    z-index: 0;
+}
+
+.login-container-dsk h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1542B9;
+    position: relative;
+    z-index: 1;
+}
+
+.form-group-dsk {
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.form-group-dsk label {
+    display: block;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.form-group-dsk input {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 2px solid #E5E7EB;
+    font-size: 16px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.form-group-dsk input:focus {
+    outline: none;
+    border-bottom-color: #1542B9;
+}
+
+.login-button-dsk {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    border: none;
+    background: #1542B9;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* border-radius: 8px; */
+}
+
+.login-button-dsk:hover {
+    background: #1542B9;
+    transform: translateY(-1px);
+}
+
+.login-button-dsk:disabled {
+    background-color: #99A3BA;
+    cursor: not-allowed;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #1542B9;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.link-button:hover {
+    color: #1542B9;
+}
+
+.error {
+    color: #DC2626;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.success-dsk {
+    color: #059669;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-container-dsk p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+    position: relative;
+    z-index: 1;
+}
+  
