@@ -2,17 +2,18 @@ import { Outlet } from "react-router-dom";
 import "./Root.css";
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
-import MobileNavbar from "../components/navbar/MobileNavbar";
-import DesktopNavbar from "../components/navbar/DesktopNavbar";
+import NuevoDesktopNavbar from "../components/navbar/NuevoDesktopNavbar";
 
 function Root() {
     return (
         <>
-            <DesktopNavbar />
-             <Header />
-            <Outlet />
+           
+            <Header />
+            <main className="padding">
+            <NuevoDesktopNavbar />
+                <Outlet  /></main>
             <Footer />
-            <MobileNavbar />
+           
         </>
     );
 }

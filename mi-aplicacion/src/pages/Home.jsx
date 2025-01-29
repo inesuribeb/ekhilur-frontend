@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicNavbar from '../components/navbar/DesktopNavbar';
+import NuevoDesktopNavbar from '../components/navbar/NuevoDesktopNavbar';
 import LoginForm from '../components/auth/Login';
 import './Home.css';
 
@@ -7,7 +7,7 @@ import './Home.css';
 const Home = () => {
   return (
     <div className="home-page">
-      <BasicNavbar />
+      <NuevoDesktopNavbar/>
       <div className="login-wrapper">
         <LoginForm />
       </div>
