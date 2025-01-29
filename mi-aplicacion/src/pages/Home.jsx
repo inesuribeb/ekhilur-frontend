@@ -1,4 +1,3 @@
-import React from 'react';
 import BasicNavbar from '../components/navbar/DesktopNavbar';
 import LoginForm from '../components/auth/Login';
 import './Home.css';

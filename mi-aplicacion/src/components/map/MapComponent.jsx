@@ -1,8 +1,8 @@
-import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './MapComponent.css';
+import Footer from '../footer/Footer';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -35,6 +35,7 @@ const MapComponent = () => {
                     </Popup>
                 </Marker>
             </MapContainer>
+            <Footer />
         </div>
     );
 };
