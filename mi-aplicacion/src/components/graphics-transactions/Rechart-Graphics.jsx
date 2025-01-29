@@ -5,7 +5,7 @@ import {
     PieChart, Pie, Sector,
     XAxis, YAxis, CartesianGrid,
     Tooltip, Legend, ResponsiveContainer,
-    Cell
+    Cell, Area, AreaChart
 } from 'recharts';
 import './Graphics-Transactions.css';
 
@@ -103,7 +103,7 @@ const renderActiveShape = (props) => {
 };
 
 const RechartDashboard = () => {
-    const [visibleCharts, setVisibleCharts] = useState(new Set());
+    const [animatedCharts, setAnimatedCharts] = useState(new Set());
     const [activePieIndices, setActivePieIndices] = useState({});
 
     useEffect(() => {
@@ -112,7 +112,8 @@ const RechartDashboard = () => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const chartId = entry.target.dataset.chartId;
-                        setVisibleCharts(prev => new Set([...prev, chartId]));
+                        setAnimatedCharts(prev => new Set([...prev, chartId]));
+                        observer.unobserve(entry.target);
                     }
                 });
             },
@@ -123,11 +124,14 @@ const RechartDashboard = () => {
         );
 
         document.querySelectorAll('.chart-card').forEach(chart => {
-            observer.observe(chart);
+            const chartId = chart.dataset.chartId;
+            if (!animatedCharts.has(chartId)) {
+                observer.observe(chart);
+            }
         });
 
         return () => observer.disconnect();
-    }, []);
+    }, [animatedCharts]);
 
     const BarChartComponent = ({ data }) => (
         <ResponsiveContainer width="100%" height="100%">
@@ -148,21 +152,28 @@ const RechartDashboard = () => {
 
     const LineChartComponent = ({ data }) => (
         <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <defs>
+                    <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#818CF8" stopOpacity={0.9}/>
+                        <stop offset="95%" stopColor="#818CF8" stopOpacity={0.2}/>
+                    </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line 
-                    type="monotone" 
-                    dataKey="value" 
-                    stroke="#818CF8" 
+                <Area
+                    type="monotone"
+                    dataKey="value"
+                    stroke="#818CF8"
                     strokeWidth={2}
+                    fill="url(#colorGradient)"
                     dot={{ fill: '#818CF8' }}
                     activeDot={{ r: 8 }}
                 />
-            </LineChart>
+            </AreaChart>
         </ResponsiveContainer>
     );
 
@@ -257,7 +268,7 @@ const RechartDashboard = () => {
             {charts.map((chart) => (
                 <div 
                     key={chart.id}
-                    className={`chart-card ${visibleCharts.has(chart.id) ? 'visible' : ''}`}
+                    className={`chart-card ${animatedCharts.has(chart.id) ? 'visible' : ''}`}
                     data-chart-id={chart.id}
                 >
                     <h2>{chart.title}</h2>
