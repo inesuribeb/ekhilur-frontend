@@ -1,6 +1,6 @@
 .home-page {
     height: 100vh;
-    background: linear-gradient(135deg, #fcfcfc 0%, #fcfcfc 100%);
+    background: white;
     display: flex;
     flex-direction: column;
     overflow: hidden;
