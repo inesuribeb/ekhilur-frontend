@@ -8,7 +8,8 @@ async function fetchData(route, method = 'GET', data = null) {
             method,
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
         }
 
@@ -23,10 +24,14 @@ async function fetchData(route, method = 'GET', data = null) {
         console.log('Fetching:', url.toString(), fetchOptions);
 
         const response = await fetch(url.toString(), fetchOptions);
-        console.log("response", response)
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error?.ES || 'Error en la petición');
+        }
+        
         const responseData = await response.json();
         return {
-            success: response.ok,
+            success: true,
             status: response.status,
             data: responseData
         }
@@ -40,12 +45,15 @@ async function fetchData(route, method = 'GET', data = null) {
     }
 }
 
-
 async function login(email, password) {
     return await fetchData('api/login', 'POST', { email, password });
 }
 
+async function getAllClients() {
+    return await fetchData('/api/client/all');
+}
 
 export {
-    login
+    login,
+    getAllClients
 };
