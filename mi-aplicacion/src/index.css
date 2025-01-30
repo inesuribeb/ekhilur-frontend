@@ -9,3 +9,16 @@
 body {
   background-color: #FDD7D6;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Si estás usando React, también el div root necesita altura completa */
+#root {
+  height: 100%;
+  width: 100%;
+}
