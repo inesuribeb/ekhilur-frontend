@@ -6,6 +6,7 @@ import Transactions from "../pages/transactions/Transactions"
 import RechartGraphics from "../pages/graphics/RechartGraphics"
 import Graphics from "../pages/graphics/Graphics"
 import NuevoMenu from "../components/menu/NuevoMenu";
+import Menu from "../components/menu/Menu";
 
 const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
                 
             },
             {
-                path: "erabiltzaileak",
+                path: "mapak",
                 element: <Maps />,
             },
             {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
                 element: <Transactions />,
             },
             {
+                Path: "erabiltzaileak",
+                element: <Menu />,
+             },   
+             {
                 path: "grafikak",
                 element: <Graphics />,
             },

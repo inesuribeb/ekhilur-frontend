@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Eye, LogOut, Menu as MenuIcon, X } from 'lucide-react';
+import { LanguageContext } from '../../context/LanguageContext';
 import Logo from '../../utils/proyecto.png';
 import LanguageButton from '../LanguageButton/LanguageButton';
 import './NuevoDesktopNavbar.css';
@@ -9,6 +10,8 @@ const NuevoDesktopNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const [isBlinking, setIsBlinking] = useState(false);
+  const { toggleLanguage } = useContext(LanguageContext);
 
   const isMenuPage = location.pathname === '/menus';
   const isHomePage = location.pathname === '/';
@@ -17,12 +20,20 @@ const NuevoDesktopNavbar = () => {
     navigate('/');
   };
 
+  const handleEyeClick = () => {
+    setIsBlinking(true);
+    setTimeout(() => {
+      setIsBlinking(false);
+      toggleLanguage(); // Directamente llamamos a toggleLanguage del contexto
+    }, 150);
+  };
+
   const menuItems = [
     { name: 'Mapak', route: '/mapak' },
     { name: 'Transakzioak', route: '/transakzioak' },
     { name: 'Grafikak', route: '/grafikak' },
     { 
-      name: 'Logout', 
+      name: '', 
       route: '/', 
       icon: <LogOut size={24} />,
       onClick: handleLogout 
@@ -31,14 +42,14 @@ const NuevoDesktopNavbar = () => {
 
   return (
     <>
-      <nav className="modern-navbar">
+      <nav className={`modern-navbar ${isHomePage ? 'home-route' : ''}`}>
         <div className="modern-navbar__container">
           <div className="modern-navbar__logo" onClick={() => navigate('/')}>
             <img src={Logo} alt="Logo" className="logo-image" />
           </div>
           <div className="modern-navbar__controls">
-            <div className="language-switcher">
-              <Eye className="eye-icon" size={24} />
+            <div className="language-switcher" onClick={handleEyeClick}>
+              <Eye className={`eye-icon ${isBlinking ? 'blink' : ''}`} size={24} />
               <LanguageButton />
             </div>
             {!isHomePage && !isMenuPage && (
