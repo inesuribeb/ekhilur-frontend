@@ -1,6 +1,6 @@
 /* Navbar */
 .modern-navbar {
-  position: fixed;
+  position: absolute;
   top: 74px;
   left: 0;
   right: 0;
@@ -164,4 +164,59 @@
 .language-toggle-button-eus:hover,
 .language-toggle-button-es:hover {
   transform: scale(1.05);
+}
+
+
+
+
+@media (max-width: 480px) {
+  .modern-navbar {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    right: 0;
+    padding: 0;
+    background-color: transparent;  /* Color azul que se ve en la imagen */
+  }
+
+  .modern-navbar__container {
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+
+  .modern-navbar__logo {
+    height: 38px;
+  }
+
+  .modern-navbar__controls {
+    gap: 0.75rem;
+  }
+
+  .hamburger-menu {
+    width: 100%;
+    right: -100%;
+  }
+
+  .hamburger-menu.open {
+    right: 0;
+  }
+
+  .hamburger-menu-item {
+    padding: 0.875rem 1.25rem;
+  }
+
+  .language-switcher {
+    gap: 0.25rem;
+  }
+
+  .language-switcher > button {
+    width: 32px;
+  }
+
+  .eye-icon,
+  .hamburger-button svg,
+  .logout-button svg {
+    width: 22px;
+    height: 22px;
+  }
 }
