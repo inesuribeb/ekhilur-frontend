@@ -1,10 +1,16 @@
 /* NuevoMenu.css */
 .NuevoMenu {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 74px); 
+  /* height: 100vh; */
   display: flex;
   overflow: hidden;
   position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+
 }
 
 /* Estilos para desktop */
@@ -299,7 +305,8 @@
 
 /* Tercera línea con ÚLTIMO MES */
 .mobile-third-line {
-  background-color: #FEE2E2; /* Color rosa claro */
+  /* background-color: #FEE2E2; */
+  background-color: white;
   border-radius: 20px;
   padding-left: 12px;
   padding-right: 12px;

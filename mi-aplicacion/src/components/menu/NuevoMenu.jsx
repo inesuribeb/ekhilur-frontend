@@ -179,12 +179,12 @@ function NuevoMenu() {
 
             <div className="menu-right-info">
                 <p>198 EUR</p>
-                <p>gasto medio cliente / mes</p>
+                <p>Gasto medio cliente / mes</p>
             </div>
 
             <div className="menu-right-info2">
                 <p>21 EUR</p>
-                <p>ahorro cashback cliente / mes</p>
+                <p>Ahorro cashback cliente / mes</p>
             </div>
 
             <div className="menu-right-info3">
