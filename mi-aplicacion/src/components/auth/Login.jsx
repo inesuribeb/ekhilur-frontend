@@ -17,7 +17,6 @@ const LoginForm = () => {
 
     const [step, setStep] = useState('credentials');
     const [errors, setErrors] = useState({});
-    const [successMessage, setSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [secret, setSecret] = useState('');
 
@@ -25,16 +24,16 @@ const LoginForm = () => {
         const newErrors = {};
         if (step === 'credentials') {
             if (!formData.email) {
-                newErrors.email = 'El correo electrónico es obligatorio';
+                newErrors.email = {key: 'emailRequired'};
             } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-                newErrors.email = 'El correo electrónico no es válido';
+                newErrors.email = {key: 'emailInvalid'};
             }
             if (!formData.password) {
-                newErrors.password = 'La contraseña es obligatoria';
+                newErrors.password = {key: 'passwordRequired'};
             }
         } else if (step === 'verifyCode') {
             if (!formData.twoFactorCode) {
-                newErrors.twoFactorCode = 'El código de verificación es obligatorio';
+                newErrors.twoFactorCode = {key: 'verificationCodeRequired'};
             }
         }
         setErrors(newErrors);
@@ -55,37 +54,38 @@ const LoginForm = () => {
             setIsLoading(true);
             try {
                 if (step === 'credentials') {
-                    console.log('Enviando credenciales...');
                     const response = await login(formData.email, formData.password);
-                    console.log('Respuesta del servidor:', response);
                     
                     if (response.success) {
-                        // Si hay secreto, es un nuevo usuario y necesitamos mostrarlo
                         if (response.secret) {
-                            console.log('Nuevo usuario, mostrando secreto');
                             setSecret(response.secret);
                             setStep('showSecret');
                         } else {
-                            // Usuario existente, ir directamente a verificación
-                            console.log('Usuario existente, pidiendo código');
                             setStep('verifyCode');
                         }
                     } else {
-                        setErrors({ submit: response.message || 'Error al iniciar sesión' });
+                        setErrors({ 
+                            submit: {
+                                message: response.message[language === 'Eus' ? 'EUS' : 'ES']
+                            }
+                        });
                     }
                 } else if (step === 'verifyCode') {
                     const response = await verify2FA(formData.twoFactorCode, formData.email);
                     
                     if (response.success) {
-                        setSuccessMessage('Inicio de sesión exitoso');
                         navigate('/menu');
                     } else {
-                        setErrors({ submit: response.message || 'Código de verificación inválido' });
+                        setErrors({ 
+                            submit: {key: 'invalidCode'}
+                        });
                     }
                 }
             } catch (error) {
                 console.error('Error en handleSubmit:', error);
-                setErrors({ submit: 'Error al procesar la solicitud' });
+                setErrors({ 
+                    submit: {key: 'requestError'}
+                });
             } finally {
                 setIsLoading(false);
             }
@@ -108,7 +108,11 @@ const LoginForm = () => {
                                 onChange={handleChange}
                                 disabled={isLoading}
                             />
-                            {errors.email && <span className="error">{errors.email}</span>}
+                            {errors.email && 
+                                <span className="error">
+                                    {translate[errors.email.key][language]}
+                                </span>
+                            }
                         </div>
                         <div className="form-group-dsk">
                             <label htmlFor="password">{translate.password[language]}</label>
@@ -120,7 +124,11 @@ const LoginForm = () => {
                                 onChange={handleChange}
                                 disabled={isLoading}
                             />
-                            {errors.password && <span className="error">{errors.password}</span>}
+                            {errors.password && 
+                                <span className="error">
+                                    {translate[errors.password.key][language]}
+                                </span>
+                            }
                         </div>
                     </>
                 )}
@@ -128,12 +136,12 @@ const LoginForm = () => {
                 {step === 'showSecret' && (
                     <div className="form-group-dsk">
                         <div className="secret-info">
-                            <p>Para completar la configuración de la autenticación de dos factores:</p>
+                            <p>{translate.twoFactorTitle[language]}</p>
                             <ol>
-                                <li>Descarga Google Authenticator en tu dispositivo móvil</li>
-                                <li>Abre la aplicación y añade una nueva cuenta</li>
-                                <li>Introduce este código: <strong>{secret}</strong></li>
-                                <li>Guarda este código en un lugar seguro, lo necesitarás si cambias de dispositivo</li>
+                                <li>{translate.twoFactorStep1[language]}</li>
+                                <li>{translate.twoFactorStep2[language]}</li>
+                                <li>{translate.twoFactorStep3[language]} <strong>{secret}</strong></li>
+                                <li>{translate.twoFactorStep4[language]}</li>
                             </ol>
                         </div>
                         <button 
@@ -141,14 +149,16 @@ const LoginForm = () => {
                             className="login-button-dsk"
                             onClick={() => setStep('verifyCode')}
                         >
-                            Continuar
+                            {translate.continue[language]}
                         </button>
                     </div>
                 )}
 
                 {step === 'verifyCode' && (
                     <div className="form-group-dsk">
-                        <label htmlFor="twoFactorCode">Código de verificación</label>
+                        <label htmlFor="twoFactorCode">
+                            {translate.verificationCode[language]}
+                        </label>
                         <input
                             type="text"
                             id="twoFactorCode"
@@ -156,13 +166,21 @@ const LoginForm = () => {
                             value={formData.twoFactorCode}
                             onChange={handleChange}
                             disabled={isLoading}
-                            placeholder="Introduce el código de Google Authenticator"
+                            placeholder={translate.codePlaceholder[language]}
                         />
-                        {errors.twoFactorCode && <span className="error">{errors.twoFactorCode}</span>}
+                        {errors.twoFactorCode && 
+                            <span className="error">
+                                {translate[errors.twoFactorCode.key][language]}
+                            </span>
+                        }
                     </div>
                 )}
 
-                {errors.submit && <div className="error">{errors.submit}</div>}
+                {errors.submit && 
+                    <div className="error">
+                        {errors.submit.message}
+                    </div>
+                }
                 
                 {(step === 'credentials' || step === 'verifyCode') && (
                     <button className="login-button-dsk" type="submit" disabled={isLoading}>
@@ -170,7 +188,6 @@ const LoginForm = () => {
                     </button>
                 )}
             </form>
-            {successMessage && <p className="success-dsk">{successMessage}</p>}
         </div>
     );
 };
