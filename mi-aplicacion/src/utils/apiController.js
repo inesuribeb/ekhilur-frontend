@@ -20,16 +20,24 @@ async function fetchData(route, method = 'GET', data = null) {
             }
         }
 
-        console.log('Fetching:', url.toString(), fetchOptions);
+        console.log('Sending request to:', url.toString());
+        console.log('Request data:', data);
 
         const response = await fetch(url.toString(), fetchOptions);
-        console.log("response", response)
-        const responseData = await response.json();
-        return {
-            success: response.ok,
-            status: response.status,
-            data: responseData
+        
+        const responseText = await response.text(); // Primero obtenemos el texto
+        console.log('Raw response:', responseText);
+        
+        let responseData;
+        try {
+            responseData = JSON.parse(responseText); // Luego lo parseamos a JSON
+        } catch (e) {
+            console.error('Error parsing JSON:', e);
+            throw new Error('Invalid JSON response');
         }
+        
+        console.log('Parsed response data:', responseData);
+        return responseData;
 
     } catch (error) {
         console.error('Fetch error:', error);
@@ -40,12 +48,15 @@ async function fetchData(route, method = 'GET', data = null) {
     }
 }
 
-
 async function login(email, password) {
     return await fetchData('api/login', 'POST', { email, password });
 }
 
+async function verify2FA(tokenF2A, email) {
+    return await fetchData('api/2fa/verify', 'POST', { tokenF2A, email });
+}
 
 export {
-    login
+    login,
+    verify2FA
 };
