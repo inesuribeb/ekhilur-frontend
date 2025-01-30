@@ -15,6 +15,11 @@
   padding: 3rem 4rem;
 }
 
+.menu-left h1 {
+  font-size: 35px;
+  max-width: 300px;
+}
+
 .menu-right {
   width: 50%;
   height: 100%;
@@ -23,84 +28,157 @@
   overflow: hidden;
 }
 
+
 .menu-center {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #FFD450;
   width: 30%;
   height: 60%;
-  padding: 3rem 4rem;
+  padding: 2rem;
   border-radius: 20px;
   z-index: 10;
 }
+
+.menu-center .flex {
+  margin-bottom: 4rem; /* o el valor que necesites */
+}
+
+/* Estilos para los textos del header */
+.menu-center h4 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 0;
+  color: #000;
+}
+
+/* Estilos para las flechas */
+.arrow-up {
+  transform: rotate(-45deg);
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.arrow-down {
+  transform: rotate(45deg);
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+
 
 .menu-left-info {
   position: absolute;
-  top: 60%;
-  left: 20%;
-  transform: translate(-50%, -50%);
+  top: 55%;
+  left: 15%;
+  transform: translateX(-50%);
   background-color: white;
-  width: 20%;
-  height: 20%;
-  padding: 3rem 4rem;
+  width: fit-content; 
+  min-width: 300px; 
+  padding: 1.5rem 2rem; 
   border-radius: 20px;
   border: 2px solid #1542B9;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.menu-left-info2 {
-  position: absolute;
-  top: 82%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  width: 20%;
-  height: 20%;
-  padding: 3rem 4rem;
-  border-radius: 20px;
-  border: 2px solid #1542B9;
-  z-index: 10;
+
+.menu-left-info p {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.5;
 }
 
-.menu-right-info {
+.info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.number {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #000; /* O el color que prefieras */
+}
+
+/* Estilos base compartidos */
+.menu-right-info,
+.menu-right-info2,
+.menu-right-info3 {
   position: absolute;
-  top: 30%;
-  left: 80%;
+  left: 85%;
   transform: translate(-50%, -50%);
   background-color: white;
-  width: 20%;
-  height: 20%;
-  padding: 3rem 4rem;
+  width: fit-content;
+  min-width: 300px;
+  padding: 1.5rem 2rem;
   border-radius: 20px;
   z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Posicionamiento específico que ya tenías */
+.menu-right-info {
+  top: 30%;
 }
 
 .menu-right-info2 {
-  position: absolute;
   top: 52%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  width: 20%;
-  height: 20%;
-  padding: 3rem 4rem;
-  border-radius: 20px;
-  z-index: 20;
 }
 
 .menu-right-info3 {
-  position: absolute;
-  top: 82%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  width: 20%;
-  height: 20%;
-  padding: 3rem 4rem;
-  border-radius: 20px;
-  z-index: 20;
+  top: 76%;
+}
+
+/* Estilos para el texto */
+.menu-right-info p:first-child,
+.menu-right-info2 p:first-child {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.menu-right-info p:last-child,
+.menu-right-info2 p:last-child {
+  font-size: 1rem;
+  color: #666;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Estilos específicos para el último bloque */
+.menu-right-info3 h5 {
+  color: #0047CC;
+  font-size: 0.875rem;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.05em;
+}
+
+.menu-right-info3 p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.menu-right-info3 p:last-child {
+  margin-top: 0.25rem;
 }
 
 .menu-right::after {
