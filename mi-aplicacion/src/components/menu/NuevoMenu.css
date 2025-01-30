@@ -194,12 +194,16 @@
   z-index: 8;
 }
 
+
+
+
+
 /* Estilos para móvil */
 .mobile-menu {
   min-height: 100vh;
   background-color: white;
-  padding-top: 64px;
-  padding-right: 64px;
+  padding-top: 40px;
+  padding-right: 40px;
   position: relative;
   overflow: hidden;
 }
@@ -215,52 +219,163 @@
 .mobile-content {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding: 0.5rem;
+  gap: 0rem;
+  padding-left: 0.75rem;
   position: relative;
   z-index: 10;
+  margin-bottom: 30px;
+}
+/*new*/
+
+/* .mobile-content {
+  width: 100%;
+  padding: 20px;
+} */
+
+/* Primera línea con las dos columnas de Empresas y Usuarios */
+.mobile-first-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  width: 100%;
 }
 
-.mobile-info-card {
+.mobile-column1-line1, .mobile-column2-line1 {
+  flex: 1;
+  border: 1.5px solid #1542B9;
+  border-radius: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: white;
+}
+
+.mobile-column1-line1 p:first-child, .mobile-column2-line1 p:first-child {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.mobile-column1-line1 .mobile-title-1l,
+.mobile-column2-line1 .mobile-title-1l {
+    font-size: 12px;
+}
+
+
+.mobile-column1-line1 p:last-child, .mobile-column2-line1 p:last-child {
+  color: #1542B9;
+  font-size: 12px;
+}
+
+.mobile-second-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.mobile-column1-line2, .mobile-column2-line2 {
+  flex: 1;
+  border: 1.5px solid #1542B9;
+  border-radius: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: white;
+}
+
+.mobile-column1-line2 p:first-child, .mobile-column2-line2 p:first-child {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.mobile-column1-line2 p:last-child, .mobile-column2-line2 p:last-child {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Tercera línea con ÚLTIMO MES */
+.mobile-third-line {
+  background-color: #FEE2E2; /* Color rosa claro */
+  border-radius: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.mobile-third-line h4 {
+  color: #1542B9;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-top: 0;
+  margin-top: 10px;
+}
+
+.mobile-third-line p {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Sección del gráfico */
+.mobile-chart {
+  background-color: #FFD450; /* Color amarillo */
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.mobile-chart h4 {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* .mobile-info-card {
   background-color: white;
   border-radius: 20px;
   padding: 1.5rem;
   border: 2px solid #1542B9;
-}
+} */
 
-.mobile-info-pair {
+/* .mobile-info-pair {
   width: calc(50% - 0.5rem);
-}
+} */
 
-.mobile-info-full {
+/* .mobile-info-full {
   width: 100%;
-}
+} */
 
 .mobile-chart {
   background-color: #FFD450;
   width: 100%;
   border-radius: 20px;
-  padding: 1.5rem;
-  margin-top: 1rem;
+  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  margin-top: 0rem;
 }
 
-.mobile-chart > div:last-child {
+/* .mobile-chart > div:last-child {
   height: 300px;
-}
+} */
 
-/* Franja azul superior */
 .mobile-menu::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 64px;
+  height: 34px;
   background-color: #1542B9;
   z-index: 1;
 }
 
-/* Círculo rosa */
 .mobile-menu::after {
   content: '';
   position: absolute;
@@ -274,14 +389,113 @@
   z-index: 8;
 }
 
-/* Franja azul lateral derecha */
 .blue-stripe {
   position: absolute;
   top: 0;
   right: 0;
-  width: 64px;
+  width: 24px;
   height: 100%;
   background-color: #1542B9;
   z-index: 1;
 }
 
+/* .mobile-menu {
+  background-color: #1542B9;
+  min-height: 100vh;
+}
+
+.mobile-header {
+  padding: 1rem;
+}
+
+.mobile-header img {
+  height: 2rem;
+}
+
+.mobile-container {
+  background-color: white;
+  border-radius: 2rem 2rem 0 0;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.mobile-info-pair {
+  border: 2px solid #1542B9;
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.mobile-info-pair .number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.mobile-info-pair .stat {
+  display: flex;
+  align-items: center;
+  color: #1542B9;
+  margin-top: 0.5rem;
+}
+
+.mobile-info-pair .triangle {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #1542B9;
+  margin-right: 0.5rem;
+}
+
+.mobile-info-pair .subtitle {
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.mobile-last-month {
+  background-color: #FEE2E2;
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.mobile-last-month h5 {
+  color: #1542B9;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+}
+
+.mobile-last-month p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.25rem 0;
+}
+
+.mobile-chart {
+  background-color: #FEF3C7;
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.chart-header .unit {
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
+.chart-container {
+  height: 200px;
+}
+
+.arrow-up {
+  color: #16A34A;
+}
+
+.arrow-down {
+  color: #DC2626;
+} */

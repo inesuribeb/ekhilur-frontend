@@ -25,43 +25,47 @@ function NuevoMenu() {
     const MobileVersion = () => (
         <div className="mobile-menu">
             <div className="blue-stripe"></div>
-            <div className="mobile-header">
-                {/* Removed the title from mobile version */}
-            </div>
+
 
             <div className="mobile-content">
-                <div className="mobile-info-card mobile-info-pair">
-                    <div className="text-2xl font-bold">125 Empresas</div>
-                    <div className="text-blue-600">▲ +5% último mes</div>
+                <div className='mobile-first-line'>
+                    <div className="mobile-column1-line1">
+                        <p>125</p>
+                        <p className="mobile-title-1l">Empresas</p>
+                        <p className="stat">▲ +5% último mes</p>
+                    </div>
+
+                    <div className="mobile-column2-line1">
+                        <p>1,380</p>
+                        <p className="mobile-title-1l">Usuarios</p>
+                        <p className="stat">▲ +12% último mes</p>
+                    </div>
                 </div>
 
-                <div className="mobile-info-card mobile-info-pair">
-                    <div className="text-2xl font-bold">1,380 Usuarios</div>
-                    <div className="text-blue-600">▲ +12% último mes</div>
+                <div className='mobile-second-line'>
+                    <div className="mobile-column1-line2">
+                        <p>198 EUR</p>
+                        <p>Gasto medio cliente / mes</p>
+                    </div>
+
+                    <div className="mobile-column2-line2">
+                        <p>21 EUR</p>
+                        <p>Ahorro cashback cliente / mes</p>
+                    </div>
                 </div>
 
-                <div className="mobile-info-card mobile-info-pair">
-                    <div className="text-2xl font-bold">198 EUR</div>
-                    <div>gasto medio cliente / mes</div>
-                </div>
-
-                <div className="mobile-info-card mobile-info-pair">
-                    <div className="text-2xl font-bold">21 EUR</div>
-                    <div>ahorro cashback cliente / mes</div>
-                </div>
-
-                <div className="mobile-info-card mobile-info-full">
-                    <div className="text-blue-600 font-bold">ÚLTIMO MES</div>
-                    <div className="text-2xl font-bold mt-2">2,150 compras en Ekhilur</div>
-                    <div className="text-2xl font-bold">42,700 EUR pagados con Ekhilur</div>
+                <div className="mobile-third-line">
+                    <h4>ÚLTIMO MES</h4>
+                    <p>2,150 compras en Ekhilur</p>
+                    <p>42,700 EUR pagados con Ekhilur</p>
                 </div>
 
                 <div className="mobile-chart">
                     <div className="flex justify-between mb-4">
-                        <div>↗ 1,900 EUR entran real</div>
-                        <div>↘ 225 EUR salen real</div>
+                        <h4>↗ 1,900 EUR entran real</h4>
+                        <h4>↘ 225 EUR salen real</h4>
                     </div>
-                    <div style={{ width: '100%', height: '300px' }}>
+                    <div style={{ width: '100%', height: '150px' }}>
                         <ResponsiveContainer>
                             <BarChart data={chartData}>
                                 <XAxis dataKey="month" />
@@ -74,6 +78,74 @@ function NuevoMenu() {
             </div>
         </div>
     );
+    // const MobileVersion = () => (
+    //     <div className="mobile-menu">
+    //         <div className="mobile-header">
+    //             <img src="/logo.png" alt="DatuSarea" />
+    //         </div>
+
+    //         <div className="mobile-container">
+    //             <div className="mobile-info-pair">
+    //                 <p className="number">125 Empresas</p>
+    //                 <div className="stat">
+    //                     <div className="triangle"></div>
+    //                     <span>+5% último mes</span>
+    //                 </div>
+    //             </div>
+
+    //             <div className="mobile-info-pair">
+    //                 <p className="number">1,380 Usuarios</p>
+    //                 <div className="stat">
+    //                     <div className="triangle"></div>
+    //                     <span>+12% último mes</span>
+    //                 </div>
+    //             </div>
+
+    //             <div className="mobile-info-pair">
+    //                 <p className="number">198 EUR</p>
+    //                 <p className="subtitle">gasto medio cliente / mes</p>
+    //             </div>
+
+    //             <div className="mobile-info-pair">
+    //                 <p className="number">21 EUR</p>
+    //                 <p className="subtitle">ahorro cashback-cliente / mes</p>
+    //             </div>
+
+    //             <div className="mobile-last-month">
+    //                 <h5>ÚLTIMO MES</h5>
+    //                 <p>2,150 compras en Ekhilur</p>
+    //                 <p>42,700 EUR pagados con Ekhilur</p>
+    //             </div>
+
+    //             <div className="mobile-chart">
+    //                 <div className="chart-header">
+    //                     <div className="in-amount">
+    //                         <span className="arrow-up">↗</span>
+    //                         <span>1,900</span>
+    //                         <span className="unit">EUR entran real</span>
+    //                     </div>
+    //                     <div className="out-amount">
+    //                         <span className="arrow-down">↘</span>
+    //                         <span>225</span>
+    //                         <span className="unit">EUR salen real</span>
+    //                     </div>
+    //                 </div>
+    //                 <div className="chart-container">
+    //                     <ResponsiveContainer>
+    //                         <BarChart data={chartData}>
+    //                             <XAxis dataKey="month" axisLine={false} tickLine={false} />
+    //                             <YAxis hide />
+    //                             <Bar dataKey="value" fill="#000000" radius={[4, 4, 0, 0]} />
+    //                         </BarChart>
+    //                     </ResponsiveContainer>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+    // );
+
+
+
 
     const DesktopVersion = () => (
         <div className="NuevoMenu">
@@ -121,21 +193,6 @@ function NuevoMenu() {
                 <p>42,700 EUR pagados con Ekhilur</p>
             </div>
 
-            {/* <div className="menu-center">
-                <div className="flex justify-between mb-4">
-                    <h4>↗ 1,900 EUR entran real</h4>
-                    <h4>↘ 225 EUR salen real</h4>
-                </div>
-                <div style={{ width: '100%', height: '80%' }}>
-                    <ResponsiveContainer>
-                        <BarChart data={chartData}>
-                            <XAxis dataKey="month" />
-                            <YAxis hide />
-                            <Bar dataKey="value" fill="#000000" />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-            </div> */}
 
             <div className="menu-center">
                 <div className="flex justify-between mb-20">

@@ -4,3 +4,11 @@ padding-top: 74px;
 padding-left: 74px;
 padding-right: 74px;
 }
+
+@media screen and (max-width: 768px) {
+    .padding {
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
