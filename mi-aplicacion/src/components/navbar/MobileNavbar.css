@@ -1,4 +1,4 @@
-.mobile-navbar {
+/* .mobile-navbar {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -63,13 +63,13 @@
   }
   
   /* Media query para ocultar en desktop */
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     .mobile-navbar {
       display: none;
     }
   }
   
-  /* Animación al hacer hover */
+  
   .mobile-navbar__item:hover {
     color: black
-  }
+  } */
