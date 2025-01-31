@@ -71,9 +71,14 @@ async function getLandingPageData() {
     return await fetchData('/api/landing-page/all');
 }
 
+async function getClientData() {
+    return await fetchData('/api/client/data');
+}
+
 export {
     login,
     getAllClients,
     verify2FA,
-    getLandingPageData
+    getLandingPageData,
+    getClientData
 };
