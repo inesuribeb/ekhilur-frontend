@@ -2,58 +2,59 @@ import React, { useState, useEffect, useContext } from 'react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
-import mockData from '../../utils/mockData';
+import { getLandingPageData } from '../../utils/apiController';
 import './NuevoMenu.css';
 
 function NuevoMenu() {
     const [isMobile, setIsMobile] = useState(false);
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const { language } = useContext(LanguageContext);
 
     const monthTranslations = {
         Eus: {
-            1: 'Urt',
-            2: 'Ots',
-            3: 'Mar',
-            4: 'Api',
-            5: 'Mai',
-            6: 'Eka',
-            7: 'Uzt',
-            8: 'Abu',
-            9: 'Ira',
-            10: 'Urr',
-            11: 'Aza',
-            12: 'Abe'
+            1: 'Urt', 2: 'Ots', 3: 'Mar', 4: 'Api',
+            5: 'Mai', 6: 'Eka', 7: 'Uzt', 8: 'Abu',
+            9: 'Ira', 10: 'Urr', 11: 'Aza', 12: 'Abe'
         },
         Es: {
-            1: 'Ene',
-            2: 'Feb',
-            3: 'Mar',
-            4: 'Abr',
-            5: 'May',
-            6: 'Jun',
-            7: 'Jul',
-            8: 'Ago',
-            9: 'Sep',
-            10: 'Oct',
-            11: 'Nov',
-            12: 'Dic'
+            1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr',
+            5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago',
+            9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic'
         }
     };
 
     const getChartData = (flujoMensual) => {
         return flujoMensual
             .slice(-4)
-            .map(item => {
-                const monthName = monthTranslations[language][item.mes];
-                return {
-                    month: monthName,
-                    value: item.entradas,
-                    salidas: item.salidas
-                };
-            });
+            .map(item => ({
+                month: monthTranslations[language][item.Mes],
+                value: parseFloat(item['Entradas (€)']),
+                salidas: parseFloat(item['Salidas (€)'])
+            }));
     };
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getLandingPageData();
+                if (response.success) {
+                    setData(response.data);
+                    setError(null);
+                } else {
+                    setError(response.message || 'Error al cargar los datos');
+                }
+            } catch (error) {
+                setError('Error al conectar con el servidor');
+                console.error('Error:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+
         const checkIfMobile = () => {
             setIsMobile(window.innerWidth <= 768);
         };
@@ -66,14 +67,14 @@ function NuevoMenu() {
 
     const MobileVersion = () => {
         const {
-            analisis_usuarios,
-            promedio_mensual,
-            ahorro_mensual,
-            total_diciembre,
-            flujo_efectivo
-        } = mockData;
+            userAnalysis,
+            monthlyAverageSpending,
+            monthlySavingsAverage,
+            totalOperationsData,
+            cashFlowAnalysis
+        } = data;
 
-        const chartData = getChartData(flujo_efectivo.flujo_mensual);
+        const chartData = getChartData(cashFlowAnalysis['Flujo de dinero mensual 2024']);
 
         return (
             <div className="mobile-menu">
@@ -82,44 +83,44 @@ function NuevoMenu() {
                 <div className="mobile-content">
                     <div className='mobile-first-line'>
                         <div className="mobile-column1-line1">
-                            <p>{analisis_usuarios[1].Total_Diciembre_2024}</p>
+                            <p>{userAnalysis[1].Total_Diciembre_2024}</p>
                             <p className="mobile-title-1l">{translate.companies[language]}</p>
                             <p className="stat">
-                                ▲ {analisis_usuarios[1].Incremento_Porcentual} {translate.lastMonth[language]}
+                                ▲ {userAnalysis[1].Incremento_Porcentual}% {translate.lastMonth[language]}
                             </p>
                         </div>
 
                         <div className="mobile-column2-line1">
-                            <p>{analisis_usuarios[0].Total_Diciembre_2024}</p>
+                            <p>{userAnalysis[0].Total_Diciembre_2024}</p>
                             <p className="mobile-title-1l">{translate.users[language]}</p>
                             <p className="stat">
-                                ▲ {analisis_usuarios[0].Incremento_Porcentual} {translate.lastMonth[language]}
+                                ▲ {userAnalysis[0].Incremento_Porcentual}% {translate.lastMonth[language]}
                             </p>
                         </div>
                     </div>
 
                     <div className='mobile-second-line'>
                         <div className="mobile-column1-line2">
-                            <p>{promedio_mensual.gasto_medio_mensual.toFixed(0)} EUR</p>
+                            <p>{parseFloat(monthlyAverageSpending['Gasto medio mensual por usuario']).toFixed(0)} EUR</p>
                             <p>{translate.averageSpending[language]}</p>
                         </div>
 
                         <div className="mobile-column2-line2">
-                            <p>{ahorro_mensual.ahorro_medio_mensual.toFixed(0)} EUR</p>
+                            <p>{parseFloat(monthlySavingsAverage['Ahorro medio mensual por usuario']).toFixed(0)} EUR</p>
                             <p>{translate.cashbackSavings[language]}</p>
                         </div>
                     </div>
 
                     <div className="mobile-third-line">
                         <h4>{translate.lastMonthTitle[language]}</h4>
-                        <p>{total_diciembre.numero_total_operaciones} {translate.purchasesIn[language]}</p>
-                        <p>{total_diciembre.importe_total.toFixed(0)} {translate.paidWith[language]}</p>
+                        <p>{totalOperationsData['Número total de operaciones']} {translate.purchasesIn[language]}</p>
+                        <p>{totalOperationsData['Importe total (€)']} {translate.paidWith[language]}</p>
                     </div>
 
                     <div className="mobile-chart">
                         <div className="flex justify-between mb-4">
-                            <h4>↗ {(flujo_efectivo.total_entradas / 1000).toFixed(0)}k {translate.realEnter[language]}</h4>
-                            <h4>↘ {(flujo_efectivo.total_salidas / 1000).toFixed(0)}k {translate.realExit[language]}</h4>
+                            <h4>↗ {(parseFloat(cashFlowAnalysis['Totales anuales']['Total Entradas (€)']) / 1000).toFixed(0)}k {translate.realEnter[language]}</h4>
+                            <h4>↘ {(parseFloat(cashFlowAnalysis['Totales anuales']['Total Salidas (€)']) / 1000).toFixed(0)}k {translate.realExit[language]}</h4>
                         </div>
                         <div style={{ width: '100%', height: '150px' }}>
                             <ResponsiveContainer>
@@ -146,14 +147,14 @@ function NuevoMenu() {
 
     const DesktopVersion = () => {
         const {
-            analisis_usuarios,
-            promedio_mensual,
-            ahorro_mensual,
-            total_diciembre,
-            flujo_efectivo
-        } = mockData;
+            userAnalysis,
+            monthlyAverageSpending,
+            monthlySavingsAverage,
+            totalOperationsData,
+            cashFlowAnalysis
+        } = data;
 
-        const chartData = getChartData(flujo_efectivo.flujo_mensual);
+        const chartData = getChartData(cashFlowAnalysis['Flujo de dinero mensual 2024']);
 
         return (
             <div className="NuevoMenu">
@@ -169,51 +170,51 @@ function NuevoMenu() {
                 <div className="menu-left-info">
                     <div className="info-block">
                         <p className="number">
-                            {analisis_usuarios[1].Total_Diciembre_2024} {translate.companies[language]}
+                            {userAnalysis[1].Total_Diciembre_2024} {translate.companies[language]}
                         </p>
                         <div className="stat">
                             <div className="triangle"></div>
-                            <span>{analisis_usuarios[1].Incremento_Porcentual} {translate.lastMonth[language]}</span>
+                            <span>{userAnalysis[1].Incremento_Porcentual}% {translate.lastMonth[language]}</span>
                         </div>
                     </div>
 
                     <div className="info-block">
                         <p className="number">
-                            {analisis_usuarios[0].Total_Diciembre_2024} {translate.users[language]}
+                            {userAnalysis[0].Total_Diciembre_2024} {translate.users[language]}
                         </p>
                         <div className="stat">
                             <div className="triangle"></div>
-                            <span>{analisis_usuarios[0].Incremento_Porcentual} {translate.lastMonth[language]}</span>
+                            <span>{userAnalysis[0].Incremento_Porcentual}% {translate.lastMonth[language]}</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="menu-right-info">
-                    <p>{promedio_mensual.gasto_medio_mensual.toFixed(0)} EUR</p>
+                    <p>{parseFloat(monthlyAverageSpending['Gasto medio mensual por usuario']).toFixed(0)} EUR</p>
                     <p>{translate.averageSpending[language]}</p>
                 </div>
 
                 <div className="menu-right-info2">
-                    <p>{ahorro_mensual.ahorro_medio_mensual.toFixed(0)} EUR</p>
+                    <p>{parseFloat(monthlySavingsAverage['Ahorro medio mensual por usuario']).toFixed(0)} EUR</p>
                     <p>{translate.cashbackSavings[language]}</p>
                 </div>
 
                 <div className="menu-right-info3">
                     <h5>{translate.lastMonthTitle[language]}</h5>
-                    <p>{total_diciembre.numero_total_operaciones} {translate.purchasesIn[language]}</p>
-                    <p>{total_diciembre.importe_total.toFixed(0)} {translate.paidWith[language]}</p>
+                    <p>{totalOperationsData['Número total de operaciones']} {translate.purchasesIn[language]}</p>
+                    <p>{totalOperationsData['Importe total (€)']} {translate.paidWith[language]}</p>
                 </div>
 
                 <div className="menu-center">
                     <div className="flex justify-between mb-20">
                         <h4>
                             <span className="arrow-up">↗</span>
-                            <span>{flujo_efectivo.total_entradas.toLocaleString()} </span>
+                            <span>{parseFloat(cashFlowAnalysis['Totales anuales']['Total Entradas (€)']).toLocaleString()} </span>
                             <span className="text-sm ml-2">{translate.realEnter[language]}</span>
                         </h4>
                         <h4>
                             <span className="arrow-down">↘</span>
-                            <span>{flujo_efectivo.total_salidas.toLocaleString()} </span>
+                            <span>{parseFloat(cashFlowAnalysis['Totales anuales']['Total Salidas (€)']).toLocaleString()} </span>
                             <span className="text-sm ml-2">{translate.realExit[language]}</span>
                         </h4>
                     </div>
@@ -239,6 +240,18 @@ function NuevoMenu() {
             </div>
         );
     };
+
+    if (loading) {
+        return <div>Cargando...</div>;
+    }
+
+    if (error) {
+        return <div className="error-message">{error}</div>;
+    }
+
+    if (!data) {
+        return <div>No se pudieron cargar los datos</div>;
+    }
 
     return isMobile ? <MobileVersion /> : <DesktopVersion />;
 }
