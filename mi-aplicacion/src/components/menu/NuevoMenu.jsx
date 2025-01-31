@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from 'recharts';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
 import { getLandingPageData } from '../../utils/apiController';
@@ -10,6 +10,8 @@ function NuevoMenu() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState(null);
+    const [hoveredBar, setHoveredBar] = useState(null);
     const { language } = useContext(LanguageContext);
 
     const monthTranslations = {
@@ -31,8 +33,24 @@ function NuevoMenu() {
             .map(item => ({
                 month: monthTranslations[language][item.Mes],
                 value: parseFloat(item['Entradas (€)']),
-                salidas: parseFloat(item['Salidas (€)'])
+                salidas: parseFloat(item['Salidas (€)']),
+                rawData: item
             }));
+    };
+
+    const CustomLabel = (props) => {
+        const { x, y, value, width } = props;
+        return (
+            <text 
+                x={x + width / 2} 
+                y={y - 10} 
+                fill="#000" 
+                textAnchor="middle"
+                fontSize={12}
+            >
+                {parseFloat(value).toLocaleString()}€
+            </text>
+        );
     };
 
     useEffect(() => {
@@ -65,7 +83,49 @@ function NuevoMenu() {
         return () => window.removeEventListener('resize', checkIfMobile);
     }, []);
 
+    const handleBarClick = (data) => {
+        if (data && data.activePayload) {
+            const clickedData = data.activePayload[0].payload;
+            setSelectedMonth({
+                value: clickedData.value,
+                salidas: clickedData.salidas
+            });
+        }
+    };
+
+    const CustomBar = (props) => {
+        const { fill, x, y, width, height, index } = props;
+        const isHovered = hoveredBar === index;
+        const isSelected = selectedMonth && props.payload.value === selectedMonth.value;
+        
+        return (
+            <rect
+                x={x}
+                y={y}
+                width={width}
+                height={height}
+                fill={isHovered || isSelected ? '#333333' : '#000000'}
+                rx={4}
+                ry={4}
+                onMouseEnter={() => {
+                    setHoveredBar(index);
+                    setSelectedMonth({
+                        value: props.payload.value,
+                        salidas: props.payload.salidas
+                    });
+                }}
+                onMouseLeave={() => {
+                    setHoveredBar(null);
+                    setSelectedMonth(null);
+                }}
+                style={{ cursor: 'pointer' }}
+            />
+        );
+    };
+
     const MobileVersion = () => {
+        if (!data) return null;
+
         const {
             userAnalysis,
             monthlyAverageSpending,
@@ -75,13 +135,18 @@ function NuevoMenu() {
         } = data;
 
         const chartData = getChartData(cashFlowAnalysis['Flujo de dinero mensual 2024']);
+        const totalesAnuales = cashFlowAnalysis['Totales anuales'];
+        const displayData = selectedMonth || {
+            value: parseFloat(totalesAnuales['Total Entradas (€)']),
+            salidas: parseFloat(totalesAnuales['Total Salidas (€)'])
+        };
 
         return (
             <div className="mobile-menu">
                 <div className="blue-stripe"></div>
 
                 <div className="mobile-content">
-                    <div className='mobile-first-line'>
+                    <div className="mobile-first-line">
                         <div className="mobile-column1-line1">
                             <p>{userAnalysis[1].Total_Diciembre_2024}</p>
                             <p className="mobile-title-1l">{translate.companies[language]}</p>
@@ -99,7 +164,7 @@ function NuevoMenu() {
                         </div>
                     </div>
 
-                    <div className='mobile-second-line'>
+                    <div className="mobile-second-line">
                         <div className="mobile-column1-line2">
                             <p>{parseFloat(monthlyAverageSpending['Gasto medio mensual por usuario']).toFixed(0)} EUR</p>
                             <p>{translate.averageSpending[language]}</p>
@@ -119,12 +184,15 @@ function NuevoMenu() {
 
                     <div className="mobile-chart">
                         <div className="flex justify-between mb-4">
-                            <h4>↗ {(parseFloat(cashFlowAnalysis['Totales anuales']['Total Entradas (€)']) / 1000).toFixed(0)}k {translate.realEnter[language]}</h4>
-                            <h4>↘ {(parseFloat(cashFlowAnalysis['Totales anuales']['Total Salidas (€)']) / 1000).toFixed(0)}k {translate.realExit[language]}</h4>
+                            <h4>↗ {(displayData.value / 1000).toFixed(0)}k {translate.realEnter[language]}</h4>
+                            <h4>↘ {(displayData.salidas / 1000).toFixed(0)}k {translate.realExit[language]}</h4>
                         </div>
                         <div style={{ width: '100%', height: '150px' }}>
                             <ResponsiveContainer>
-                                <BarChart data={chartData}>
+                                <BarChart 
+                                    data={chartData}
+                                    onClick={handleBarClick}
+                                >
                                     <XAxis
                                         dataKey="month"
                                         axisLine={false}
@@ -133,9 +201,10 @@ function NuevoMenu() {
                                     <YAxis hide />
                                     <Bar
                                         dataKey="value"
-                                        fill="#000000"
-                                        radius={[4, 4, 0, 0]}
-                                    />
+                                        shape={<CustomBar />}
+                                    >
+                                        <LabelList content={<CustomLabel />} />
+                                    </Bar>
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
@@ -146,6 +215,8 @@ function NuevoMenu() {
     };
 
     const DesktopVersion = () => {
+        if (!data) return null;
+
         const {
             userAnalysis,
             monthlyAverageSpending,
@@ -155,6 +226,11 @@ function NuevoMenu() {
         } = data;
 
         const chartData = getChartData(cashFlowAnalysis['Flujo de dinero mensual 2024']);
+        const totalesAnuales = cashFlowAnalysis['Totales anuales'];
+        const displayData = selectedMonth || {
+            value: parseFloat(totalesAnuales['Total Entradas (€)']),
+            salidas: parseFloat(totalesAnuales['Total Salidas (€)'])
+        };
 
         return (
             <div className="NuevoMenu">
@@ -209,18 +285,21 @@ function NuevoMenu() {
                     <div className="flex justify-between mb-20">
                         <h4>
                             <span className="arrow-up">↗</span>
-                            <span>{parseFloat(cashFlowAnalysis['Totales anuales']['Total Entradas (€)']).toLocaleString()} </span>
+                            <span>{displayData.value.toLocaleString()} </span>
                             <span className="text-sm ml-2">{translate.realEnter[language]}</span>
                         </h4>
                         <h4>
                             <span className="arrow-down">↘</span>
-                            <span>{parseFloat(cashFlowAnalysis['Totales anuales']['Total Salidas (€)']).toLocaleString()} </span>
+                            <span>{displayData.salidas.toLocaleString()} </span>
                             <span className="text-sm ml-2">{translate.realExit[language]}</span>
                         </h4>
                     </div>
                     <div style={{ width: '100%', height: '70%' }}>
                         <ResponsiveContainer>
-                            <BarChart data={chartData}>
+                            <BarChart 
+                                data={chartData}
+                                onClick={handleBarClick}
+                            >
                                 <XAxis
                                     dataKey="month"
                                     axisLine={false}
@@ -230,9 +309,10 @@ function NuevoMenu() {
                                 <YAxis hide />
                                 <Bar
                                     dataKey="value"
-                                    fill="#000000"
-                                    radius={[4, 4, 0, 0]}
-                                />
+                                    shape={<CustomBar />}
+                                >
+                                    <LabelList content={<CustomLabel />} />
+                                </Bar>
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -241,17 +321,9 @@ function NuevoMenu() {
         );
     };
 
-    if (loading) {
-        return <div>Cargando...</div>;
-    }
-
-    if (error) {
-        return <div className="error-message">{error}</div>;
-    }
-
-    if (!data) {
-        return <div>No se pudieron cargar los datos</div>;
-    }
+    if (loading) return <div>Cargando...</div>;
+    if (error) return <div className="error-message">{error}</div>;
+    if (!data) return <div>No se pudieron cargar los datos</div>;
 
     return isMobile ? <MobileVersion /> : <DesktopVersion />;
 }
