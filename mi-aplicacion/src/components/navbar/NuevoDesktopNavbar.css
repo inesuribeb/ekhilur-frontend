@@ -83,11 +83,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  position: relative;
 }
 
-.hamburger-button:hover {
-  transform: scale(1.1);
+.menu-icon {
+  position: absolute;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Estado inicial del ícono de menú */
+.menu-icon-bars {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* Estado inicial del ícono X */
+.menu-icon-close {
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+/* Animación cuando el menú está abierto */
+.hamburger-button.open .menu-icon-bars {
+  opacity: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger-button.open .menu-icon-close {
+  opacity: 1;
+  transform: rotate(0deg);
 }
 
 /* Logout button */
@@ -115,10 +139,8 @@
   right: -300px;
   width: 300px;
   height: 100vh;
-  /* background: rgba(17, 17, 17, 0.95); */
   background: black;
-
-  padding-top: 180px; /* Increased padding for more space from close button */
+  padding-top: 180px;
   transition: right 0.3s ease;
   z-index: 1100;
   display: flex;
@@ -168,8 +190,11 @@
   transform: scale(1.05);
 }
 
-
-
+.language-toggle-button-eus.blink,
+.language-toggle-button-es.blink {
+  transform: scaleY(0.1);
+  transition: transform 0.2s ease;
+}
 
 @media (max-width: 480px) {
   .modern-navbar {
@@ -178,7 +203,7 @@
     left: 0;
     right: 0;
     padding: 0;
-    background-color: transparent;  /* Color azul que se ve en la imagen */
+    background-color: transparent;
   }
 
   .modern-navbar__container {

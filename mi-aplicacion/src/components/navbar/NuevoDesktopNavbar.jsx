@@ -11,6 +11,7 @@ const NuevoDesktopNavbar = () => {
   const location = useLocation();
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isBlinking, setIsBlinking] = useState(false);
+  const [isButtonBlinking, setIsButtonBlinking] = useState(false);
   const { toggleLanguage } = useContext(LanguageContext);
 
   const isMenuPage = location.pathname === '/menus';
@@ -22,9 +23,11 @@ const NuevoDesktopNavbar = () => {
 
   const handleEyeClick = () => {
     setIsBlinking(true);
+    setIsButtonBlinking(true);
     setTimeout(() => {
       setIsBlinking(false);
-      toggleLanguage(); // Directamente llamamos a toggleLanguage del contexto
+      setIsButtonBlinking(false);
+      toggleLanguage();
     }, 150);
   };
 
@@ -50,14 +53,15 @@ const NuevoDesktopNavbar = () => {
           <div className="modern-navbar__controls">
             <div className="language-switcher" onClick={handleEyeClick}>
               <Eye className={`eye-icon ${isBlinking ? 'blink' : ''}`} size={24} />
-              <LanguageButton />
+              <LanguageButton isBlinking={isButtonBlinking} />
             </div>
             {!isHomePage && !isMenuPage && (
               <button
-                className="hamburger-button"
+                className={`hamburger-button ${isHamburgerOpen ? 'open' : ''}`}
                 onClick={() => setIsHamburgerOpen(!isHamburgerOpen)}
               >
-                {isHamburgerOpen ? <X size={24} /> : <MenuIcon size={24} />}
+                <MenuIcon className="menu-icon menu-icon-bars" size={24} />
+                <X className="menu-icon menu-icon-close" size={24} />
               </button>
             )}
           </div>
