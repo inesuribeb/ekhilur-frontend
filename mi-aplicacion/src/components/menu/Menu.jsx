@@ -28,7 +28,7 @@ const Menu = () => {
 
   return (
     <>
-      <BasicNavbar />
+      
       <div className="menu-container is-open">
         <div className={`vertical-tabs ${activeTab !== null ? 'expanded' : ''}`}>
           {pages.map((page, index) => (
