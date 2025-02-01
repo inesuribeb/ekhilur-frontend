@@ -40,6 +40,10 @@ const translate = {
         Eus: "Helbide elektronikoa ez da zuzena",
         Es: "El correo electrónico no es válido"
     },
+   userNotFound: {
+        Eus: "Erabiltzailea ez da aurkitu",
+        Es: "El usuario no existe"
+    },
     passwordRequired: {
         Eus: "Pasahitza beharrezkoa da",
         Es: "La contraseña es obligatoria"
