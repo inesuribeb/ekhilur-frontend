@@ -66,6 +66,14 @@ const LoginForm = () => {
                             });
                             return;
                         }
+                        
+                        if (response.data.message?.ES === "Contraseña incorrecta" ||
+                            response.data.message?.EUS === "Pasahitz okerra") {
+                            setErrors({ 
+                                password: {key: 'invalidPassword'}
+                            });
+                            return;
+                        }
 
                         // Si hay un error en la respuesta
                         if (response.data.error || (response.data.message && !response.data.success)) {

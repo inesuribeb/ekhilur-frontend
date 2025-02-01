@@ -44,6 +44,10 @@ const translate = {
         Eus: "Erabiltzailea ez da aurkitu",
         Es: "El usuario no existe"
     },
+    invalidPassword: {
+        Eus: "Pasahitza ez da zuzena",
+        Es: "Contraseña incorrecta"
+    },
     passwordRequired: {
         Eus: "Pasahitza beharrezkoa da",
         Es: "La contraseña es obligatoria"
