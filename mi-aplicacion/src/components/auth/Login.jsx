@@ -8,7 +8,7 @@ import './Login.css';
 const LoginForm = () => {
     const { language } = useContext(LanguageContext);
     const navigate = useNavigate();
-    
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -24,16 +24,16 @@ const LoginForm = () => {
         const newErrors = {};
         if (step === 'credentials') {
             if (!formData.email) {
-                newErrors.email = {key: 'emailRequired'};
+                newErrors.email = { key: 'emailRequired' };
             } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-                newErrors.email = {key: 'emailInvalid'};
+                newErrors.email = { key: 'emailInvalid' };
             }
             if (!formData.password) {
-                newErrors.password = {key: 'passwordRequired'};
+                newErrors.password = { key: 'passwordRequired' };
             }
         } else if (step === 'verifyCode') {
             if (!formData.twoFactorCode) {
-                newErrors.twoFactorCode = {key: 'verificationCodeRequired'};
+                newErrors.twoFactorCode = { key: 'verificationCodeRequired' };
             }
         }
         setErrors(newErrors);
@@ -55,36 +55,74 @@ const LoginForm = () => {
             try {
                 if (step === 'credentials') {
                     const response = await login(formData.email, formData.password);
-                    
+                    console.log('Login response:', response);
+
                     if (response.success) {
-                        if (response.secret) {
-                            setSecret(response.secret);
-                            setStep('showSecret');
-                        } else {
-                            setStep('verifyCode');
+                        // Verificamos primero los mensajes de error estructurados
+                        if (response.data.message?.ES === "Usuario no encontrado" ||
+                            response.data.message?.EUS === "Ez da erabiltzailea aurkitu") {
+                            setErrors({
+                                email: { key: 'userNotFound' }
+                            });
+                            return;
+                        }
+
+                        // Si hay un error en la respuesta
+                        if (response.data.error || (response.data.message && !response.data.success)) {
+                            setErrors({
+                                submit: { key: 'loginError' }
+                            });
+                            return;
+                        }
+
+                        // Si la autenticación fue exitosa
+                        if (response.data.success) {
+                            // Comprobamos si el backend nos pide el código de verificación
+                            if (response.data.message === 'Please enter your verification code') {
+                                setStep('verifyCode');
+                                return;
+                            }
+
+                            // Si hay secret, es la primera vez que configura 2FA
+                            if (response.data.secret) {
+                                setSecret(response.data.secret);
+                                setStep('showSecret');
+                                return;
+                            }
                         }
                     } else {
-                        setErrors({ 
-                            submit: {
-                                message: response.message[language === 'Eus' ? 'EUS' : 'ES']
-                            }
+                        setErrors({
+                            submit: { key: 'requestError' }
                         });
                     }
                 } else if (step === 'verifyCode') {
                     const response = await verify2FA(formData.twoFactorCode, formData.email);
-                    
+
                     if (response.success) {
-                        navigate('/menu');
+                        if (response.data.error || !response.data.success) {
+                            setErrors({
+                                submit: { key: 'invalidCode' }
+                            });
+                            return;
+                        }
+
+                        if (response.data.success) {
+                            navigate('/menu');
+                        } else {
+                            setErrors({
+                                submit: { key: 'invalidCode' }
+                            });
+                        }
                     } else {
-                        setErrors({ 
-                            submit: {key: 'invalidCode'}
+                        setErrors({
+                            submit: { key: 'requestError' }
                         });
                     }
                 }
             } catch (error) {
                 console.error('Error en handleSubmit:', error);
-                setErrors({ 
-                    submit: {key: 'requestError'}
+                setErrors({
+                    submit: { key: 'requestError' }
                 });
             } finally {
                 setIsLoading(false);
@@ -108,7 +146,7 @@ const LoginForm = () => {
                                 onChange={handleChange}
                                 disabled={isLoading}
                             />
-                            {errors.email && 
+                            {errors.email &&
                                 <span className="error">
                                     {translate[errors.email.key][language]}
                                 </span>
@@ -124,12 +162,15 @@ const LoginForm = () => {
                                 onChange={handleChange}
                                 disabled={isLoading}
                             />
-                            {errors.password && 
+                            {errors.password &&
                                 <span className="error">
                                     {translate[errors.password.key][language]}
                                 </span>
                             }
                         </div>
+                        <button className="login-button-dsk" type="submit" disabled={isLoading}>
+                            {isLoading ? translate.loading[language] : translate.login[language]}
+                        </button>
                     </>
                 )}
 
@@ -144,8 +185,8 @@ const LoginForm = () => {
                                 <li>{translate.twoFactorStep4[language]}</li>
                             </ol>
                         </div>
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className="login-button-dsk"
                             onClick={() => setStep('verifyCode')}
                         >
@@ -155,38 +196,37 @@ const LoginForm = () => {
                 )}
 
                 {step === 'verifyCode' && (
-                    <div className="form-group-dsk">
-                        <label htmlFor="twoFactorCode">
-                            {translate.verificationCode[language]}
-                        </label>
-                        <input
-                            type="text"
-                            id="twoFactorCode"
-                            name="twoFactorCode"
-                            value={formData.twoFactorCode}
-                            onChange={handleChange}
-                            disabled={isLoading}
-                            placeholder={translate.codePlaceholder[language]}
-                        />
-                        {errors.twoFactorCode && 
-                            <span className="error">
-                                {translate[errors.twoFactorCode.key][language]}
-                            </span>
-                        }
-                    </div>
+                    <>
+                        <div className="form-group-dsk">
+                            <label htmlFor="twoFactorCode">
+                                {translate.verificationCode[language]}
+                            </label>
+                            <input
+                                type="text"
+                                id="twoFactorCode"
+                                name="twoFactorCode"
+                                value={formData.twoFactorCode}
+                                onChange={handleChange}
+                                disabled={isLoading}
+                                placeholder={translate.codePlaceholder[language]}
+                            />
+                            {errors.twoFactorCode &&
+                                <span className="error">
+                                    {translate[errors.twoFactorCode.key][language]}
+                                </span>
+                            }
+                        </div>
+                        <button className="login-button-dsk" type="submit" disabled={isLoading}>
+                            {isLoading ? translate.loading[language] : translate.login[language]}
+                        </button>
+                    </>
                 )}
 
-                {errors.submit && 
+                {errors.submit &&
                     <div className="error">
-                        {errors.submit.message}
+                        {errors.submit.message || translate[errors.submit.key][language]}
                     </div>
                 }
-                
-                {(step === 'credentials' || step === 'verifyCode') && (
-                    <button className="login-button-dsk" type="submit" disabled={isLoading}>
-                        {isLoading ? translate.loading[language] : translate.login[language]}
-                    </button>
-                )}
             </form>
         </div>
     );
