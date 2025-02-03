@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { useState } from 'react';
+=======
+import React, { useState, useContext } from 'react';
+>>>>>>> 3ce11f78fe00f356f3c1b40a51da5ad3b67fa1e9
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Eye, LogOut, Menu as MenuIcon, X } from 'lucide-react';
+import { LanguageContext } from '../../context/LanguageContext';
 import Logo from '../../utils/proyecto.png';
 import LanguageButton from '../LanguageButton/LanguageButton';
 import './NuevoDesktopNavbar.css';
@@ -9,6 +14,9 @@ const NuevoDesktopNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const [isBlinking, setIsBlinking] = useState(false);
+  const [isButtonBlinking, setIsButtonBlinking] = useState(false);
+  const { toggleLanguage } = useContext(LanguageContext);
 
   const isMenuPage = location.pathname === '/menus';
   const isHomePage = location.pathname === '/';
@@ -17,12 +25,22 @@ const NuevoDesktopNavbar = () => {
     navigate('/');
   };
 
+  const handleEyeClick = () => {
+    setIsBlinking(true);
+    setIsButtonBlinking(true);
+    setTimeout(() => {
+      setIsBlinking(false);
+      setIsButtonBlinking(false);
+      toggleLanguage();
+    }, 150);
+  };
+
   const menuItems = [
     { name: 'Mapak', route: '/mapak' },
     { name: 'Transakzioak', route: '/transakzioak' },
     { name: 'Grafikak', route: '/grafikak' },
     { 
-      name: 'Logout', 
+      name: '', 
       route: '/', 
       icon: <LogOut size={24} />,
       onClick: handleLogout 
@@ -31,22 +49,23 @@ const NuevoDesktopNavbar = () => {
 
   return (
     <>
-      <nav className="modern-navbar">
+      <nav className={`modern-navbar ${isHomePage ? 'home-route' : ''}`}>
         <div className="modern-navbar__container">
           <div className="modern-navbar__logo" onClick={() => navigate('/')}>
             <img src={Logo} alt="Logo" className="logo-image" />
           </div>
           <div className="modern-navbar__controls">
-            <div className="language-switcher">
-              <Eye className="eye-icon" size={24} />
-              <LanguageButton />
+            <div className="language-switcher" onClick={handleEyeClick}>
+              <Eye className={`eye-icon ${isBlinking ? 'blink' : ''}`} size={24} />
+              <LanguageButton isBlinking={isButtonBlinking} />
             </div>
             {!isHomePage && !isMenuPage && (
               <button
-                className="hamburger-button"
+                className={`hamburger-button ${isHamburgerOpen ? 'open' : ''}`}
                 onClick={() => setIsHamburgerOpen(!isHamburgerOpen)}
               >
-                {isHamburgerOpen ? <X size={24} /> : <MenuIcon size={24} />}
+                <MenuIcon className="menu-icon menu-icon-bars" size={24} />
+                <X className="menu-icon menu-icon-close" size={24} />
               </button>
             )}
           </div>

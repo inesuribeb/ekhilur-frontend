@@ -1,100 +1,97 @@
 const mockData = {
-    transactionsByOperation: {
-        labels: ["Compra", "Venta", "Transferencia"],
-        datasets: [
-            {
-                label: "Número de transacciones", 
-                data: [120, 85, 150],
-                backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"]
-            }
-        ]
+    "analisis_usuarios": [
+      {
+        "Categoria": "usuario",
+        "Total_Noviembre_2024": 1563,
+        "Total_Diciembre_2024": 1572,
+        "Incremento_Absoluto": 9,
+        "Incremento_Porcentual": "0.6%"
+      },
+      {
+        "Categoria": "Empresas",
+        "Total_Noviembre_2024": 128,
+        "Total_Diciembre_2024": 128,
+        "Incremento_Absoluto": 0,
+        "Incremento_Porcentual": "0.0%"
+      }
+    ],
+    "promedio_mensual": {
+      "gasto_medio_mensual": 206.49041691897992
     },
- 
-    transactionsOverTime: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
-        datasets: [
-            {
-                label: "Volumen de transacciones",
-                data: [5000, 7000, 6500, 8000, 9000],
-                borderColor: "#42a5f5",
-                fill: false
-            }
-        ]
+    "ahorro_mensual": {
+      "ahorro_medio_mensual": 16.052427424278985
     },
- 
-    userDistribution: {
-        labels: ["Normal", "Premium", "VIP"],
-        datasets: [
-            {
-                label: "Tipos de usuario",
-                data: [300, 150, 50],
-                backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"]
-            }
-        ]
+    "total_diciembre": {
+      "numero_total_operaciones": 11841,
+      "importe_total": 419917.68000000005
     },
- 
-    transactionsByHour: {
-        labels: Array.from({length: 24}, (_, i) => `${i}:00`),
-        datasets: [{
-            label: "Transacciones por Hora",
-            data: Array.from({length: 24}, () => Math.floor(Math.random() * 100)),
-            backgroundColor: '#36a2eb'
-        }]
+    "flujo_efectivo": {
+      "flujo_mensual": [
+        {
+          "mes": 1,
+          "entradas": 107112.0,
+          "salidas": 114229.43
+        },
+        {
+          "mes": 2,
+          "entradas": 100374.0,
+          "salidas": 105032.99
+        },
+        {
+          "mes": 3,
+          "entradas": 94598.0,
+          "salidas": 81715.37
+        },
+        {
+          "mes": 4,
+          "entradas": 102384.0,
+          "salidas": 114781.11
+        },
+        {
+          "mes": 5,
+          "entradas": 110613.0,
+          "salidas": 111650.55
+        },
+        {
+          "mes": 6,
+          "entradas": 104452.0,
+          "salidas": 100858.53
+        },
+        {
+          "mes": 7,
+          "entradas": 96687.0,
+          "salidas": 117773.23
+        },
+        {
+          "mes": 8,
+          "entradas": 70588.0,
+          "salidas": 73365.84
+        },
+        {
+          "mes": 9,
+          "entradas": 100016.0,
+          "salidas": 83959.03
+        },
+        {
+          "mes": 10,
+          "entradas": 116508.0,
+          "salidas": 143881.7
+        },
+        {
+          "mes": 11,
+          "entradas": 109516.0,
+          "salidas": 94529.21
+        },
+        {
+          "mes": 12,
+          "entradas": 142989.0,
+          "salidas": 125870.51
+        }
+      ],
+      "total_entradas": 1255837.0,
+      "total_salidas": 1267647.5
     },
- 
-    userAgeDistribution: {
-        labels: ["18-25", "26-35", "36-45", "46-55", "56+"],
-        datasets: [{
-            label: "Distribución por Edad",
-            data: [45, 80, 65, 45, 20],
-            backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff']
-        }]
-    },
- 
-    transactionsByLocation: {
-        labels: ["Centro", "Norte", "Sur", "Este", "Oeste"],
-        datasets: [{
-            label: "Transacciones por Ubicación",
-            data: [250, 180, 200, 140, 160],
-            backgroundColor: '#4bc0c0'
-        }]
-    },
- 
-    averageAmountByOperationType: {
-        labels: ["Transferencias", "Pagos", "Retiros", "Depósitos"],
-        datasets: [{
-            label: "Monto Promedio por Tipo de Operación",
-            data: [1500, 800, 2000, 1200],
-            backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0']
-        }]
-    },
- 
-    monthlyTransactionFlow: {
-        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
-        datasets: [
-            {
-                label: "Entradas",
-                data: [8000, 9500, 8700, 9800, 10200, 11000],
-                borderColor: '#36a2eb',
-                fill: false
-            },
-            {
-                label: "Salidas",
-                data: [7500, 8800, 8200, 9000, 9500, 10000],
-                borderColor: '#ff6384',
-                fill: false
-            }
-        ]
-    },
- 
-    userBalanceDistribution: {
-        labels: ["0-1000", "1001-5000", "5001-10000", "10001+"],
-        datasets: [{
-            label: "Distribución de Saldos",
-            data: [120, 250, 180, 80],
-            backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0']
-        }]
-    }
- };
+    "timestamp": "2025-01-30T09:51:01.316544"
+  }
  
  export default mockData;

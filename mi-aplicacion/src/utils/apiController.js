@@ -8,7 +8,8 @@ async function fetchData(route, method = 'GET', data = null) {
             method,
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
         }
 
@@ -20,15 +21,29 @@ async function fetchData(route, method = 'GET', data = null) {
             }
         }
 
-        console.log('Fetching:', url.toString(), fetchOptions);
+        console.log('Sending request to:', url.toString());
+        console.log('Request data:', data);
 
         const response = await fetch(url.toString(), fetchOptions);
-        console.log("response", response)
-        const responseData = await response.json();
-        return {
-            success: response.ok,
-            status: response.status,
-            data: responseData
+        
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+        
+        let responseData;
+        try {
+            responseData = JSON.parse(responseText);
+            console.log('Parsed response data:', responseData);
+            
+            // Devolver la respuesta en el formato esperado
+            return {
+                success: true,
+                data: responseData,
+                status: response.status
+            };
+
+        } catch (e) {
+            console.error('Error parsing JSON:', e);
+            throw new Error('Invalid JSON response');
         }
 
     } catch (error) {
@@ -40,12 +55,30 @@ async function fetchData(route, method = 'GET', data = null) {
     }
 }
 
-
 async function login(email, password) {
     return await fetchData('api/login', 'POST', { email, password });
 }
 
+async function verify2FA(tokenF2A, email) {
+    return await fetchData('api/2fa/verify', 'POST', { tokenF2A, email });
+}
+
+async function getAllClients() {
+    return await fetchData('/api/client/all');
+}
+
+async function getLandingPageData() {
+    return await fetchData('/api/landing-page/all');
+}
+
+async function getClientData() {
+    return await fetchData('/api/client/data');
+}
 
 export {
-    login
+    login,
+    getAllClients,
+    verify2FA,
+    getLandingPageData,
+    getClientData
 };
