@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-=======
-import React, { useState, useContext } from 'react';
->>>>>>> 3ce11f78fe00f356f3c1b40a51da5ad3b67fa1e9
+import { useState, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Eye, LogOut, Menu as MenuIcon, X } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';

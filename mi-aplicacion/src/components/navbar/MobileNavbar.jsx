@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Map, BarChart2, CreditCard } from 'lucide-react';
 import './MobileNavbar.css';
