@@ -107,11 +107,11 @@ const translate = {
         Es: "Comprometidos/as con una economía más cercana"
     },
     companies: {
-        Eus: "Enpresak",
+        Eus: "Enpresa",
         Es: "Empresas"
     },
     users: {
-        Eus: "Erabiltzaileak",
+        Eus: "Erabiltzaile",
         Es: "Usuarios"
     },
     lastMonth: {
@@ -139,12 +139,12 @@ const translate = {
         Es: "EUR pagados con Ekhilur"
     },
     realEnter: {
-        Eus: "EUR benetan sartzen dira",
-        Es: "EUR entran real"
+        Eus: "EUR sarean sartzen dira",
+        Es: "EUR entran en la red"
     },
     realExit: {
-        Eus: "EUR benetan ateratzen dira",
-        Es: "EUR salen real"
+        Eus: "EUR saretik ateratzen dira",
+        Es: "EUR salen de la red"
     },
 
 
