@@ -75,10 +75,20 @@ async function getClientData() {
     return await fetchData('/api/client/data');
 }
 
+async function getTransactionData() {
+    return await fetchData('/api/transaction/data');
+}
+
+async function getPrediction(){
+    return await fetchData('/api/predict/all');
+}
+
 export {
     login,
     getAllClients,
     verify2FA,
     getLandingPageData,
-    getClientData
+    getClientData,
+    getTransactionData,
+    getPrediction
 };
