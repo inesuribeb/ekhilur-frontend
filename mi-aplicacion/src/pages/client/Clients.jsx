@@ -11,7 +11,8 @@ import {
     Title,
     Tooltip,
     Legend,
-    ArcElement
+    ArcElement,
+    Filler
 } from 'chart.js';
 import './Clients.css';
 
@@ -24,7 +25,8 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
-    ArcElement
+    ArcElement,
+    Filler
 );
 
 const monthTranslations = {
@@ -36,26 +38,53 @@ const monthTranslations = {
 function Clients() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [isMounted, setIsMounted] = useState(true);  // Añade este estado
-
-    const ageChartRef = useRef(null);
-    const evolutionChartRef = useRef(null);
-    const pieChartRef = useRef(null);  // Nueva referencia
-
+    const [error, setError] = useState(null);
+    const chartInstances = useRef({});
 
     useEffect(() => {
-        setIsMounted(true); 
+
+        const cleanupCharts = () => {
+            Object.values(chartInstances.current).forEach(chart => {
+                if (chart && typeof chart.destroy === 'function') {
+                    chart.destroy();
+                }
+            });
+            chartInstances.current = {};
+        };
+
 
         const fetchData = async () => {
-            if (!isMounted) return;  // No hacer la petición si no está montado
 
             try {
                 const response = await getClientData();
-                if (response.success) {
-                    setData(response.data);
+
+                if (response?.error) {
+                    throw new Error(response.error);
                 }
-            } catch (error) {
-                console.error('Error fetching data:', error);
+
+                if (response?.success && response?.data) {
+                    const requiredProperties = [
+                        'usuariosPorEdad',
+                        'evolucionAltas',
+                        'porcentajePagos',
+                        'transaccionesPorEdad',
+                        'ticketMedio',
+                        'transaccionesPorHora'
+                    ];
+
+                    const missingProperties = requiredProperties.filter(prop => !response.data[prop]);
+
+                    if (missingProperties.length > 0) {
+                        throw new Error(`Faltan datos requeridos: ${missingProperties.join(', ')}`);
+                    }
+
+                    setData(response.data);
+                } else {
+                    throw new Error('La respuesta del servidor no tiene el formato esperado');
+                }
+            } catch (err) {
+                console.error('Error fetching data:', err);
+                setError(err.message || 'Error al cargar los datos. Por favor, intente nuevamente más tarde.');
             } finally {
                 setLoading(false);
             }
@@ -64,40 +93,27 @@ function Clients() {
         fetchData();
 
         return () => {
-            setIsMounted(false);  // Componente desmontado
-
-            if (ageChartRef.current) {
-                ageChartRef.current.destroy();
-            }
-            if (evolutionChartRef.current) {
-                evolutionChartRef.current.destroy();
-            }
-            if (pieChartRef.current) {
-                pieChartRef.current.destroy();
-            }
+            cleanupCharts();
         };
+
     }, []);
 
-    if (!isMounted) return null;
 
+    if (loading) return <div className="p-4">Cargando...</div>;
+    if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
+    if (!data) return <div className="p-4">No hay datos disponibles</div>;
 
-    if (loading || !data) {
-        return <div>Cargando...</div>;
-    }
-
-    // Datos para el gráfico de distribución por edad
     const ageDistributionData = {
         labels: data.usuariosPorEdad.map(item => item.Grupo_edad),
         datasets: [{
             label: 'Número de usuarios',
             data: data.usuariosPorEdad.map(item => item.cantidad_usuarios),
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            borderColor: 'rgb(53, 162, 235)',
+            borderColor: 'rgb(44, 47, 136)',
+            backgroundColor: 'rgba(44, 47, 136, 0.5)',
             borderWidth: 1
         }]
     };
 
-    // Datos para el gráfico de evolución de altas
     const evolutionData = {
         labels: data.evolucionAltas.map(item => {
             const year = item.Ano.split('.')[0];
@@ -107,8 +123,8 @@ function Clients() {
         datasets: [{
             label: 'Nuevas altas',
             data: data.evolucionAltas.map(item => item.total_usuarios),
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgb(71, 84, 198)',
+            backgroundColor: '(214, 216, 222, 0.5)',
             tension: 0.3,
             fill: true
         }]
@@ -119,12 +135,12 @@ function Clients() {
         datasets: [{
             data: data.porcentajePagos.map(item => parseFloat(item.porcentaje)),
             backgroundColor: [
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(75, 192, 192, 0.8)'
+                'rgba(242, 152, 188, 0.8)',
+                'rgba(230, 88, 88, 0.8)'
             ],
             borderColor: [
-                'rgba(54, 162, 235, 1)',
-                'rgba(75, 192, 192, 1)'
+                'rgba(242, 152, 188,)',
+                'rgba(230, 88, 88)'
             ],
             borderWidth: 1
         }]
@@ -138,8 +154,8 @@ function Clients() {
                 data: data.transaccionesPorEdad
                     .filter(item => item.Id_tipo_operacion === 1)
                     .map(item => item.total_transacciones),
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(254, 232, 3, 0.8)',
+                borderColor: 'rgba(254, 232, 3)',
                 borderWidth: 1
             },
             {
@@ -147,8 +163,8 @@ function Clients() {
                 data: data.transaccionesPorEdad
                     .filter(item => item.Id_tipo_operacion === 7)
                     .map(item => item.total_transacciones),
-                backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(251, 68, 2, 0.8)',
+                borderColor: 'rgba(251, 68, 2)',
                 borderWidth: 1
             }
         ]
@@ -159,15 +175,15 @@ function Clients() {
         datasets: [{
             label: 'Ticket Medio (EUR)',
             data: data.ticketMedio.map(item => parseFloat(item.Ticket_medio)),
-            backgroundColor: 'rgba(153, 102, 255, 0.5)',
-            borderColor: 'rgba(153, 102, 255, 1)',
+            backgroundColor: 'rgba(251, 81, 6, 0.5)',
+            borderColor: 'rgba(251, 81, 6, 1)',
             borderWidth: 1
         }]
     };
 
     const transactionsByHourData = {
         labels: data.transaccionesPorHora.map(item =>
-            `${String(item.Hora_Dia).padStart(2, '0')}:00`  // Formato 24h
+            `${String(item.Hora_Dia).padStart(2, '0')}:00`
         ),
         datasets: [{
             label: 'Promedio de transacciones',
@@ -202,12 +218,40 @@ function Clients() {
             ...commonOptions.plugins,
             title: {
                 display: true,
-                text: 'Distribución de Usuarios por Edad'
+                // text: 'Distribución de Usuarios por Edad'
             }
         },
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                grid: {
+                    display: false  // Quita las líneas horizontales
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
+                }
+            },
+            x: {
+                grid: {
+                    display: false  // Quita las líneas verticales
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
+                }
+            }
+        }
+    };
+
+    const pieOptions = {
+        ...commonOptions,
+        plugins: {
+            ...commonOptions.plugins,
+            title: {
+                display: true,
+                // text: 'Distribución de Tipos de Pago'
+            },
+            legend: {
+                position: 'bottom'
             }
         }
     };
@@ -218,7 +262,7 @@ function Clients() {
             ...commonOptions.plugins,
             title: {
                 display: true,
-                text: 'Evolución de Altas por Mes'
+                // text: 'Evolución de Altas por Mes'
             }
         },
         scales: {
@@ -231,21 +275,27 @@ function Clients() {
                 title: {
                     display: true,
                     text: 'Número de altas'
+                },
+                grid: {
+                    display: false  // Quita las líneas horizontales
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
+                },
+                ticks: {
+                    color: '#000000'  // Color para los números del eje Y
                 }
-            }
-        }
-    };
-
-    const pieOptions = {
-        ...commonOptions,
-        plugins: {
-            ...commonOptions.plugins,
-            title: {
-                display: true,
-                text: 'Distribución de Tipos de Pago'
             },
-            legend: {
-                position: 'bottom'
+            x: {
+                grid: {
+                    display: false  // Quita las líneas verticales
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
+                },
+                ticks: {
+                    color: '#000000'  // Color para los números del eje Y
+                }
             }
         }
     };
@@ -256,7 +306,7 @@ function Clients() {
             ...commonOptions.plugins,
             title: {
                 display: true,
-                text: 'Transacciones por Grupo de Edad'
+                // text: 'Transacciones por Grupo de Edad'
             }
         },
         scales: {
@@ -265,11 +315,20 @@ function Clients() {
                 title: {
                     display: true,
                     text: 'Número de transacciones'
+                },
+                grid: {
+                    display: false
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
                 }
             },
             x: {
                 grid: {
                     display: false
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
                 }
             }
         }
@@ -281,7 +340,7 @@ function Clients() {
             ...commonOptions.plugins,
             title: {
                 display: true,
-                text: 'Ticket Medio por Tipo de Operación'
+                // text: 'Ticket Medio por Tipo de Operación'
             }
         },
         scales: {
@@ -291,15 +350,24 @@ function Clients() {
                     display: true,
                     text: 'EUR'
                 },
+                grid: {
+                    display: false
+                },
                 ticks: {
                     callback: function (value) {
                         return value.toFixed(2) + ' €';
                     }
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
                 }
             },
             x: {
                 grid: {
                     display: false
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
                 }
             }
         }
@@ -311,7 +379,7 @@ function Clients() {
             ...commonOptions.plugins,
             title: {
                 display: true,
-                text: 'Transacciones por Hora del Día'
+                // text: 'Transacciones por Hora del Día'
             }
         },
         scales: {
@@ -319,21 +387,30 @@ function Clients() {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Promedio de transacciones'
+                    // text: 'Promedio de transacciones'
                 },
                 ticks: {
                     callback: function (value) {
                         return value.toLocaleString();  // Formato con separadores de miles
                     }
+                },
+                grid: {
+                    display: false
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
                 }
             },
             x: {
                 grid: {
-                    display: true
+                    display: false
                 },
                 title: {
                     display: true,
-                    text: 'Hora del día'
+                    // text: 'Hora del día'
+                },
+                border: {
+                    display: false  // Quita la línea del eje Y
                 }
             }
         }
@@ -342,69 +419,160 @@ function Clients() {
     return (
         <div className="clients-container">
             <div className="charts-grid">
-                <div className="chart-section">
-                    <h2 className="text-xl font-bold mb-4">Distribución por Edad</h2>
-                    <div className="h-[300px]">
-                        <Bar
-                            ref={ageChartRef}
-                            data={ageDistributionData}
-                            options={ageOptions}
-                        />
-                    </div>
-                </div>
+                <div className="charts-grid">
 
-                <div className="chart-section">
-                    <h2 className="text-xl font-bold mb-4">Evolución del número de altas por mes</h2>
-                    <div className="h-[300px]">
-                        <Line
-                            ref={evolutionChartRef}
-                            data={evolutionData}
-                            options={evolutionOptions}
-                        />
-                    </div>
-                </div>
+                    <div className="chart-section">
 
-                <div className="chart-section">
-                    <h2 className="text-xl font-bold mb-4">Tipos de Pago</h2>
-                    <div className="h-[500px] flex items-center justify-center">
-                        <Pie
-                            ref={pieChartRef}
-                            data={paymentData}
-                            options={pieOptions}
-                        />
-                    </div>
-                </div>
+                        <div className='fila1-columna1'>
+                            <h2 className="text-xl font-bold mb-4">Distribución de usuarios por Edad</h2>
+                            <h1>Sorprendente: los mayores de 55 casi triplican a los jóvenes de 18-25</h1>
+                        </div>
 
-                <div className="chart-section">
-                    <h2 className="text-xl font-bold mb-4">Transacciones por Edad</h2>
-                    <div className="h-[500px]">
-                        <Bar
-                            data={transactionsByAgeData}
-                            options={transactionsByAgeOptions}
-                        />
-                    </div>
-                </div>
+                        <div className='fila1-columna2'>
+                            <div className="chart-bar">
+                                <Bar
+                                    ref={(ref) => {
+                                        if (ref) {
+                                            chartInstances.current['age'] = ref;
 
-                <div className="chart-section">
-                    <h2 className="text-xl font-bold mb-4">Ticket Medio</h2>
-                    <div className="h-[500px]">
-                        <Bar
-                            data={ticketMedioData}
-                            options={ticketMedioOptions}
-                        />
-                    </div>
-                </div>
+                                        }
+                                    }}
+                                    // ref={ageChartRef}
+                                    data={ageDistributionData}
+                                    options={ageOptions}
+                                />
+                            </div>
+                        </div>
 
-                <div className="chart-section">
-                    <h2 className="text-xl font-bold mb-4">Transacciones por Hora</h2>
-                    <div className="h-[500px]">
-                        <Line
-                            data={transactionsByHourData}
-                            options={transactionsByHourOptions}
-                        />
                     </div>
-                </div>
 
+                    <div className="chart-section">
+
+                        <div className='fila2-columna1'>
+                            <div className="chart-line">
+                                <Line
+                                    ref={(ref) => {
+                                        if (ref) {
+                                            chartInstances.current['evolution'] = ref;
+
+                                        }
+                                    }}
+                                    // ref={evolutionChartRef}
+                                    data={evolutionData}
+                                    options={evolutionOptions}
+                                />
+                            </div>
+                        </div>
+
+                        <div className='fila2-columna2'>
+                            <h2 className="text-xl font-bold mb-4">Evolución del número de altas por mes</h2>
+                            <h1>Crecimiento Sostenido: Las Altas de Usuarios Se Mantienen Estables Tras un Inicio Explosivo</h1>
+                        </div>
+
+                    </div>
+
+                    <div className="chart-section">
+
+                        <div className='fila3-columna1'>
+                            <h2 className="text-xl font-bold mb-4">Distribución de tipos de Pago</h2>
+                            <h1>El 89.74% de las transacciones corresponden a pagos a usuarios, destacando la preferencia por este método de pago sobre los cobros desde QR</h1>
+                        </div>
+
+                        <div className='fila3-columna2'>
+                            <div className="chart-pie">
+                                <Pie
+                                    ref={(ref) => {
+                                        if (ref) {
+
+                                            chartInstances.current['pie'] = ref;
+
+                                        }
+                                    }}
+                                    data={paymentData}
+                                    options={pieOptions}
+                                />
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div className="chart-section">
+
+                        <div className='fila4-columna1'>
+                            <div className="chart-bar">
+                                <Bar
+                                    ref={(ref) => {
+                                        if (ref) {
+
+                                            chartInstances.current['transactions'] = ref;
+
+                                        }
+                                    }}
+                                    data={transactionsByAgeData}
+                                    options={transactionsByAgeOptions}
+                                />
+                            </div>
+                        </div>
+
+                        <div className='fila4-columna2'>
+                            <h2 className="text-xl font-bold mb-4">Transacciones por grupos de Edad</h2>
+                            <h1>Los grupos de edad de 46-65 años lideran las transacciones, con un notable aumento en los pagos y cobros desde QR en personas mayores de 65 años</h1>
+                        </div>
+
+                    </div>
+
+                    <div className="chart-section">
+
+                        <div className='fila5-columna1'>
+                            <h2 className="text-xl font-bold mb-4">Ticket Medio por Tipo de Operación</h2>
+                            <h1>Los pagos a usuarios presentan un ticket medio más alto que los cobros desde QR, reflejando transacciones de mayor valor</h1>
+                        </div>
+
+                        <div className='fila5-columna2'>
+                            <div className="chart-bar">
+                                <Bar
+                                    ref={(ref) => {
+                                        if (ref) {
+
+                                            chartInstances.current['ticket'] = ref;
+
+                                        }
+                                    }}
+                                    data={ticketMedioData}
+                                    options={ticketMedioOptions}
+                                />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="chart-section">
+
+                        <div className='fila6-columna1'>
+                            <div className="chart-line">
+                                <Line
+                                    ref={(ref) => {
+                                        if (ref) {
+
+                                            chartInstances.current['hourly'] = ref;
+
+                                        }
+                                    }}
+                                    data={transactionsByHourData}
+                                    options={transactionsByHourOptions}
+                                />
+                            </div>
+                        </div>
+
+                        <div className='fila6-columna2'>
+                            <h2 className="text-xl font-bold mb-4">Transacciones por Hora del Día</h2>
+                            <h1>Las transacciones alcanzan su pico entre las 10:00 AM y las 12:00 PM, lo que sugiere una mayor actividad durante las primeras horas del día</h1>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     );
