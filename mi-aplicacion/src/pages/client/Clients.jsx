@@ -269,9 +269,7 @@ function Clients() {
             y: {
                 beginAtZero: true,
                 max: 250,
-                ticks: {
-                    stepSize: 50
-                },
+                stepSize: 50,
                 title: {
                     display: true,
                     text: 'Número de altas'

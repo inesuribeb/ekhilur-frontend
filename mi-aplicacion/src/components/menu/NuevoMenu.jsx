@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { ComposedChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList, Line, Tooltip } from 'recharts';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
