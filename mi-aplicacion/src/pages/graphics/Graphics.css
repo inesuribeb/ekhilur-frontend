@@ -1,5 +1,242 @@
-.graphics-container {
+/* .graphics-container {
     background-color: white;
     padding: 20px;
     padding-top: 100px;
+} */
+@font-face {
+    font-family: 'Against';
+    src: url('/fonts/against regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.graphics-container {
+    display: flex;        
+    /* width: 100%;          */
+    height: 100vh;  
+    height: 975px;  
+
+    padding: 7rem;
+    padding-top: 170px; 
+    padding-bottom: 70px;
+    background-color: black;    
+    font-family: 'Against';
+    width: 115%;
+    margin-left: -7.5%;
+    margin-top: -7.5%;
+}
+
+.primera-columna-predict,
+.segunda-columna-predict {
+    flex: 1;            
+    height: 100%;       
+    display: flex;         /* Añadir display flex a ambas columnas */
+    flex-direction: column; /* Organizar verticalmente ambas columnas */
+    border-radius: 15px;
+
+}
+
+.primera-columna-predict {
+    background-color: transparent;  
+}
+
+.primera-columna-primera-fila,
+.primera-columna-segunda-fila {
+    flex: 1;              
+    border: 3px solid black; 
+}
+
+/* Estilos específicos para cada fila */
+.primera-columna-primera-fila {
+    display: flex;
+    background-color: yellow;
+    border-radius: 15px;
+    flex-direction: column;  
+    /* justify-content: center; 
+    align-items: center;    
+    text-align: center; */
+    
+}
+.dates {
+    width: 100%;  /* Ocupa todo el ancho disponible */
+    display: flex;
+    flex-direction: column;  /* Apila las fechas verticalmente */
+    gap: 0rem;     /* Espacio entre las fechas */
+    padding: 40px;
+}
+
+.dates h2:first-child {
+    align-self: flex-start;  /* Primera fecha a la izquierda */
+    font-family: 'Against';
+    letter-spacing: 5px;
+}
+
+.dates h2:last-child {
+    align-self: flex-end;    /* Segunda fecha a la derecha */
+    font-family: 'Against';
+    letter-spacing: 5px;
+}
+
+.title {
+    text-align: center;  /* Mantiene el título centrado */
+    /* margin-top: auto;   */
+    margin-top: 0rem;
+}
+.title h1 {
+    font-family: 'Against';
+    letter-spacing: 16px;
+}
+
+.primera-columna-segunda-fila {
+    /* background-color: black;
+    color: white; */
+    display: flex; 
+    gap:4px;
+}
+
+/* Columnas dentro de la segunda fila */
+.segunda-fila-columna-izquierda,
+.segunda-fila-columna-derecha {
+    flex: 1;              
+    border: 1px solid black;
+    display: flex;           /* Añadir display flex */
+    flex-direction: column;  /* Organizar contenido en columna */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center;     /* Centrar horizontalmente */
+    text-align: center;
+    gap: 15px;
+    border-radius: 15px;
+
+}
+
+.ingreso-descripcion-uno,
+.ingreso-descripcion-dos,
+.label-uno,
+.label-dos {
+    font-size: 0.75rem;
+    /* text-transform: uppercase; */
+    letter-spacing: 1px;
+    padding: 8px 30px;
+    border-radius: 35px;
+    margin: 10px 0;
+    font-family: 'Against';
+    letter-spacing: 3.5px;
+}
+
+.ingreso-descripcion-uno,
+.label-uno {
+    border: 1px solid black;
+
+}
+
+.ingreso-descripcion-dos,
+.label-dos {
+    border: 1px solid white;
+
+}
+
+.cifra-ingreso-total,
+.cifra-ingreso-diario {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    /* gap: -0.5rem;  */
+    border: 2px solid yellow;
+    border-radius: 50%;
+    /* width: 150px;
+    height: 150px; */
+    padding: 20px;
+}
+
+.cifra-ingreso-total .currency,
+.cifra-ingreso-diario .currency {
+    margin-top: -0.7rem;  /* Valor negativo para acercar al número */
+}
+
+.cifra-ingreso-diario {
+    border: 1.5px solid white;
+    background-color: white;
+    color: black;
+    width: 150px;
+    height: 150px;
+}
+.cifra-ingreso-total{
+    border: 1.5px solid black;
+    background-color: transparent;
+    color: black;
+    width: 225px;
+    height: 225px;
+}
+
+.amount {
+    font-size: 2.75rem;  /* O el tamaño que prefieras */
+    font-family: 'Against';
+    letter-spacing: 3px;
+
+}
+
+.cifra-ingreso-total .amount {
+    font-size: 3.75rem;
+    letter-spacing: 3px;
+}
+
+.currency {
+    font-size: 1.1rem;  /* O el tamaño que prefieras */
+    font-family: 'Against';
+    letter-spacing: 5px;
+}
+
+.segunda-fila-columna-izquierda {
+    background-color: white;
+    color: black;
+}
+.segunda-fila-columna-derecha {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+
+
+
+
+/* Segunda columna */
+.segunda-columna-predict {
+    background-color: transparent;    
+}
+
+/* Filas de la segunda columna */
+.segunda-columna-primera-fila,
+.segunda-columna-segunda-fila {
+    flex: 1;              /* Asegura que las filas tengan la misma altura */
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    /* justify-content: center; */
+    padding-top: 15px;
+    border-radius: 15px;
+
+}
+
+.segunda-columna-primera-fila{
+    background-color: white;
+}
+
+.segunda-columna-segunda-fila {
+    background-color: blue;
+    color: white;
+}
+
+.label-uno span,
+.label-dos span{
+    font-family: 'Against';
+}
+
+
+
+.amount-info {
+    padding-top: 80px;
+    font-size:50px;
 }
