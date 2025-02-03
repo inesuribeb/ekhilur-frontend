@@ -23,6 +23,7 @@
     border-radius: 10px;
     height: 550px;
     align-items: flex-end;
+    width: 100%;
 }
 
 .chart-section h1,
@@ -174,6 +175,32 @@
     background-color: #F3F2EC;
 }
 
+/* Actualizaciones para la sección de tabla de transacciones */
+.chart-section.transaction-type-section,
+.chart-section {
+    width: 100%;
+    margin: 0;
+    padding: 1rem 5rem;
+}
+
+.transaction-type-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.transaction-type-table-wrapper {
+    width: 100%;
+    height: calc(100% - 140px);
+    overflow-y: auto;
+}
+
+.transaction-type-table {
+    width: 100%;
+}
+
 /* Ajustes para pantallas móviles y tablets */
 @media screen and (max-width: 768px) {
     .transactions-container {
@@ -271,6 +298,16 @@
     .chart-section .fila4-columna2 {
         text-align: center;
         align-items: center;
+    }
+
+    .chart-section.transaction-type-section,
+    .chart-section {
+        padding: 1rem;
+        height: auto;
+    }
+    
+    .transaction-type-container {
+        padding: 1rem;
     }
 }
 
