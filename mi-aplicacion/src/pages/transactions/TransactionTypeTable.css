@@ -1,0 +1,137 @@
+.transaction-type-section {
+    background-color: transparent;
+}
+
+.transaction-type-container {
+    background-color: #f3f2ec;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-type-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.transaction-type-summary {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2D2F7E;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.summary-label {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+}
+
+.summary-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.month-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.month-label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2A307F;
+}
+
+.month-select-input {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #4754C6;
+    font-size: 1rem;
+    background-color: white;
+    color: #2A307F;
+}
+
+.transaction-type-table-wrapper {
+    overflow-x: auto;
+    flex-grow: 1;
+}
+
+.transaction-type-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.transaction-type-table thead {
+    background-color: #4754C6;
+    color: white;
+}
+
+.transaction-type-table th {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    color: white;
+}
+
+.transaction-type-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    color: black
+}
+
+
+.transaction-type-table th {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+}
+
+.transaction-type-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+    color: black;
+}
+
+.transaction-type-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .transaction-type-summary {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .month-selector {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .transaction-type-table th,
+    .transaction-type-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}

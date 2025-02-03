@@ -1,6 +1,7 @@
 import { getTransactionData } from '../../utils/apiController';
 import { useEffect, useState, useRef } from 'react';
 import { Bar, Line, Pie } from "react-chartjs-2";
+import TransactionTypeTable from './TransactionTypeTable';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -15,6 +16,7 @@ import {
     Filler
 } from 'chart.js';
 import './Transactions.css';
+import './TransactionTypeTable.css';
 
 ChartJS.register(
     CategoryScale,
@@ -40,7 +42,6 @@ function Transactions() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const chartInstances = useRef({});
-    const chartRef = useRef(null);
 
     useEffect(() => {
         const cleanupCharts = () => {
@@ -93,40 +94,6 @@ function Transactions() {
         return () => cleanupCharts();
     }, []);
 
-    useEffect(() => {
-        if (chartRef.current && data) {
-            const chart = chartRef.current;
-            const ctx = chart.ctx;
-            const chartArea = chart.chartArea;
-            
-            if (!chartArea) return;
-            
-            const centerX = (chartArea.left + chartArea.right) / 2;
-            const centerY = (chartArea.top + chartArea.bottom) / 2;
-            const r = Math.min(chartArea.right - chartArea.left, chartArea.bottom - chartArea.top) / 2;
-
-            const gradients = [
-                { start: '#FF1493', end: '#FF69B4' },  // Pink
-                { start: '#FFD700', end: '#FFA500' },  // Gold
-                { start: '#20B2AA', end: '#008B8B' },  // Turquoise
-                { start: '#00FF7F', end: '#3CB371' },  // Spring Green
-                { start: '#8A2BE2', end: '#4B0082' }   // Purple
-            ];
-            
-            data.transactions.forEach((_, index) => {
-                const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, r);
-                gradient.addColorStop(0, gradients[index % gradients.length].start);
-                gradient.addColorStop(1, gradients[index % gradients.length].end);
-                
-                if (chart.data.datasets[0]) {
-                    chart.data.datasets[0].backgroundColor[index] = gradient;
-                }
-            });
-            
-            chart.update();
-        }
-    }, [data]);
-
     if (loading) return <div className="p-4">Cargando...</div>;
     if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
     if (!data) return <div className="p-4">No hay datos disponibles</div>;
@@ -158,49 +125,6 @@ function Transactions() {
                 }
             }
         }
-    };
-
-    const transactionsData = {
-        labels: data.transactions.map(item => item.tipo_operacion || 'Sin tipo'),
-        datasets: [{
-            data: data.transactions.map(item => parseFloat(item.cantidad_total_eur)),
-            backgroundColor: new Array(data.transactions.length).fill('rgba(255, 255, 255, 0.7)'),
-            borderWidth: 0
-        }]
-    };
-
-    const radialOptions = {
-        ...commonOptions,
-        plugins: {
-            legend: {
-                display: true,
-                position: 'bottom',
-                labels: {
-                    generateLabels: function(chart) {
-                        const data = chart.data;
-                        const gradients = [
-                            { start: '#FF1493' },  // Pink
-                            { start: '#FFD700' },  // Gold
-                            { start: '#20B2AA' },  // Turquoise
-                            { start: '#00FF7F' },  // Spring Green
-                            { start: '#8A2BE2' }   // Purple
-                        ];
-                        if (data.datasets.length) {
-                            return data.labels.map((label, i) => ({
-                                text: `${label} - ${data.datasets[0].data[i].toLocaleString('es-ES')}€`,
-                                fillStyle: gradients[i % gradients.length].start,
-                                hidden: false,
-                                index: i
-                            }));
-                        }
-                        return [];
-                    }
-                }
-            }
-        },
-        radius: '90%',
-        rotation: -0.5 * Math.PI,
-        cutout: '0%'
     };
 
     const cashbackData = {
@@ -300,24 +224,14 @@ function Transactions() {
     return (
         <div className="transactions-container">
             <div className="charts-grid">
+                {/* Transaction Type Table section */}
                 <div className="chart-section">
                     <div className="fila1-columna1">
-                        <h2 className="text-xl font-bold mb-4">Distribución de Transacciones por Tipo</h2>
-                        <h1>Los pagos a usuarios representan el mayor volumen de transacciones</h1>
+                        <h2 className="text-xl font-bold mb-4">Detalle de Tipos de Transacciones</h2>
+                        <h1>Análisis detallado de transacciones por tipo y mes</h1>
                     </div>
                     <div className="fila1-columna2">
-                        <div className="chart-bar">
-                            <Pie
-                                ref={(ref) => {
-                                    if (ref) {
-                                        chartInstances.current['transactions'] = ref;
-                                        chartRef.current = ref;
-                                    }
-                                }}
-                                data={transactionsData}
-                                options={radialOptions}
-                            />
-                        </div>
+                        {data && <TransactionTypeTable transactions={data.transactions} />}
                     </div>
                 </div>
 
@@ -359,42 +273,6 @@ function Transactions() {
                                     if (ref) chartInstances.current['mobile'] = ref;
                                 }}
                                 data={mobileAverageData}
-                                options={commonOptions}
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="chart-section">
-                    <div className="fila4-columna1">
-                        <div className="chart-bar">
-                            <Bar
-                                ref={(ref) => {
-                                    if (ref) chartInstances.current['weekday'] = ref;
-                                }}
-                                data={weekdayVsWeekendData}
-                                options={commonOptions}
-                            />
-                        </div>
-                    </div>
-                    <div className="fila4-columna2">
-                        <h2 className="text-xl font-bold mb-4">Transacciones Entre Semana vs Fin de Semana</h2>
-                        <h1>Comparativa mensual del volumen de transacciones según el día de la semana</h1>
-                    </div>
-                </div>
-
-                <div className="chart-section">
-                    <div className="fila5-columna1">
-                        <h2 className="text-xl font-bold mb-4">Transacciones por Hora del Día</h2>
-                        <h1>Distribución horaria de las transacciones mostrando los picos de actividad</h1>
-                    </div>
-                    <div className="fila5-columna2">
-                        <div className="chart-line">
-                            <Line
-                                ref={(ref) => {
-                                    if (ref) chartInstances.current['hourly'] = ref;
-                                }}
-                                data={hourlyTransactionsData}
                                 options={commonOptions}
                             />
                         </div>
