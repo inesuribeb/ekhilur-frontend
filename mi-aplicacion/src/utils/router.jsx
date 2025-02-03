@@ -6,6 +6,7 @@ import RechartGraphics from "../pages/graphics/RechartGraphics"
 import NuevoMenu from "../components/menu/NuevoMenu";
 import Menu from "../components/menu/Menu";
 import Clients from "../pages/client/Clients";
+import MatrixGraph from "../components/graphics-transactions/Matrixgraph";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "aurreikuspenak",
                 element: <RechartGraphics />,
+            },
+            {
+                path: "matrix",
+                element: <MatrixGraph />,
             },
             
         ],
