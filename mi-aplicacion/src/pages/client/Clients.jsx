@@ -416,6 +416,7 @@ function Clients() {
         }
     };
 
+
     return (
         <div className="clients-container">
             <div className="charts-grid">
@@ -562,6 +563,11 @@ function Clients() {
                                     data={transactionsByHourData}
                                     options={transactionsByHourOptions}
                                 />
+
+                                {/* <Bar
+                                    data={createHeatmapData(data.transaccionesPorHora)}
+                                    options={heatmapOptions}
+                                /> */}
                             </div>
                         </div>
 

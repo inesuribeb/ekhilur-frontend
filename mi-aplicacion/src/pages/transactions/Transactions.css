@@ -1,5 +1,335 @@
-.transactions-test-map {
-    background-color: white;
-    padding: 20px;
-    padding-top: 100px;
+.transactions-container {
+    padding: 2rem;
+    margin: 0 auto;
+    background-color: black;
+    padding-top: 170px;
+    width: 115%;
+    margin-left: -7.5%;
+    margin-top: -7.5%;
+}
+
+.charts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.chart-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    border-radius: 10px;
+    height: 550px;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.chart-section h1,
+.chart-section h2 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.chart-section .text-xl {
+    font-size: 1.25rem;
+}
+
+.chart-section .fila1-columna1,
+.chart-section .fila2-columna1,
+.chart-section .fila3-columna1,
+.chart-section .fila4-columna1,
+.chart-section .fila5-columna1,
+.chart-section .fila1-columna2,
+.chart-section .fila2-columna2,
+.chart-section .fila3-columna2,
+.chart-section .fila4-columna2,
+.chart-section .fila5-columna2 {
+    flex: 1;
+    padding: 3rem;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.chart-section .fila1-columna1,
+.chart-section .fila3-columna1,
+.chart-section .fila5-columna1 {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.chart-section .fila2-columna2,
+.chart-section .fila4-columna2 {
+    align-items: flex-end;
+    text-align: right;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.chart-section .fila1-columna2,
+.chart-section .fila3-columna2,
+.chart-section .fila5-columna2 {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.chart-section .fila2-columna1,
+.chart-section .fila4-columna1 {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.chart-section .fila1-columna1 h2,
+.chart-section .fila3-columna1 h2,
+.chart-section .fila5-columna1 h2,
+.chart-section .fila2-columna2 h2,
+.chart-section .fila4-columna2 h2 {
+    font-size: 40px;
+    letter-spacing: 1.1px;
+}
+
+.chart-section .fila1-columna1 h1,
+.chart-section .fila3-columna1 h1,
+.chart-section .fila5-columna1 h1,
+.chart-section .fila2-columna2 h1,
+.chart-section .fila4-columna2 h1 {
+    font-size: 18px;
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+.chart-section .fila1-columna2,
+.chart-section .fila2-columna2,
+.chart-section .fila3-columna2,
+.chart-section .fila4-columna2,
+.chart-section .fila5-columna2 {
+    padding-left: 20px;
+}
+
+.chart-bar,
+.chart-line,
+.chart-pie {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-section canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Colores de fondo para cada sección */
+.chart-section .fila1-columna1 {
+    background-color: #E49C17;
+    color: #ffffff;
+}
+
+.chart-section .fila1-columna2 {
+    background-color: #2D2F7E;
+    color: white;
+}
+
+.chart-section .fila2-columna1 {
+    background-color: #F1F425;
+}
+
+.chart-section .fila2-columna2 {
+    background-color: #4754C6;
+    color: white;
+}
+
+.chart-section .fila3-columna1 {
+    background-color: #C0C853;
+}
+
+.chart-section .fila3-columna2 {
+    background-color: #F4F3EB;
+}
+
+.chart-section .fila4-columna1 {
+    background-color: #F6D7E9;
+}
+
+.chart-section .fila4-columna2 {
+    background-color: #E83324;
+    color: white;
+}
+
+.chart-section .fila5-columna1 {
+    background-color: #DBBCE9;
+    color: #2A307F;
+}
+
+.chart-section .fila5-columna2 {
+    background-color: #F3F2EC;
+}
+
+/* Actualizaciones para la sección de tabla de transacciones */
+.chart-section.transaction-type-section,
+.chart-section {
+    width: 100%;
+    margin: 0;
+    padding: 1rem 5rem;
+}
+
+.transaction-type-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.transaction-type-table-wrapper {
+    width: 100%;
+    height: calc(100% - 140px);
+    overflow-y: auto;
+}
+
+.transaction-type-table {
+    width: 100%;
+}
+
+/* Ajustes para pantallas móviles y tablets */
+@media screen and (max-width: 768px) {
+    .transactions-container {
+        width: 100%;
+        margin: 0;
+        padding: 3rem;
+        padding-top: 100px;
+        width: 115%;
+        margin-left: -7.5%;
+        margin-top: -7.5%;
+    }
+
+    .chart-section {
+        height: auto;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0rem;
+        margin-bottom: 2rem;
+    }
+
+    .chart-section .fila1-columna1,
+    .chart-section .fila2-columna1,
+    .chart-section .fila3-columna1,
+    .chart-section .fila4-columna1,
+    .chart-section .fila5-columna1,
+    .chart-section .fila1-columna2,
+    .chart-section .fila2-columna2,
+    .chart-section .fila3-columna2,
+    .chart-section .fila4-columna2,
+    .chart-section .fila5-columna2 {
+        width: 100%;
+        padding: 2rem;
+        min-height: 300px;
+    }
+
+    .chart-section .fila1-columna1,
+    .chart-section .fila2-columna1,
+    .chart-section .fila3-columna1,
+    .chart-section .fila4-columna1,
+    .chart-section .fila5-columna1 {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .chart-section .fila1-columna2,
+    .chart-section .fila2-columna2,
+    .chart-section .fila3-columna2,
+    .chart-section .fila4-columna2,
+    .chart-section .fila5-columna2 {
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    .chart-section h2 {
+        font-size: 20px;
+    }
+
+    .chart-section h1 {
+        font-size: 14px;
+    }
+
+    .chart-section .fila1-columna1 h2,
+    .chart-section .fila3-columna1 h2,
+    .chart-section .fila5-columna1 h2,
+    .chart-section .fila2-columna2 h2,
+    .chart-section .fila4-columna2 h2 {
+        font-size: 30px;
+        letter-spacing: 1.1px;
+    }
+
+    .chart-section .fila1-columna1 h1,
+    .chart-section .fila3-columna1 h1,
+    .chart-section .fila5-columna1 h1,
+    .chart-section .fila2-columna2 h1,
+    .chart-section .fila4-columna2 h1 {
+        font-size: 16px;
+        letter-spacing: 1px;
+        opacity: 0.5;
+    }
+
+    .chart-bar,
+    .chart-line,
+    .chart-pie {
+        height: 250px;
+    }
+
+    .chart-section .fila1-columna1,
+    .chart-section .fila3-columna1,
+    .chart-section .fila5-columna1,
+    .chart-section .fila2-columna2,
+    .chart-section .fila4-columna2 {
+        text-align: center;
+        align-items: center;
+    }
+
+    .chart-section.transaction-type-section,
+    .chart-section {
+        padding: 1rem;
+        height: auto;
+    }
+    
+    .transaction-type-container {
+        padding: 1rem;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media screen and (max-width: 480px) {
+    .transactions-container {
+        padding-top: 80px;
+    }
+
+    .chart-section {
+        padding: 0.5rem;
+    }
+
+    .chart-section h2 {
+        font-size: 20px;
+    }
+
+    .chart-section h1 {
+        font-size: 14px;
+    }
+
+    .charts-grid {
+        gap: 1rem;
+    }
 }
