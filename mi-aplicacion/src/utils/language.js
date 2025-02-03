@@ -101,6 +101,20 @@ const translate = {
         Es: "Introduce el código de Google Authenticator"
     },
 
+    // Traducciones para el navbar
+    clients: {
+        Eus: "Bezeroak",
+        Es: "Clientes"
+    },
+    transactions: {
+        Eus: "Transakzioak",
+        Es: "Transacciones"
+    },
+    predictions: {
+        Eus: "Aurreikuspenak",
+        Es: "Predicciones"
+    },
+  
     // Traducciones para el menú
     menuTitle: {
         Eus: "Ekonomia hurbilagoarekin konprometituak",
@@ -111,7 +125,7 @@ const translate = {
         Es: "Empresas"
     },
     users: {
-        Eus: "Erabiltzaile",
+        Eus: "Erabiltzaileak",
         Es: "Usuarios"
     },
     lastMonth: {
