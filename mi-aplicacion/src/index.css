@@ -8,6 +8,8 @@
 
 body {
   background-color: #FDD7D6;
+  overflow-x: hidden; /* Previene el scroll horizontal */
+
 }
 
 
@@ -22,4 +24,6 @@ html, body {
 #root {
   height: 100%;
   width: 100%;
+  overflow-x: hidden; /* Previene el scroll horizontal */
+
 }
