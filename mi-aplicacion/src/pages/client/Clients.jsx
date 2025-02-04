@@ -32,11 +32,6 @@ ChartJS.register(
     Filler
 );
 
-const monthTranslations = {
-    1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr',
-    5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago',
-    9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic'
-};
 
 function Clients() {
     const [data, setData] = useState(null);
@@ -151,7 +146,7 @@ function Clients() {
     const evolutionData = {
         labels: data.evolucionAltas.map(item => {
             const year = item.Ano.split('.')[0];
-            const month = monthTranslations[parseInt(item.Mes)];
+            const month = translate.months[parseInt(item.Mes)][language];
             return `${month} ${year}`;
         }),
         datasets: [{
@@ -165,7 +160,7 @@ function Clients() {
     };
 
     const paymentData = {
-        labels: data.porcentajePagos.map(item => item.Operacion),
+        labels: data.porcentajePagos.map(item => translate.paymentOperation[item.Operacion]?.[language] || item.Operacion),
         datasets: [{
             data: data.porcentajePagos.map(item => parseFloat(item.porcentaje)),
             backgroundColor: [

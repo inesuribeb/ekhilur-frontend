@@ -238,6 +238,16 @@ const translate = {
         Eus: "Transakzioen gailurra goizeko 10ak eta 12ak bitartean iristen da, horrek erakusten digu eguneko lehenengo orduetan dagoela aktibitate gehien",
         Es: "Las transacciones alcanzan su pico entre las 10:00 AM y las 12:00 PM, lo que sugiere una mayor actividad durante las primeras horas del día"
     },
+    paymentOperation: {
+        "Pago a usuario": {
+            Eus: "Erabiltzaileari ordainketa",
+            Es: "Pago a usuario"
+        },
+        "Cobro desde QR": {
+            Eus: "QR bidezko kobrantza",
+            Es: "Cobro desde QR"
+        }
+    },
     // Página predicciones
     prediction: {
         Eus: "IRAGARPENA",
