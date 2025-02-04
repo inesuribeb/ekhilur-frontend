@@ -443,6 +443,23 @@ const translate = {
 
 
 
+    // ... mapas ...
+
+    
+    
+    
+    heatMapTitle: {
+        en: "User Distribution by Zone",
+        es: "Distribución de Usuarios por Zona"
+    },
+    heatMapText: {
+        en: "Heat map showing user concentration across different areas",
+        es: "Mapa de calor mostrando la concentración de usuarios por zonas"
+    },
+      
+    
+    
+
     // ... meses ...
     monthsLong: {
         1: {

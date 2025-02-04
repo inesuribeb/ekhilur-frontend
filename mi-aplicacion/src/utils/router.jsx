@@ -8,6 +8,8 @@ import Menu from "../components/menu/Menu";
 import Clients from "../pages/client/Clients";
 import MatrixGraph from "../components/graphics-transactions/Matrixgraph";
 
+import MapHernaniTicket from "../components/map/MapHernaniTicket";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
             {
                 path: "matrix",
                 element: <MatrixGraph />,
+            },
+           /*  {
+                path: "hernani",
+                element: <MapHernaniClient />,
+            }, */
+            {
+                path: "ticket",
+                element: <MapHernaniTicket />,
             },
             
         ],
