@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Eye, LogOut, Menu as MenuIcon, X } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
-import Logo from '../../utils/proyecto.png';
+// import Logo from '../../utils/proyecto.png';
+import Logo from '../../utils/logo2.png';
 import LanguageButton from '../LanguageButton/LanguageButton';
 import './NuevoDesktopNavbar.css';
 
@@ -34,6 +35,7 @@ const NuevoDesktopNavbar = () => {
   };
 
   const menuItems = [
+    { name: translate.home[language], route: '/menu' },
     { name: translate.clients[language], route: '/bezeroak' },
     { name: translate.transactions[language], route: '/transakzioak' },
     { name: translate.predictions[language], route: '/aurreikuspenak' },

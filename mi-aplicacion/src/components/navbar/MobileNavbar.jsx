@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Map, BarChart2, CreditCard } from 'lucide-react';
 import './MobileNavbar.css';
@@ -71,4 +71,4 @@ const MobileNavbar = () => {
   );
 };
 
-export default MobileNavbar;
+export default MobileNavbar; */
