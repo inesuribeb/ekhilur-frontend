@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, useMap, Circle, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import "../../components/map/MapComponent.css";
+import "./ticketmap.css";
 
 const FixedZoom = ({ zoomLevel }) => {
   const map = useMap();
@@ -26,21 +26,28 @@ const FixedZoom = ({ zoomLevel }) => {
 };
 
 
-
 const HeatMapLayer = ({ data }) => {
+  // Verifica si los datos están vacíos o no están definidos
   if (!data?.length) return null;
 
-  // Split coordinates from the Coordenadas field
-  const processedData = data.map(point => ({
-    ...point,
-    Latitud: point.Coordenadas.split(',')[0].trim(),
-    Longitud: point.Coordenadas.split(',')[1].trim()
-  }));
+  // Procesa los datos para asegurarse de que las coordenadas sean válidas
+  const processedData = data
+    .map(point => ({
+      ...point,
+      Latitud: parseFloat(point.Latitud.trim()), // Elimina espacios y convierte a número
+      Longitud: parseFloat(point.Longitud.trim()), // Elimina espacios y convierte a número
+    }))
+    .filter(point => !isNaN(point.Latitud) && !isNaN(point.Longitud)); // Filtra coordenadas inválidas
 
+  // Si no hay datos válidos, no renderices nada
+  if (!processedData.length) return null;
+
+  // Calcula el valor máximo y mínimo del ticket medio
   const ticketValues = processedData.map(point => parseFloat(point.Ticket_medio));
   const maxTicket = Math.max(...ticketValues);
   const minTicket = Math.min(...ticketValues);
 
+  // Calcula el radio del círculo basado en el ticket medio
   const calculateRadius = (ticket) => {
     const minRadius = 15;
     const maxRadius = 40;
@@ -48,6 +55,7 @@ const HeatMapLayer = ({ data }) => {
     return minRadius + normalized * (maxRadius - minRadius);
   };
 
+  // Calcula el color del círculo basado en el ticket medio
   const calculateColor = (ticket) => {
     const normalized = (ticket - minTicket) / (maxTicket - minTicket);
     if (normalized < 0.33) return '#3388ff';
@@ -55,16 +63,17 @@ const HeatMapLayer = ({ data }) => {
     return '#ff0000';
   };
 
+  // Renderiza los círculos en el mapa
   return processedData.map((point, index) => (
     <Circle
       key={index}
-      center={[parseFloat(point.Latitud), parseFloat(point.Longitud)]}
+      center={[point.Latitud, point.Longitud]} // Usa Latitud y Longitud directamente
       radius={calculateRadius(parseFloat(point.Ticket_medio))}
       pathOptions={{
         fillColor: calculateColor(parseFloat(point.Ticket_medio)),
         fillOpacity: 0.6,
         color: calculateColor(parseFloat(point.Ticket_medio)),
-        weight: 1
+        weight: 1,
       }}
     >
       <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent={false}>
@@ -81,7 +90,6 @@ const HeatMapLayer = ({ data }) => {
     </Circle>
   ));
 };
-
 const TicketMap = ({ mapTicketMedio }) => {
   const ZOOM_LEVEL = 15.5;
   const CENTER = [43.26826, -1.97609];

@@ -146,7 +146,6 @@ function NuevoMenu() {
     window.addEventListener("resize", checkIfMobile);
 
     return () => {
-        isMounted = false;
       window.removeEventListener("resize", checkIfMobile);
       document.documentElement.style.setProperty("--animation-state", "paused");
       animationInProgressRef.current = false;
