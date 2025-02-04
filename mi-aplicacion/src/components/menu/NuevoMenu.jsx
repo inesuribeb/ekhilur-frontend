@@ -14,7 +14,7 @@ import translate from "../../utils/language";
 import { getLandingPageData } from "../../utils/apiController";
 import "./NuevoMenu.css";
 
-function NuevoMenu() {
+  function NuevoMenu() {
   const [isMobile, setIsMobile] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -146,6 +146,7 @@ function NuevoMenu() {
     window.addEventListener("resize", checkIfMobile);
 
     return () => {
+        isMounted = false;
       window.removeEventListener("resize", checkIfMobile);
       document.documentElement.style.setProperty("--animation-state", "paused");
       animationInProgressRef.current = false;

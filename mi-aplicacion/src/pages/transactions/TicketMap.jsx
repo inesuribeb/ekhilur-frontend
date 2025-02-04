@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, useMap, Circle, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import "./ticketmap.css";
+import "../transactions/ticketmap.css";
 
 const FixedZoom = ({ zoomLevel }) => {
   const map = useMap();
@@ -102,8 +102,8 @@ const TicketMap = ({ mapTicketMedio }) => {
       </div>
       
       <div className="fila6-columna2 map-container">
-        <div className="map-content">
-          <div className="map-wrapper">
+        <div className="map-content-tr">
+          <div className="map-wrapper-tr">
             <MapContainer 
               center={CENTER}
               zoom={ZOOM_LEVEL}
