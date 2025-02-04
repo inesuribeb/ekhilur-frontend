@@ -20,7 +20,7 @@ import {
 } from 'chart.js';
 import './Transactions.css';
 import './TransactionTypeTable.css';
-import translate from '../../utils/language';
+
 
 ChartJS.register(
     CategoryScale,
