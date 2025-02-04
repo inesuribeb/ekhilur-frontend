@@ -140,7 +140,7 @@ function Transactions() {
     };
 
     const cashbackData = {
-        labels: data.totalWastedVsCashBack.map(item => item.Categoria || 'Sin categoría'),
+        labels: data.totalWastedVsCashBack.map(item => translate.wastedCategories[item.Categoria]?.[language] || item.Categoria),
         datasets: [{
             data: data.totalWastedVsCashBack.map(item => parseFloat(item.Total || 0)),
             backgroundColor: [
@@ -163,7 +163,7 @@ function Transactions() {
                 if (!item.Id_fecha) return '';
                 try {
                     const date = new Date(item.Id_fecha);
-                    return `${date.getDate()} ${monthTranslations[date.getMonth() + 1]}`;
+                    return `${date.getDate()} ${translate.months[date.getMonth() + 1][language]}`;
                 } catch (e) {
                     return 'Fecha inválida';
                 }
@@ -181,7 +181,7 @@ function Transactions() {
                 fill: false
             },
             {
-                label: 'Compras Acumuladas',
+                label: translate.accumulatedBuys[language],
                 data: data.mobileAverage
                     .filter(item => new Date(item.Id_fecha) >= new Date('2024-01-31'))
                     .filter((_, index) => index % 14 === 0)
@@ -196,10 +196,10 @@ function Transactions() {
 
     const weekdayVsWeekendData = {
         labels: [...new Set(data.transaccionesEntreSemanaYFinDeSemana
-            .map(item => monthTranslations[parseInt(item.Mes)] || 'Sin mes'))],
+            .map(item => translate.months[parseInt(item.Mes)]?.[language] || translate.noMonth?.[language] || 'Sin mes'))],
         datasets: [
             {
-                label: 'Entre semana',
+                label: translate.weekDay[language],
                 data: data.transaccionesEntreSemanaYFinDeSemana
                     .filter(item => item.dia_semana === "Entre semana")
                     .map(item => parseFloat(item.Cantidad_total || 0)),
@@ -208,7 +208,7 @@ function Transactions() {
                 borderWidth: 1
             },
             {
-                label: 'Fin de semana',
+                label: translate.weekEnd[language],
                 data: data.transaccionesEntreSemanaYFinDeSemana
                     .filter(item => item.dia_semana === "Fin de semana")
                     .map(item => parseFloat(item.Cantidad_total || 0)),

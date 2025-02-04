@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
+import { LanguageContext } from '../../context/LanguageContext';
+import translate from '../../utils/language';
 
-const monthTranslations = {
-    1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril',
-    5: 'Mayo', 6: 'Junio', 7: 'Julio', 8: 'Agosto',
-    9: 'Septiembre', 10: 'Octubre', 11: 'Noviembre', 12: 'Diciembre'
-};
+// Create an array of month numbers 1-12 for filtering
+const monthNumbers = Array.from({length: 12}, (_, i) => i + 1);
 
 const TransactionTypeTable = ({ transactions }) => {
     const [selectedMonth, setSelectedMonth] = useState(1);
+    const { language } = useContext(LanguageContext);
 
     // Get unique years from transactions
     const years = [...new Set(transactions.map(t => parseFloat(t.Anho)))];
@@ -15,6 +15,7 @@ const TransactionTypeTable = ({ transactions }) => {
 
     // Filter transactions by selected month and latest year
     const filteredTransactions = transactions.filter(t => 
+        monthNumbers.includes(parseFloat(t.Mes)) && 
         parseFloat(t.Mes) === selectedMonth && 
         parseFloat(t.Anho) === latestYear
     );
@@ -29,15 +30,17 @@ const TransactionTypeTable = ({ transactions }) => {
         <div className="transaction-type-container">
             <div className="transaction-type-header">
                 <div className="month-selector">
-                    <label htmlFor="month-select" className="month-label">Seleccionar Mes:</label>
+                    <label htmlFor="month-select" className="month-label">{translate.selectMonth[language]}:</label>
                     <select 
                         id="month-select"
                         value={selectedMonth}
                         onChange={(e) => setSelectedMonth(parseFloat(e.target.value))}
                         className="month-select-input"
                     >
-                        {Object.entries(monthTranslations).map(([num, name]) => (
-                            <option key={num} value={num}>{name}</option>
+                        {Array.from({length: 12}, (_, i) => i + 1).map(num => (
+                            <option key={num} value={num}>
+                                {translate.monthsLong[num][language]}
+                            </option>
                         ))}
                     </select>
                 </div>
@@ -45,15 +48,15 @@ const TransactionTypeTable = ({ transactions }) => {
 
             <div className="transaction-type-summary">
                 <div className="summary-item">
-                    <span className="summary-label">Año:</span>
+                    <span className="summary-label">{translate.year[language]}:</span>
                     <span className="summary-value">{latestYear}</span>
                 </div>
                 <div className="summary-item">
-                    <span className="summary-label">Total Transacciones:</span>
+                    <span className="summary-label">{translate.totalTransactions[language]}:</span>
                     <span className="summary-value">{totalTransactions.toLocaleString()}</span>
                 </div>
                 <div className="summary-item">
-                    <span className="summary-label">Importe Total:</span>
+                    <span className="summary-label">{translate.totalAmount[language]}:</span>
                     <span className="summary-value">{totalAmount.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€</span>
                 </div>
             </div>
@@ -62,10 +65,10 @@ const TransactionTypeTable = ({ transactions }) => {
                 <table className="transaction-type-table">
                     <thead>
                         <tr>
-                            <th>Tipo de Operación</th>
-                            <th>Número de Transacciones</th>
-                            <th>Dinero Total (€)</th>
-                            <th>% del Total</th>
+                            <th>{translate.operationType[language]}</th>
+                            <th>{translate.transactionsNumber[language]}</th>
+                            <th>{translate.totalAmount[language]} (€)</th>
+                            <th>{translate.totalPercentage[language]}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,7 +77,7 @@ const TransactionTypeTable = ({ transactions }) => {
                                 (parseFloat(transaction.Dinero_total) / totalAmount * 100).toFixed(2);
                             return (
                                 <tr key={index}>
-                                    <td>{transaction.Tipo_operacion}</td>
+                                    <td>{translate.operationTypes[transaction.Tipo_operacion]?.[language] || transaction.Tipo_operacion}</td>
                                     <td>{parseInt(transaction.num_transacciones).toLocaleString()}</td>
                                     <td>{parseFloat(transaction.Dinero_total).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€</td>
                                     <td>{transactionPercentage}%</td>
