@@ -1,6 +1,7 @@
 import { getClientData } from '../../utils/apiController';
 import { useEffect, useState, useRef, useContext} from 'react';
 import { LanguageContext } from '../../context/LanguageContext';
+import LoadComponent from '../../components/loadComponent/LoadComponent'
 import translate from '../../utils/language';
 import { Bar, Line, Pie } from "react-chartjs-2";
 import {
@@ -17,7 +18,6 @@ import {
     Filler
 } from 'chart.js';
 import './Clients.css';
-
 
 ChartJS.register(
     CategoryScale,
@@ -46,7 +46,6 @@ function Clients() {
     const { language } = useContext(LanguageContext);
 
     useEffect(() => {
-
         const cleanupCharts = () => {
             Object.values(chartInstances.current).forEach(chart => {
                 if (chart && typeof chart.destroy === 'function') {
@@ -56,9 +55,7 @@ function Clients() {
             chartInstances.current = {};
         };
 
-
         const fetchData = async () => {
-
             try {
                 const response = await getClientData();
 
@@ -99,13 +96,46 @@ function Clients() {
         return () => {
             cleanupCharts();
         };
-
     }, []);
 
-
-    if (loading) return <div className="p-4">Cargando...</div>;
+    // if (loading) return <div className="p-4">Cargando...</div>;
+    if (loading) return <LoadComponent isLoading={loading} />;
     if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
     if (!data) return <div className="p-4">No hay datos disponibles</div>;
+
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    display: false
+                },
+                border: {
+                    display: false
+                },
+                ticks: {
+                    callback: function(value) {
+                        return value >= 1000 ? `${value/1000}K` : value;
+                    }
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                border: {
+                    display: false
+                }
+            }
+        }
+    };
 
     const ageDistributionData = {
         labels: data.usuariosPorEdad.map(item => item.Grupo_edad),
@@ -121,7 +151,7 @@ function Clients() {
     const evolutionData = {
         labels: data.evolucionAltas.map(item => {
             const year = item.Ano.split('.')[0];
-            const month = monthTranslations[parseInt(item.Mes)]; //Traducir meses
+            const month = monthTranslations[parseInt(item.Mes)];
             return `${month} ${year}`;
         }),
         datasets: [{
@@ -134,7 +164,7 @@ function Clients() {
         }]
     };
 
-    const paymentData = { //Los labels no están traducidos
+    const paymentData = {
         labels: data.porcentajePagos.map(item => item.Operacion),
         datasets: [{
             data: data.porcentajePagos.map(item => parseFloat(item.porcentaje)),
@@ -174,7 +204,7 @@ function Clients() {
         ]
     };
 
-    const ticketMedioData = { //Los labels de las gráficas sin traducir
+    const ticketMedioData = {
         labels: data.ticketMedio.map(item => item.Operacion),
         datasets: [{
             label: translate.averageTicket[language],
@@ -204,44 +234,12 @@ function Clients() {
         }]
     };
 
-
-
-    const commonOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-            }
-        }
-    };
-
     const ageOptions = {
         ...commonOptions,
         plugins: {
             ...commonOptions.plugins,
             title: {
-                display: true,
-                // text: 'Distribución de Usuarios por Edad'
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    display: false  // Quita las líneas horizontales
-                },
-                border: {
-                    display: false  // Quita la línea del eje Y
-                }
-            },
-            x: {
-                grid: {
-                    display: false  // Quita las líneas verticales
-                },
-                border: {
-                    display: false  // Quita la línea del eje Y
-                }
+                display: true
             }
         }
     };
@@ -251,11 +249,15 @@ function Clients() {
         plugins: {
             ...commonOptions.plugins,
             title: {
-                display: true,
-                // text: 'Distribución de Tipos de Pago'
+                display: true
             },
             legend: {
                 position: 'bottom'
+            }
+        },
+        scales: {
+            y: {
+                display: false
             }
         }
     };
@@ -265,8 +267,7 @@ function Clients() {
         plugins: {
             ...commonOptions.plugins,
             title: {
-                display: true,
-                // text: 'Evolución de Altas por Mes'
+                display: true
             }
         },
         scales: {
@@ -274,31 +275,32 @@ function Clients() {
                 beginAtZero: true,
                 max: 250,
                 ticks: {
-                    stepSize: 50
+                    stepSize: 50,
+                    color: '#000000',
+                    callback: function(value) {
+                        return value >= 1000 ? `${value/1000}K` : value;
+                    }
                 },
                 title: {
                     display: true,
                     text: translate.signUpNumber[language]
                 },
                 grid: {
-                    display: false  // Quita las líneas horizontales
+                    display: false
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
-                },
-                ticks: {
-                    color: '#000000'  // Color para los números del eje Y
+                    display: false
                 }
             },
             x: {
                 grid: {
-                    display: false  // Quita las líneas verticales
+                    display: false
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
+                    display: false
                 },
                 ticks: {
-                    color: '#000000'  // Color para los números del eje Y
+                    color: '#000000'
                 }
             }
         }
@@ -309,8 +311,7 @@ function Clients() {
         plugins: {
             ...commonOptions.plugins,
             title: {
-                display: true,
-                // text: 'Transacciones por Grupo de Edad'
+                display: true
             }
         },
         scales: {
@@ -324,7 +325,12 @@ function Clients() {
                     display: false
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
+                    display: false
+                },
+                ticks: {
+                    callback: function(value) {
+                        return value >= 1000 ? `${value/1000}K` : value;
+                    }
                 }
             },
             x: {
@@ -332,7 +338,7 @@ function Clients() {
                     display: false
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
+                    display: false
                 }
             }
         }
@@ -343,8 +349,7 @@ function Clients() {
         plugins: {
             ...commonOptions.plugins,
             title: {
-                display: true,
-                // text: 'Ticket Medio por Tipo de Operación'
+                display: true
             }
         },
         scales: {
@@ -359,11 +364,11 @@ function Clients() {
                 },
                 ticks: {
                     callback: function (value) {
-                        return value.toFixed(2) + ' €';
+                        return value.toFixed(0) + ' €';
                     }
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
+                    display: false
                 }
             },
             x: {
@@ -371,7 +376,7 @@ function Clients() {
                     display: false
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
+                    display: false
                 }
             }
         }
@@ -382,27 +387,25 @@ function Clients() {
         plugins: {
             ...commonOptions.plugins,
             title: {
-                display: true,
-                // text: 'Transacciones por Hora del Día'
+                display: true
             }
         },
         scales: {
             y: {
                 beginAtZero: true,
                 title: {
-                    display: true,
-                    // text: 'Promedio de transacciones'
+                    display: true
                 },
                 ticks: {
                     callback: function (value) {
-                        return value.toLocaleString();  // Formato con separadores de miles
+                        return value >= 1000 ? `${value/1000}K` : value.toLocaleString();
                     }
                 },
                 grid: {
                     display: false
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
+                    display: false
                 }
             },
             x: {
@@ -410,178 +413,127 @@ function Clients() {
                     display: false
                 },
                 title: {
-                    display: true,
-                    // text: 'Hora del día'
+                    display: true
                 },
                 border: {
-                    display: false  // Quita la línea del eje Y
+                    display: false
                 }
             }
         }
     };
 
-
     return (
         <div className="clients-container">
             <div className="charts-grid">
                 <div className="charts-grid">
-
                     <div className="chart-section">
-
                         <div className='fila1-columna1'>
                             <h2 className="text-xl font-bold mb-4">{translate.ageDistribution[language]}</h2>
                             <h1>{translate.ageDistributionText[language]}</h1>
                         </div>
-
                         <div className='fila1-columna2'>
                             <div className="chart-bar">
                                 <Bar
                                     ref={(ref) => {
-                                        if (ref) {
-                                            chartInstances.current['age'] = ref;
-
-                                        }
+                                        if (ref) chartInstances.current['age'] = ref;
                                     }}
-                                    // ref={ageChartRef}
                                     data={ageDistributionData}
                                     options={ageOptions}
                                 />
                             </div>
                         </div>
-
                     </div>
 
                     <div className="chart-section">
-
                         <div className='fila2-columna1'>
                             <div className="chart-line">
                                 <Line
                                     ref={(ref) => {
-                                        if (ref) {
-                                            chartInstances.current['evolution'] = ref;
-
-                                        }
+                                        if (ref) chartInstances.current['evolution'] = ref;
                                     }}
-                                    // ref={evolutionChartRef}
                                     data={evolutionData}
                                     options={evolutionOptions}
                                 />
                             </div>
                         </div>
-
                         <div className='fila2-columna2'>
                             <h2 className="text-xl font-bold mb-4">{translate.signUpEvolution[language]}</h2>
                             <h1>{translate.signUpEvolutionText[language]}</h1>
                         </div>
-
                     </div>
 
                     <div className="chart-section">
-
                         <div className='fila3-columna1'>
                             <h2 className="text-xl font-bold mb-4">{translate.payDistribution[language]}</h2>
                             <h1>{translate.payDistributionText[language]}</h1>
                         </div>
-
                         <div className='fila3-columna2'>
                             <div className="chart-pie">
                                 <Pie
                                     ref={(ref) => {
-                                        if (ref) {
-
-                                            chartInstances.current['pie'] = ref;
-
-                                        }
+                                        if (ref) chartInstances.current['pie'] = ref;
                                     }}
                                     data={paymentData}
                                     options={pieOptions}
                                 />
                             </div>
                         </div>
-
-
                     </div>
 
                     <div className="chart-section">
-
                         <div className='fila4-columna1'>
                             <div className="chart-bar">
                                 <Bar
                                     ref={(ref) => {
-                                        if (ref) {
-
-                                            chartInstances.current['transactions'] = ref;
-
-                                        }
+                                        if (ref) chartInstances.current['transactions'] = ref;
                                     }}
                                     data={transactionsByAgeData}
                                     options={transactionsByAgeOptions}
                                 />
                             </div>
                         </div>
-
+                        
                         <div className='fila4-columna2'>
                             <h2 className="text-xl font-bold mb-4">{translate.transactionsByAge[language]}</h2>
                             <h1>{translate.transactionsByAgeText[language]}</h1>
                         </div>
-
                     </div>
 
                     <div className="chart-section">
-
                         <div className='fila5-columna1'>
                             <h2 className="text-xl font-bold mb-4">{translate.averageTicketByOperationType[language]}</h2>
                             <h1>{translate.averageTicketByOperationTypeText[language]}</h1>
                         </div>
-
                         <div className='fila5-columna2'>
                             <div className="chart-bar">
                                 <Bar
                                     ref={(ref) => {
-                                        if (ref) {
-
-                                            chartInstances.current['ticket'] = ref;
-
-                                        }
+                                        if (ref) chartInstances.current['ticket'] = ref;
                                     }}
                                     data={ticketMedioData}
                                     options={ticketMedioOptions}
                                 />
                             </div>
                         </div>
-
                     </div>
 
                     <div className="chart-section">
-
                         <div className='fila6-columna1'>
                             <div className="chart-line">
                                 <Line
                                     ref={(ref) => {
-                                        if (ref) {
-
-                                            chartInstances.current['hourly'] = ref;
-
-                                        }
+                                        if (ref) chartInstances.current['hourly'] = ref;
                                     }}
                                     data={transactionsByHourData}
                                     options={transactionsByHourOptions}
                                 />
-
-                                {/* <Bar
-                                    data={createHeatmapData(data.transaccionesPorHora)}
-                                    options={heatmapOptions}
-                                /> */}
                             </div>
                         </div>
-
                         <div className='fila6-columna2'>
                             <h2 className="text-xl font-bold mb-4">{translate.transactionsPerHour[language]}</h2>
                             <h1>{translate.transactionsPerHourText[language]}</h1>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>

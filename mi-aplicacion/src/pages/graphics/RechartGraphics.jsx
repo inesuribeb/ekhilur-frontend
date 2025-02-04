@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getPrediction } from "../../utils/apiController";
 import { useContext } from 'react';
+import LoadComponent from '../../components/loadComponent/LoadComponent'
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
 import './Graphics.css';
@@ -25,7 +26,8 @@ function RechartGraphics() {
         fetchData();
     }, []);
 
-    if (loading || !predictionData) return <div>Cargando...</div>;
+    // if (loading || !predictionData) return <div>Cargando...</div>;
+    if (loading) return <LoadComponent isLoading={loading} />;
 
     const { predicciones } = predictionData;
 
