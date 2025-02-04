@@ -102,6 +102,11 @@ const translate = {
     },
 
     // Traducciones para el navbar
+    home: {
+        Eus: "Hasiera",
+        Es: "Inicio"
+    },
+
     clients: {
         Eus: "Bezeroak",
         Es: "Clientes"
