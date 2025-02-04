@@ -20,7 +20,7 @@ import {
 } from 'chart.js';
 import './Transactions.css';
 import './TransactionTypeTable.css';
-import translate from '../../utils/language';
+
 
 ChartJS.register(
     CategoryScale,
@@ -119,6 +119,11 @@ function Transactions() {
                 },
                 border: {
                     display: false
+                },
+                ticks: {
+                    callback: function(value) {
+                        return value >= 1000 ? `${value/1000}K` : value;
+                    }
                 }
             },
             x: {
@@ -254,6 +259,11 @@ function Transactions() {
                                         ...commonOptions.plugins,
                                         legend: {
                                             position: 'bottom'
+                                        }
+                                    },
+                                    scales: {
+                                        y: {
+                                            display: false
                                         }
                                     }
                                 }}
