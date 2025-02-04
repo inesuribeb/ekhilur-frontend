@@ -114,6 +114,11 @@ function Transactions() {
                 },
                 border: {
                     display: false
+                },
+                ticks: {
+                    callback: function(value) {
+                        return value >= 1000 ? `${value/1000}K` : value;
+                    }
                 }
             },
             x: {
@@ -249,6 +254,11 @@ function Transactions() {
                                         ...commonOptions.plugins,
                                         legend: {
                                             position: 'bottom'
+                                        }
+                                    },
+                                    scales: {
+                                        y: {
+                                            display: false
                                         }
                                     }
                                 }}

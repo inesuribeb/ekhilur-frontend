@@ -21,7 +21,8 @@
     padding-right: 5rem;
     border-radius: 10px;
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    height: 550px;
+   /*  height: 550px; */
+    height: 75vh;
     align-items: flex-end;
     /* Esto alineará el contenido en la parte inferior */
 }
