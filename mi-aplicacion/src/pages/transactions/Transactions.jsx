@@ -1,5 +1,7 @@
 import { getTransactionData } from '../../utils/apiController';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
+import { LanguageContext } from '../../context/LanguageContext';
+import translate from '../../utils/language';
 import { Bar, Line, Pie } from "react-chartjs-2";
 import TransactionTypeTable from './TransactionTypeTable';
 import {
@@ -13,10 +15,12 @@ import {
     Tooltip,
     Legend,
     ArcElement,
-    Filler
+    Filler,
+    layouts
 } from 'chart.js';
 import './Transactions.css';
 import './TransactionTypeTable.css';
+import translate from '../../utils/language';
 
 ChartJS.register(
     CategoryScale,
@@ -42,6 +46,7 @@ function Transactions() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const chartInstances = useRef({});
+    const { language } = useContext(LanguageContext);
 
     useEffect(() => {
         const cleanupCharts = () => {
@@ -227,8 +232,8 @@ function Transactions() {
                 {/* Transaction Type Table section */}
                 <div className="chart-section">
                     <div className="fila1-columna1">
-                        <h2 className="text-xl font-bold mb-4">Detalle de Tipos de Transacciones</h2>
-                        <h1>Análisis detallado de transacciones por tipo y mes</h1>
+                        <h2 className="text-xl font-bold mb-4">{translate.transactionsDetails[language]}</h2>
+                        <h1>{translate.transactionsDetailsText[language]}</h1>
                     </div>
                     <div className="fila1-columna2">
                         {data && <TransactionTypeTable transactions={data.transactions} />}
@@ -256,15 +261,15 @@ function Transactions() {
                         </div>
                     </div>
                     <div className="fila2-columna2">
-                        <h2 className="text-xl font-bold mb-4">Gasto Total vs Cashback</h2>
-                        <h1>Análisis de la relación entre gastos totales y recompensas en forma de cashback</h1>
+                        <h2 className="text-xl font-bold mb-4">{translate.cashback[language]}</h2>
+                        <h1>{translate.cashbackText[language]}</h1>
                     </div>
                 </div>
 
                 <div className="chart-section">
                     <div className="fila3-columna1">
-                        <h2 className="text-xl font-bold mb-4">Comparativa de Compras Acumuladas</h2>
-                        <h1>Análisis bimensual de las compras acumuladas y su variación respecto al periodo anterior (shift_14)</h1>
+                        <h2 className="text-xl font-bold mb-4">{translate.accumulateBuys[language]}</h2>
+                        <h1>{translate.accumulateBuysText[language]}</h1>
                     </div>
                     <div className="fila3-columna2">
                         <div className="chart-line">
@@ -292,15 +297,15 @@ function Transactions() {
                         </div>
                     </div>
                     <div className="fila4-columna2">
-                        <h2 className="text-xl font-bold mb-4">Transacciones Entre Semana vs Fin de Semana</h2>
-                        <h1>Comparativa mensual del volumen de transacciones según el día de la semana</h1>
+                        <h2 className="text-xl font-bold mb-4">{translate.transactionsWeekend[language]}</h2>
+                        <h1>{translate.transactionsWeekendText[language]}</h1>
                     </div>
                 </div>
 
                 <div className="chart-section">
                     <div className="fila5-columna1">
-                        <h2 className="text-xl font-bold mb-4">Transacciones por Hora del Día</h2>
-                        <h1>Distribución horaria de las transacciones mostrando los picos de actividad</h1>
+                        <h2 className="text-xl font-bold mb-4">{translate.transactionsHour[language]}</h2>
+                        <h1>{translate.transactionsHourText[language]}</h1>
                     </div>
                     <div className="fila5-columna2">
                         <div className="chart-line">
