@@ -7,7 +7,9 @@
 }
 
 body {
-  background-color: #FDD7D6;
+  /* background-color: #FDD7D6; */
+  /* background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6); */
+  background-color: black;
   overflow-x: hidden; /* Previene el scroll horizontal */
 
 }

@@ -83,6 +83,14 @@ async function getPrediction(){
     return await fetchData('/api/predict/all');
 }
 
+async function getClientMap(){
+    return await fetchData('/api/map/clients');
+}
+
+async function getTicketMap(){
+    return await fetchData('/api/map/tickets');
+}
+
 export {
     login,
     getAllClients,
@@ -90,5 +98,7 @@ export {
     getLandingPageData,
     getClientData,
     getTransactionData,
-    getPrediction
+    getPrediction,
+    getClientMap,
+    getTicketMap
 };

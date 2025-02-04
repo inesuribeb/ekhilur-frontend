@@ -47,7 +47,8 @@
 
 .primera-columna-primera-fila {
     display: flex;
-    background-color: yellow;
+    /* background-color: yellow; */
+    background: linear-gradient(45deg, #E8E92C, #BC90FF, #C6C6C6);
     border-radius: 15px;
     flex-direction: column;      
 }
@@ -61,13 +62,13 @@
 
 .dates h2:first-child {
     align-self: flex-start; 
-    font-family: 'N27';
+    /* font-family: 'Against'; */
     letter-spacing: 5px;
 }
 
 .dates h2:last-child {
     align-self: flex-end;  
-    font-family: 'N27';
+    /* font-family: 'N27'; */
     letter-spacing: 5px;
 }
 
@@ -155,6 +156,7 @@
     height: 225px;
 }
 
+
 .amount {
     font-size: 2.75rem; 
     font-family: 'N27';
@@ -207,7 +209,8 @@
 }
 
 .segunda-columna-segunda-fila {
-    background-color: blue;
+    /* background-color: blue; */
+    background: linear-gradient(90deg, #E8E92C 70%, #C6C6C6 100%);
     color: white;
 }
 
@@ -353,5 +356,360 @@
         .amount-info {
             font-size: 24px;
         }
+    }
+}
+@font-face {
+    font-family: 'Against';
+    src: url('/fonts/against regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'N27';
+    src: url('/fonts/N27-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.graphics-container {
+    display: flex;
+    height: 100vh;
+    height: 975px;
+    padding: 7rem;
+    padding-top: 170px;
+    padding-bottom: 70px;
+    background-color: black;
+    font-family: 'Against';
+    width: 115%;
+    margin-left: -7.5%;
+    margin-top: -7.5%;
+}
+
+.primera-columna-predict,
+.segunda-columna-predict {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+
+}
+
+.primera-columna-predict {
+    background-color: transparent;
+}
+
+.primera-columna-primera-fila,
+.primera-columna-segunda-fila {
+    flex: 1;
+    border: 3px solid black;
+}
+
+.primera-columna-primera-fila {
+    display: flex;
+    background-color: yellow;
+    border-radius: 15px;
+    flex-direction: column;
+}
+
+.dates {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    padding: 40px;
+}
+
+.dates h2:first-child {
+    align-self: flex-start;
+    font-family: 'N27';
+    letter-spacing: 5px;
+}
+
+.dates h2:last-child {
+    align-self: flex-end;
+    font-family: 'N27';
+    letter-spacing: 5px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 0rem;
+}
+
+.title h1 {
+    font-family: 'Against';
+    letter-spacing: 16px;
+}
+
+.primera-columna-segunda-fila {
+
+    display: flex;
+    gap: 4px;
+}
+
+.segunda-fila-columna-izquierda,
+.segunda-fila-columna-derecha {
+    flex: 1;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    border-radius: 15px;
+
+}
+
+.ingreso-descripcion-uno,
+.ingreso-descripcion-dos,
+.label-uno,
+.label-dos {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 8px 30px;
+    border-radius: 35px;
+    margin: 10px 0;
+    font-family: 'Against';
+    letter-spacing: 3.5px;
+}
+
+.ingreso-descripcion-uno,
+.label-uno {
+    border: 1px solid black;
+
+}
+
+.ingreso-descripcion-dos,
+.label-dos {
+    border: 1px solid white;
+
+}
+
+.cifra-ingreso-total,
+.cifra-ingreso-diario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid yellow;
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.cifra-ingreso-total .currency,
+.cifra-ingreso-diario .currency {
+    margin-top: -0.7rem;
+}
+
+.cifra-ingreso-diario {
+    border: 1.5px solid white;
+    background-color: white;
+    color: black;
+    width: 150px;
+    height: 150px;
+}
+
+.cifra-ingreso-total {
+    border: 1.5px solid black;
+    background-color: transparent;
+    color: black;
+    width: 225px;
+    height: 225px;
+}
+
+.amount {
+    font-size: 2.75rem;
+    font-family: 'N27';
+    letter-spacing: 3px;
+}
+
+.cifra-ingreso-total .amount {
+    font-size: 3.75rem;
+    letter-spacing: 3px;
+}
+
+.currency {
+    font-size: 1.1rem;
+    font-family: 'Against';
+    letter-spacing: 5px;
+}
+
+.segunda-fila-columna-izquierda {
+    background-color: white;
+    color: black;
+}
+
+.segunda-fila-columna-derecha {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+
+
+
+
+/* Segunda columna */
+.segunda-columna-predict {
+    background-color: transparent;
+}
+
+.segunda-columna-primera-fila,
+.segunda-columna-segunda-fila {
+    flex: 1;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+    border-radius: 15px;
+}
+
+.segunda-columna-primera-fila {
+    background-color: white;
+}
+
+.segunda-columna-segunda-fila {
+    background-color: blue;
+    color: white;
+}
+
+.label-uno span,
+.label-dos span {
+    font-family: 'Against';
+}
+
+.amount-info {
+    padding-top: 80px;
+    font-size: 50px;
+}
+
+/* Media Queries para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .graphics-container {
+        flex-direction: column;
+        height: auto;
+        padding: 2rem;
+        width: 100%;
+        margin: 0;
+    }
+
+    .primera-columna-predict,
+    .segunda-columna-predict {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .dates {
+        padding: 20px;
+    }
+
+    .dates h2 {
+        font-size: 1rem;
+        letter-spacing: 3px;
+    }
+
+    .title h1 {
+        font-size: 1.5rem;
+        letter-spacing: 8px;
+    }
+
+    .primera-columna-segunda-fila {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cifra-ingreso-total {
+        width: 180px;
+        height: 180px;
+    }
+
+    .cifra-ingreso-diario {
+        width: 120px;
+        height: 120px;
+    }
+
+    .cifra-ingreso-total .currency{
+        margin-top: 0.2rem;
+    }
+    .cifra-ingreso-diario .currency {
+        margin-top: 0.2rem;
+    }
+
+    .segunda-fila-columna-izquierda .cifra-ingreso-total {
+        transform: translateY(-1rem);
+    }
+
+    .segunda-fila-columna-derecha .cifra-ingreso-diario {
+        transform: translateY(0.8rem);
+    }
+
+    .cifra-ingreso-total .amount {
+        font-size: 2.5rem;
+    }
+
+    .amount {
+        font-size: 2rem;
+    }
+
+    .currency {
+        font-size: 0.9rem;
+    }
+
+    .ingreso-descripcion-uno,
+    .ingreso-descripcion-dos,
+    .label-uno,
+    .label-dos {
+        font-size: 0.7rem;
+        padding: 6px 20px;
+    }
+
+    .amount-info {
+        padding-top: 40px;
+        font-size: 30px;
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+/* Media Queries para dispositivos muy pequeños */
+@media screen and (max-width: 480px) {
+    .graphics-container {
+        padding: 1rem;
+    }
+
+    .dates h2 {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    .title h1 {
+        font-size: 1.2rem;
+        letter-spacing: 6px;
+    }
+
+    .cifra-ingreso-total {
+        width: 150px;
+        height: 150px;
+    }
+
+    .cifra-ingreso-diario {
+        width: 100px;
+        height: 100px;
+    }
+
+    .cifra-ingreso-total .amount {
+        font-size: 2rem;
+    }
+
+    .amount {
+        font-size: 1.5rem;
+    }
+
+    .amount-info {
+        font-size: 24px;
     }
 }

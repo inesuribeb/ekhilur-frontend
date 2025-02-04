@@ -54,35 +54,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(244, 243, 235);
+    /* background-color: rgb(244, 243, 235); */
+    background-color: black;
     z-index: 1000;
 }
 
 .loading-circle-container {
     position: relative;
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
 }
 
 .progress-ring {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
     transform: rotate(-90deg);
 }
 
 .progress-ring-circle-bg {
     fill: none;
-    stroke: #e0e0e0;
-    stroke-width: 8;
+    stroke: black;
+    stroke-width: 6;
+    stroke-linecap: round;
 }
 
 .progress-ring-circle {
     fill: none;
-    stroke: #F1F525;
-    stroke-width: 8;
+    stroke: #E8E92C;
+    stroke-width: 6;
     stroke-linecap: round;
     transition: stroke-dashoffset 0.3s ease-out;
 }
+
+
 
 .loading-text-center {
     position: absolute;

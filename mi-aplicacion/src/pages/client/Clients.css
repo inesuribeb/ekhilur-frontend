@@ -9,13 +9,6 @@
     margin-top: -7.5%;
 }
 
-@font-face {
-    font-family: 'Against';
-    src: url('/fonts/against regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 
 .chart-section {
     display: flex;
@@ -28,8 +21,7 @@
     padding-right: 5rem;
     border-radius: 10px;
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    /* height: 550px; */
-    height: 75vh;
+    height: 550px;
     align-items: flex-end;
     /* Esto alineará el contenido en la parte inferior */
 }
@@ -119,9 +111,8 @@
 .chart-section .fila2-columna2 h2,
 .chart-section .fila4-columna2 h2,
 .chart-section .fila6-columna2 h2 {
-    font-size: 35px;
+    font-size: 40px;
     letter-spacing: 1.1px;
-    font-family: 'Against';
 }
 
 .chart-section .fila1-columna1 h1,
@@ -352,5 +343,50 @@
 
     .chart-section h1 {
         font-size: 14px;
+    }
+}
+
+.fila7-columna1,
+.fila7-columna2 {
+    flex: 1;
+    padding: 3rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fila7-columna1 {
+    background-color: #F4F3EB;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.fila7-columna2 {
+    background-color: #FFFFFF;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .fila7-columna1,
+    .fila7-columna2 {
+        width: 100%;
+        padding: 2rem;
+        min-height: 300px;
+        height: 700px;
+    }
+
+    .fila7-columna1 {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .fila7-columna2 {
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
 }
