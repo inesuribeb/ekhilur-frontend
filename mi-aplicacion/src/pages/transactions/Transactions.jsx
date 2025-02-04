@@ -2,6 +2,7 @@ import { getTransactionData } from '../../utils/apiController';
 import { useEffect, useState, useRef, useContext } from 'react';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
+import LoadComponent from '../../components/loadComponent/LoadComponent'
 import { Bar, Line, Pie } from "react-chartjs-2";
 import TransactionTypeTable from './TransactionTypeTable';
 import {
@@ -99,7 +100,8 @@ function Transactions() {
         return () => cleanupCharts();
     }, []);
 
-    if (loading) return <div className="p-4">Cargando...</div>;
+    // if (loading) return <div className="p-4">Cargando...</div>;
+    if (loading) return <LoadComponent isLoading={loading} />;
     if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
     if (!data) return <div className="p-4">No hay datos disponibles</div>;
 

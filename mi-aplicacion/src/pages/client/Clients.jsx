@@ -1,6 +1,7 @@
 import { getClientData } from '../../utils/apiController';
 import { useEffect, useState, useRef, useContext} from 'react';
 import { LanguageContext } from '../../context/LanguageContext';
+import LoadComponent from '../../components/loadComponent/LoadComponent'
 import translate from '../../utils/language';
 import { Bar, Line, Pie } from "react-chartjs-2";
 import {
@@ -97,7 +98,8 @@ function Clients() {
         };
     }, []);
 
-    if (loading) return <div className="p-4">Cargando...</div>;
+    // if (loading) return <div className="p-4">Cargando...</div>;
+    if (loading) return <LoadComponent isLoading={loading} />;
     if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
     if (!data) return <div className="p-4">No hay datos disponibles</div>;
 
