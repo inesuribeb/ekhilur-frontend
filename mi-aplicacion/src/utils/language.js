@@ -238,6 +238,16 @@ const translate = {
         Eus: "Transakzioen gailurra goizeko 10ak eta 12ak bitartean iristen da, horrek erakusten digu eguneko lehenengo orduetan dagoela aktibitate gehien",
         Es: "Las transacciones alcanzan su pico entre las 10:00 AM y las 12:00 PM, lo que sugiere una mayor actividad durante las primeras horas del día"
     },
+    paymentOperation: {
+        "Pago a usuario": {
+            Eus: "Erabiltzaileari ordainketa",
+            Es: "Pago a usuario"
+        },
+        "Cobro desde QR": {
+            Eus: "QR bidezko kobrantza",
+            Es: "Cobro desde QR"
+        }
+    },
     // Página predicciones
     prediction: {
         Eus: "IRAGARPENA",
@@ -290,7 +300,7 @@ const translate = {
         Es: "Análisis bimensual de las compras acumuladas y su variación respecto al periodo anterior (shift_14)"
     },
     transactionsWeekend: {
-        Eus: "Asteko transakzioak vs asteburuko transakzioak",
+        Eus: "Astegunetako transakzioak vs asteburuko transakzioak",
         Es: "Transacciones Entre Semana vs Fin de Semana"
     },
     transactionsWeekendText: {
@@ -305,9 +315,184 @@ const translate = {
         Eus: "Transakzioen orduz orduko banaketa jardueraren gailurrak erakutsiz",
         Es: "Distribución horaria de las transacciones mostrando los picos de actividad"
     },
+    wastedCategories: {
+        "Gasto_total": {
+            Eus: "Guztizko gastua",
+            Es: "Gasto total"
+        },
+        "Cashback_total": {
+            Eus: "Guztizko cashback-a",
+            Es: "Cashback_total"
+        }
+    },
+    noCategory: {
+        Eus: "Kategoriarik gabe",
+        Es: "Sin categoría"
+    },
+
+    // Tabla de transacciones
+    selectMonth: {
+        Eus: "Aukeratu hilabetea",
+        Es: "Seleccionar mes"
+    },
+    year: {
+        Eus: "Urtea",
+        Es: "Año"
+    },
+    totalTransactions: {
+        Eus: "Transakiozen guztizkoa",
+        Es: "Total Transacciones"
+    },
+    totalAmount: {
+        Eus: "Zenbateko osoa",
+        Es: "Importe Total"
+    },
+
+    operationType: {
+        Eus: "Operazio mota",
+        Es: "Tipo de Operación"
+    },
+
+    totalAmount: {
+        Eus: "Guztizko dirua",
+        Es: "Dinero Total"
+    },
+
+    totalPercentage: {
+        Eus: "Guztizkoaren ehunekoa",
+        Es: "% del total"
+    },
+    accumulatedBuys:{
+        Eus: "Batutako erosketak",
+        Es: "Compras Acumuladas"
+    },
+    weekDay:{
+        Eus: "Astegunetan",
+        Es: "Entre semana"
+    },
+    weekEnd:{
+        Eus: "Asteburua",
+        Es: "Fin de semana"
+    },
+    // Tipos de operación en la tabla
+    operationTypes: {
+        "Pago en tienda": {
+            Eus: "Dendako ordainketa",
+            Es: "Pago en tienda"
+        },
+        "Conversión a €": {
+            Eus: "€-ra bihurtzea",
+            Es: "Conversión a €"
+        },
+        "Recarga App": {
+            Eus: "App karga",
+            Es: "Recarga App"
+        },
+        "Recarga en tienda": {
+            Eus: "Dendako karga",
+            Es: "Recarga en tienda"
+        },
+        "Otros": {
+            Eus: "Besteak",
+            Es: "Otros"
+        },
+        "Transferencia entre comercios": {
+            Eus: "Denden arteko transferentzia",
+            Es: "Transferencia entre comercios"
+        },
+        "Cashback Ayuntamiento": {
+            Eus: "Udalaren cashback-a",
+            Es: "Cashback Ayuntamiento"
+        },
+        "Matrícula de socio": {
+            Eus: "Bazkide matrikula",
+            Es: "Matrícula de socio"
+        },
+        "Cashback Comercio": {
+            Eus: "Dendaren cashback-a",
+            Es: "Cashback Comercio"
+        },
+        "Comisión por retirada": {
+            Eus: "Dirua ateratzeko komisioa",
+            Es: "Comisión por retirada"
+        },
+        "Cuota variable": {
+            Eus: "Kuota aldakorra",
+            Es: "Cuota variable"
+        },
+        "Transferencia entre usuarios": {
+            Eus: "Erabiltzaileen arteko transferentzia",
+            Es: "Transferencia entre usuarios"
+        },
+        "Donación": {
+            Eus: "Dohaintza",
+            Es: "Donación"
+        },
+        "Cuota mensual de socio": {
+            Eus: "Bazkidearen hileko kuota",
+            Es: "Cuota mensual de socio"
+        },
+    },
+
+
+
+
 
     // ... meses ...
-
+    monthsLong: {
+        1: {
+            Eus: "Urtarrila",
+            Es: "Enero"
+        },
+        2: {
+            Eus: "Otsaila",
+            Es: "Febrero"
+        },
+        3: {
+            Eus: "Martxoa",
+            Es: "Marzo"
+        },
+        4: {
+            Eus: "Apirila",
+            Es: "Abril"
+        },
+        5: {
+            Eus: "Maiatza",
+            Es: "Mayo"
+        },
+        6: {
+            Eus: "Ekaina",
+            Es: "Junio"
+        },
+        7: {
+            Eus: "Uztaila",
+            Es: "Julio"
+        },
+        8: {
+            Eus: "Abuztua",
+            Es: "Agosto"
+        },
+        9: {
+            Eus: "Iraila",
+            Es: "Septiembre"
+        },
+        10: {
+            Eus: "Urria",
+            Es: "Octubre"
+        },
+        11: {
+            Eus: "Azaroa",
+            Es: "Noviembre"
+        },
+        12: {
+            Eus: "Abendua",
+            Es: "Diciembre"
+        }
+    },
+    noMonth: {
+        Eus: "Hilabeterik gabe",
+        Es: "Sin mes"
+    },
     months: {
         1: {
             Eus: "urt",
@@ -356,7 +541,8 @@ const translate = {
         12: {
             Eus: "abe",
             Es: "dic"
-        }
+        },
+        
     }
 
 
