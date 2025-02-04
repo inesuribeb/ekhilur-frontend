@@ -306,6 +306,23 @@ const translate = {
         Es: "Distribución horaria de las transacciones mostrando los picos de actividad"
     },
 
+    // ... mapas ...
+
+    
+    
+    
+    heatMapTitle: {
+        en: "User Distribution by Zone",
+        es: "Distribución de Usuarios por Zona"
+    },
+    heatMapText: {
+        en: "Heat map showing user concentration across different areas",
+        es: "Mapa de calor mostrando la concentración de usuarios por zonas"
+    },
+      
+    
+    
+
     // ... meses ...
 
     months: {
