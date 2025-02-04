@@ -40,7 +40,7 @@ const translate = {
         Eus: "Helbide elektronikoa ez da zuzena",
         Es: "El correo electrónico no es válido"
     },
-   userNotFound: {
+    userNotFound: {
         Eus: "Erabiltzailea ez da aurkitu",
         Es: "El usuario no existe"
     },
@@ -114,7 +114,7 @@ const translate = {
         Eus: "Aurreikuspenak",
         Es: "Predicciones"
     },
-  
+
     // Traducciones para el menú
     menuTitle: {
         Eus: "Ekonomia hurbilagoarekin konprometituak",
@@ -162,121 +162,150 @@ const translate = {
     },
     // Página de clientes
 
-    userNumber:{
+    userNumber: {
         Eus: "Erabiltzaile kopurua",
         Es: "Número de usuarios"
     },
-    payToUser:{
+    payToUser: {
         Eus: "Erabiltzaileari ordainketa",
         Es: "Pago a usuario"
     },
-    QRpay:{
+    QRpay: {
         Eus: "QR ordainketa",
         Es: "Pago desde QR"
     },
-    averageTicket:{
+    averageTicket: {
         Eus: "Batez besteko tiketa (EUR)",
         Es: "Ticket medio (EUR)"
     },
-    averageTransactions:{
+    averageTransactions: {
         Eus: "Transakzioen batez bestekoa",
         Es: "Promedio de transacciones"
     },
-    signUpNumber:{
+    signUpNumber: {
         Eus: "Izen emate kopurua",
         Es: "Número de altas"
     },
-    transactionsNumber:{
+    transactionsNumber: {
         Eus: "Transakzio kopurua",
         Es: "Número de transacciones"
     },
-    ageDistribution:{
+    ageDistribution: {
         Eus: "Erabiltzaileak adinaren arabera",
         Es: "Distribución de usuarios por Edad"
     },
-    ageDistributionText:{
-        Eus: "Harrigarria: 55 urtetik gorakoek 18-25 urteko gazteak hirukoizten dituzte ",
-        Es: "Sorprendente: los mayores de 55 casi triplican a los jóvenes de 18-25"
+    ageDistributionText: {
+        Eus: "Harrigarria: 46 urtetik gorakoek 45 urtetik beherakoak bikoizten dituzte ",
+        Es: "Sorprendente: los mayores de 46 duplican a los menores de 45"
     },
-    signUpEvolution:{
+    signUpEvolution: {
         Eus: "Izen emateen bilakaera hilabetero",
         Es: "Evolución del número de altas por mes"
     },
-    signUpEvolutionText:{
+    signUpEvolutionText: {
         Eus: "Hazkunde iraunkorra: Izen emateak egonkor mantentzen dira hasiera boteretsu baten ondoren",
         Es: "Crecimiento Sostenido: Las Altas de Usuarios Se Mantienen Estables Tras un Inicio Explosivo"
     },
-    payDistribution:{
+    payDistribution: {
         Eus: "Ordainketa moten arabera banaketa",
         Es: "Distribución de tipos de Pago"
     },
-    payDistributionText:{
+    payDistributionText: {
         Eus: "Transakzioen ehuneko 89,74a erabiltzaileei egindako ordainketei dagokio,mota honek QR bidez egindako ordainketekin duen lehentasuna nabarmenduz",
         Es: "El 89.74% de las transacciones corresponden a pagos a usuarios, destacando la preferencia por este método de pago sobre los cobros desde QR"
     },
-    transactionsByAge:{
+    transactionsByAge: {
         Eus: "Transakzioak adin taldeen arabera",
         Es: "Transacciones por grupos de Edad"
     },
-    transactionsByAgeText:{
+    transactionsByAgeText: {
         Eus: "46-65 urteko adin taldeek egiten dituzte transakzio gehien, QR ordainketei dagokienez haunditzea nabarmena da 65 urtetik gorakoen taldean",
         Es: "Los grupos de edad de 46-65 años lideran las transacciones, con un notable aumento en los pagos y cobros desde QR en personas mayores de 65 años"
     },
-    averageTicketByOperationType:{
+    averageTicketByOperationType: {
         Eus: "Batez besteko tiketa operazio motaren arabera",
         Es: "Ticket Medio por Tipo de Operación"
     },
-    averageTicketByOperationTypeText:{
-        Eus: "Erabiltzaileei egindako ordainketen batez besteko tiketa handiagoa da QR ordainketena baino, transakzio baliogarriagoak erakutsiz ",
-        Es: "Los pagos a usuarios presentan un ticket medio más alto que los cobros desde QR, reflejando transacciones de mayor valor"
+    averageTicketByOperationTypeText: {
+        Eus: "Erabiltzaileei egindako ordainketen eta QR ordainketen batez besteko tiketa oso parekoa da, QRa apur bat haundiagoa izanik ",
+        Es: "La media de loos pagos por QR y el pago a usuarios están muy igualados,con una ligera ventaja del QR"
     },
-    transactionsPerHour:{
+    transactionsPerHour: {
         Eus: "Orduz orduzko transakzioak",
         Es: "Transacciones por Hora del Día"
     },
-    transactionsPerHourText:{
+    transactionsPerHourText: {
         Eus: "Transakzioen gailurra goizeko 10ak eta 12ak bitartean iristen da, horrek erakusten digu eguneko lehenengo orduetan dagoela aktibitate gehien",
         Es: "Las transacciones alcanzan su pico entre las 10:00 AM y las 12:00 PM, lo que sugiere una mayor actividad durante las primeras horas del día"
     },
     // Página predicciones
-    prediction:{
+    prediction: {
         Eus: "IRAGARPENA",
         Es: "PREDICCIÓN"
     },
-    maxIncome:{
+    maxIncome: {
         Eus: "Diru-sarrera haundiena",
         Es: "Día mayor ingreso"
     },
-    minIncome:{
+    minIncome: {
         Eus: "Diru-sarrera txikiena",
         Es: "Día menor ingreso"
     },
-    march2025:{
+    march2025: {
         Eus: "MARTXOA 2025",
         Es: "MARZO 2025"
     },
-    totalIncome:{
+    totalIncome: {
         Eus: "Diru-sarrera totala",
         Es: "Ingreso total"
     },
-    dailyIncome:{
+    dailyIncome: {
         Eus: "Eguneroko diru-sarrera",
         Es: "Ingreso diario"
     },
 
-  /*   totalIncome:{
-        Eus: "IRAGARPENA",
-        Es: "PREDICCIÓN"
+    //Página transacciones
+    transactionsDetails: {
+        Eus: "Transakzio moten xehetasunak",
+        Es: "Detalle de Tipos de Transacciones"
     },
-    dailyIncome:{
-        Eus: "IRAGARPENA",
-        Es: "PREDICCIÓN"
+    transactionsDetailsText: {
+        Eus: "Azterketa xehea transakzio mota eta hilabetearen arabera",
+        Es: "Análisis detallado de transacciones por tipo y mes"
     },
-    predicted:{
-        Eus: "IRAGARPENA",
-        Es: "PREDICCIÓN"
+    cashback: {
+        Eus: "Gastu totala vs Cashback",
+        Es: "Gasto Total vs Cashback"
     },
- */
+    cashbackText: {
+        Eus: "Gastu totalen eta cashback bidezko sarien arteko harremanaren azterketa",
+        Es: "Análisis de la relación entre gastos totales y recompensas en forma de cashback"
+    },
+    accumulateBuys: {
+        Eus: "Batutako erosketen konparaketa",
+        Es: "Comparativa de Compras Acumuladas"
+    },
+    accumulateBuysText: {
+        Eus: "Batutako erosketen konparaketen bi hilabeteko azterketa eta bere aldaketa azken denbora-tartearen aldean (shift_14)",
+        Es: "Análisis bimensual de las compras acumuladas y su variación respecto al periodo anterior (shift_14)"
+    },
+    transactionsWeekend: {
+        Eus: "Asteko transakzioak vs asteburuko transakzioak",
+        Es: "Transacciones Entre Semana vs Fin de Semana"
+    },
+    transactionsWeekendText: {
+        Eus: "Transakzioa kantitateen hilabeteko konparaketa asteko egunaren arabera",
+        Es: "Comparativa mensual del volumen de transacciones según el día de la semana"
+    },
+    transactionsHour: {
+        Eus: "Orduz orduko transakzioak",
+        Es: "Transacciones por Hora del Día"
+    },
+    transactionsHourText: {
+        Eus: "Transakzioen orduz orduko banaketa jardueraren gailurrak erakutsiz",
+        Es: "Distribución horaria de las transacciones mostrando los picos de actividad"
+    },
+
     // ... meses ...
 
     months: {
