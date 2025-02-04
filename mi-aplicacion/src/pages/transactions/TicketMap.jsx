@@ -25,10 +25,19 @@ const FixedZoom = ({ zoomLevel }) => {
   return null;
 };
 
+
+
 const HeatMapLayer = ({ data }) => {
   if (!data?.length) return null;
 
-  const ticketValues = data.map(point => parseFloat(point.Ticket_medio));
+  // Split coordinates from the Coordenadas field
+  const processedData = data.map(point => ({
+    ...point,
+    Latitud: point.Coordenadas.split(',')[0].trim(),
+    Longitud: point.Coordenadas.split(',')[1].trim()
+  }));
+
+  const ticketValues = processedData.map(point => parseFloat(point.Ticket_medio));
   const maxTicket = Math.max(...ticketValues);
   const minTicket = Math.min(...ticketValues);
 
@@ -46,10 +55,10 @@ const HeatMapLayer = ({ data }) => {
     return '#ff0000';
   };
 
-  return data.map((point, index) => (
+  return processedData.map((point, index) => (
     <Circle
       key={index}
-      center={[parseFloat(point.Latitud), parseFloat(point.Longitud.trim())]}
+      center={[parseFloat(point.Latitud), parseFloat(point.Longitud)]}
       radius={calculateRadius(parseFloat(point.Ticket_medio))}
       pathOptions={{
         fillColor: calculateColor(parseFloat(point.Ticket_medio)),
