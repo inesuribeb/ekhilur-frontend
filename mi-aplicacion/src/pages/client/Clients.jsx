@@ -1,5 +1,7 @@
 import { getClientData } from '../../utils/apiController';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext} from 'react';
+import { LanguageContext } from '../../context/LanguageContext';
+import translate from '../../utils/language';
 import { Bar, Line, Pie } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -15,6 +17,7 @@ import {
     Filler
 } from 'chart.js';
 import './Clients.css';
+
 
 ChartJS.register(
     CategoryScale,
@@ -40,6 +43,7 @@ function Clients() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const chartInstances = useRef({});
+    const { language } = useContext(LanguageContext);
 
     useEffect(() => {
 
@@ -106,7 +110,7 @@ function Clients() {
     const ageDistributionData = {
         labels: data.usuariosPorEdad.map(item => item.Grupo_edad),
         datasets: [{
-            label: 'Número de usuarios',
+            label: translate.userNumber[language], 
             data: data.usuariosPorEdad.map(item => item.cantidad_usuarios),
             borderColor: 'rgb(44, 47, 136)',
             backgroundColor: 'rgba(44, 47, 136, 0.5)',
@@ -117,11 +121,11 @@ function Clients() {
     const evolutionData = {
         labels: data.evolucionAltas.map(item => {
             const year = item.Ano.split('.')[0];
-            const month = monthTranslations[parseInt(item.Mes)];
+            const month = monthTranslations[parseInt(item.Mes)]; //Traducir meses
             return `${month} ${year}`;
         }),
         datasets: [{
-            label: 'Nuevas altas',
+            label: translate.userNumber[language],
             data: data.evolucionAltas.map(item => item.total_usuarios),
             borderColor: 'rgb(71, 84, 198)',
             backgroundColor: '(214, 216, 222, 0.5)',
@@ -130,7 +134,7 @@ function Clients() {
         }]
     };
 
-    const paymentData = {
+    const paymentData = { //Los labels no están traducidos
         labels: data.porcentajePagos.map(item => item.Operacion),
         datasets: [{
             data: data.porcentajePagos.map(item => parseFloat(item.porcentaje)),
@@ -150,7 +154,7 @@ function Clients() {
         labels: Array.from(new Set(data.transaccionesPorEdad.map(item => item.Grupo_edad))),
         datasets: [
             {
-                label: 'Pago a usuario',
+                label: translate.payToUser[language],
                 data: data.transaccionesPorEdad
                     .filter(item => item.Id_tipo_operacion === 1)
                     .map(item => item.total_transacciones),
@@ -159,7 +163,7 @@ function Clients() {
                 borderWidth: 1
             },
             {
-                label: 'Cobro desde QR',
+                label: translate.QRpay[language],
                 data: data.transaccionesPorEdad
                     .filter(item => item.Id_tipo_operacion === 7)
                     .map(item => item.total_transacciones),
@@ -170,10 +174,10 @@ function Clients() {
         ]
     };
 
-    const ticketMedioData = {
+    const ticketMedioData = { //Los labels de las gráficas sin traducir
         labels: data.ticketMedio.map(item => item.Operacion),
         datasets: [{
-            label: 'Ticket Medio (EUR)',
+            label: translate.averageTicket[language],
             data: data.ticketMedio.map(item => parseFloat(item.Ticket_medio)),
             backgroundColor: 'rgba(251, 81, 6, 0.5)',
             borderColor: 'rgba(251, 81, 6, 1)',
@@ -186,7 +190,7 @@ function Clients() {
             `${String(item.Hora_Dia).padStart(2, '0')}:00`
         ),
         datasets: [{
-            label: 'Promedio de transacciones',
+            label: translate.averageTransactions[language],
             data: data.transaccionesPorHora.map(item =>
                 parseFloat(item.Promedio_Cantidad)
             ),
@@ -274,7 +278,7 @@ function Clients() {
                 },
                 title: {
                     display: true,
-                    text: 'Número de altas'
+                    text: translate.signUpNumber[language]
                 },
                 grid: {
                     display: false  // Quita las líneas horizontales
@@ -314,7 +318,7 @@ function Clients() {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Número de transacciones'
+                    text: translate.transactionsNumber[language]
                 },
                 grid: {
                     display: false
@@ -425,8 +429,8 @@ function Clients() {
                     <div className="chart-section">
 
                         <div className='fila1-columna1'>
-                            <h2 className="text-xl font-bold mb-4">Distribución de usuarios por Edad</h2>
-                            <h1>Sorprendente: los mayores de 55 casi triplican a los jóvenes de 18-25</h1>
+                            <h2 className="text-xl font-bold mb-4">{translate.ageDistribution[language]}</h2>
+                            <h1>{translate.ageDistributionText[language]}</h1>
                         </div>
 
                         <div className='fila1-columna2'>
@@ -466,8 +470,8 @@ function Clients() {
                         </div>
 
                         <div className='fila2-columna2'>
-                            <h2 className="text-xl font-bold mb-4">Evolución del número de altas por mes</h2>
-                            <h1>Crecimiento Sostenido: Las Altas de Usuarios Se Mantienen Estables Tras un Inicio Explosivo</h1>
+                            <h2 className="text-xl font-bold mb-4">{translate.signUpEvolution[language]}</h2>
+                            <h1>{translate.signUpEvolutionText[language]}</h1>
                         </div>
 
                     </div>
@@ -475,8 +479,8 @@ function Clients() {
                     <div className="chart-section">
 
                         <div className='fila3-columna1'>
-                            <h2 className="text-xl font-bold mb-4">Distribución de tipos de Pago</h2>
-                            <h1>El 89.74% de las transacciones corresponden a pagos a usuarios, destacando la preferencia por este método de pago sobre los cobros desde QR</h1>
+                            <h2 className="text-xl font-bold mb-4">{translate.payDistribution[language]}</h2>
+                            <h1>{translate.payDistributionText[language]}</h1>
                         </div>
 
                         <div className='fila3-columna2'>
@@ -517,8 +521,8 @@ function Clients() {
                         </div>
 
                         <div className='fila4-columna2'>
-                            <h2 className="text-xl font-bold mb-4">Transacciones por grupos de Edad</h2>
-                            <h1>Los grupos de edad de 46-65 años lideran las transacciones, con un notable aumento en los pagos y cobros desde QR en personas mayores de 65 años</h1>
+                            <h2 className="text-xl font-bold mb-4">{translate.transactionsByAge[language]}</h2>
+                            <h1>{translate.transactionsByAgeText[language]}</h1>
                         </div>
 
                     </div>
@@ -526,8 +530,8 @@ function Clients() {
                     <div className="chart-section">
 
                         <div className='fila5-columna1'>
-                            <h2 className="text-xl font-bold mb-4">Ticket Medio por Tipo de Operación</h2>
-                            <h1>Los pagos a usuarios presentan un ticket medio más alto que los cobros desde QR, reflejando transacciones de mayor valor</h1>
+                            <h2 className="text-xl font-bold mb-4">{translate.averageTicketByOperationType[language]}</h2>
+                            <h1>{translate.averageTicketByOperationTypeText[language]}</h1>
                         </div>
 
                         <div className='fila5-columna2'>
@@ -572,8 +576,8 @@ function Clients() {
                         </div>
 
                         <div className='fila6-columna2'>
-                            <h2 className="text-xl font-bold mb-4">Transacciones por Hora del Día</h2>
-                            <h1>Las transacciones alcanzan su pico entre las 10:00 AM y las 12:00 PM, lo que sugiere una mayor actividad durante las primeras horas del día</h1>
+                            <h2 className="text-xl font-bold mb-4">{translate.transactionsPerHour[language]}</h2>
+                            <h1>{translate.transactionsPerHourText[language]}</h1>
                         </div>
 
                     </div>
