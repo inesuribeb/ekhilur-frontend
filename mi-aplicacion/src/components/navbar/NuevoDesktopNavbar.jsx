@@ -35,6 +35,7 @@ const NuevoDesktopNavbar = () => {
   };
 
   const menuItems = [
+    { name: translate.home[language], route: '/menu' },
     { name: translate.clients[language], route: '/bezeroak' },
     { name: translate.transactions[language], route: '/transakzioak' },
     { name: translate.predictions[language], route: '/aurreikuspenak' },
