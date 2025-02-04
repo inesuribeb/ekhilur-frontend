@@ -9,6 +9,13 @@
     margin-top: -7.5%;
 }
 
+@font-face {
+    font-family: 'Against';
+    src: url('/fonts/against regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 .chart-section {
     display: flex;
@@ -21,7 +28,8 @@
     padding-right: 5rem;
     border-radius: 10px;
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    height: 550px;
+    /* height: 550px; */
+    height: 75vh;
     align-items: flex-end;
     /* Esto alineará el contenido en la parte inferior */
 }
@@ -111,8 +119,9 @@
 .chart-section .fila2-columna2 h2,
 .chart-section .fila4-columna2 h2,
 .chart-section .fila6-columna2 h2 {
-    font-size: 40px;
+    font-size: 35px;
     letter-spacing: 1.1px;
+    font-family: 'Against';
 }
 
 .chart-section .fila1-columna1 h1,
