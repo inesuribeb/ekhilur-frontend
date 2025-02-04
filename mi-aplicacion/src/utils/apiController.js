@@ -58,6 +58,9 @@ async function fetchData(route, method = 'GET', data = null) {
 async function login(email, password) {
     return await fetchData('api/login', 'POST', { email, password });
 }
+async function logout() {
+    return await fetchData('api/logout', 'POST', {credentials: 'include'});
+}
 
 async function verify2FA(tokenF2A, email) {
     return await fetchData('api/2fa/verify', 'POST', { tokenF2A, email });
@@ -93,6 +96,7 @@ async function getTicketMap(){
 
 export {
     login,
+    logout,
     getAllClients,
     verify2FA,
     getLandingPageData,
