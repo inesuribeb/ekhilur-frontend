@@ -1,0 +1,63 @@
+.matrix-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.matrix-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 8px;
+}
+
+.matrix-row {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    gap: 2px;
+}
+
+.matrix-cell {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
+}
+
+.matrix-cell.active {
+    border-color: rgba(255, 99, 132, 0.2);
+}
+
+.matrix-cell.active:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.hour-labels {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    gap: 2px;
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+}
+
+.hour-label {
+    text-align: center;
+}
+
+.loading-state,
+.error-state,
+.no-data-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: #666;
+}
+
+.error-state {
+    color: #dc2626;
+}

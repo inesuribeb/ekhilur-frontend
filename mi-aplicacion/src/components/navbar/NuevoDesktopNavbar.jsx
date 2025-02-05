@@ -2,7 +2,10 @@ import { useState, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Eye, LogOut, Menu as MenuIcon, X } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
-import Logo from '../../utils/proyecto.png';
+import translate from '../../utils/language';
+import {logout} from "../../utils/apiController.js"
+// import Logo from '../../utils/proyecto.png';
+import Logo from '../../utils/logo2.png';
 import LanguageButton from '../LanguageButton/LanguageButton';
 import './NuevoDesktopNavbar.css';
 
@@ -13,12 +16,22 @@ const NuevoDesktopNavbar = () => {
   const [isBlinking, setIsBlinking] = useState(false);
   const [isButtonBlinking, setIsButtonBlinking] = useState(false);
   const { toggleLanguage } = useContext(LanguageContext);
+  const { language } = useContext(LanguageContext);
 
   const isMenuPage = location.pathname === '/menus';
   const isHomePage = location.pathname === '/';
 
-  const handleLogout = () => {
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      const response = await logout()
+
+      if (response.success) {
+        navigate('/');
+      }      
+
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
   };
 
   const handleEyeClick = () => {
@@ -32,14 +45,15 @@ const NuevoDesktopNavbar = () => {
   };
 
   const menuItems = [
-    { name: 'Mapak', route: '/mapak' },
-    { name: 'Transakzioak', route: '/transakzioak' },
-    { name: 'Grafikak', route: '/grafikak' },
-    { 
-      name: '', 
-      route: '/', 
+    { name: translate.home[language], route: '/menu' },
+    { name: translate.clients[language], route: '/bezeroak' },
+    { name: translate.transactions[language], route: '/transakzioak' },
+    { name: translate.predictions[language], route: '/aurreikuspenak' },
+    {
+      name: '',
+      route: '/',
       icon: <LogOut size={24} />,
-      onClick: handleLogout 
+      onClick: handleLogout
     }
   ];
 

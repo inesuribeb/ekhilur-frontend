@@ -58,6 +58,9 @@ async function fetchData(route, method = 'GET', data = null) {
 async function login(email, password) {
     return await fetchData('api/login', 'POST', { email, password });
 }
+async function logout() {
+    return await fetchData('api/logout', 'POST', {credentials: 'include'});
+}
 
 async function verify2FA(tokenF2A, email) {
     return await fetchData('api/2fa/verify', 'POST', { tokenF2A, email });
@@ -83,12 +86,23 @@ async function getPrediction(){
     return await fetchData('/api/predict/all');
 }
 
+async function getClientMap(){
+    return await fetchData('/api/map/clients');
+}
+
+async function getTicketMap(){
+    return await fetchData('/api/map/tickets');
+}
+
 export {
     login,
+    logout,
     getAllClients,
     verify2FA,
     getLandingPageData,
     getClientData,
     getTransactionData,
-    getPrediction
+    getPrediction,
+    getClientMap,
+    getTicketMap
 };

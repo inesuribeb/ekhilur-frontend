@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useState } from 'react';
+=======
+/* import React, { useState } from 'react';
+>>>>>>> 41fff86bbd8b817c23fb918bc28e36c0e4495805
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Map, BarChart2, CreditCard } from 'lucide-react';
 import './MobileNavbar.css';
@@ -71,4 +75,4 @@ const MobileNavbar = () => {
   );
 };
 
-export default MobileNavbar;
+export default MobileNavbar; */
