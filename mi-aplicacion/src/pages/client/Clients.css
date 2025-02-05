@@ -1,43 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
 .clients-container {
     padding: 2rem;
-    /* max-width: 1200px; */
     margin: 0 auto;
     background-color: black;
     padding-top: 170px;
     width: 115%;
     margin-left: -7.5%;
     margin-top: -7.5%;
+    font-family: 'Manrope', sans-serif;
 }
 
+.clients-container * {
+    font-family: inherit;
+}
 
+.charts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Estilos base para las secciones de gráficos */
 .chart-section {
     display: flex;
-    /* align-items: center; */
     justify-content: space-between;
-    /* gap:2rem; */
-    /* background-color: red; */
     padding: 1rem;
     padding-left: 5rem;
     padding-right: 5rem;
     border-radius: 10px;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
     height: 550px;
     align-items: flex-end;
-    /* Esto alineará el contenido en la parte inferior */
+    width: 100%;
+    margin-bottom: 5vh;
 }
 
-.chart-section h1,
-.chart-section h2 {
-    font-size: 1.25rem;
-    font-weight: bold;
+/* Contenedor de animación */
+.chart-section .chart-container {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: none;
+    will-change: opacity, transform;
+}
+
+.chart-section .chart-container.chart-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Estilos específicos para gráficos */
+.chart-section .chart-pie .chart-container,
+.chart-section .chart-line .chart-container,
+.chart-section .chart-bar .chart-container {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.chart-section .chart-pie .chart-container.chart-visible,
+.chart-section .chart-line .chart-container.chart-visible,
+.chart-section .chart-bar .chart-container.chart-visible {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Estilos de texto y títulos */
+.chart-section .fila1-columna1 .chart-container h2,
+.chart-section .fila3-columna1 .chart-container h2,
+.chart-section .fila5-columna1 .chart-container h2,
+.chart-section .fila2-columna2 .chart-container h2,
+.chart-section .fila4-columna2 .chart-container h2,
+.chart-section .fila6-columna2 .chart-container h2 {
+    font-size: 40px !important;
+    letter-spacing: 1.1px;
     margin-bottom: 1rem;
 }
 
+.chart-section .fila1-columna1 .chart-container h1,
+.chart-section .fila3-columna1 .chart-container h1,
+.chart-section .fila5-columna1 .chart-container h1,
+.chart-section .fila2-columna2 .chart-container h1,
+.chart-section .fila4-columna2 .chart-container h1,
+.chart-section .fila6-columna2 .chart-container h1 {
+    font-size: 18px !important;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
 
-/* .chart-section .text-xl {
-    font-size: 1.25rem;
-} */
-
+/* Estilos de columnas */
 .chart-section .fila1-columna1,
 .chart-section .fila2-columna1,
 .chart-section .fila3-columna1,
@@ -51,25 +105,18 @@
 .chart-section .fila5-columna2,
 .chart-section .fila6-columna2 {
     flex: 1;
-    /* Esto asegura que ambos divs ocupen el 50% del ancho */
     padding: 3rem;
     height: 100%;
-    /* Ocupará toda la altura del contenedor */
     display: flex;
-    /* Para manejar mejor el contenido interno */
     align-items: flex-end;
-    /* Alinea el texto en la parte inferior */
     flex-direction: column;
-    /* Organizamos en columna */
     justify-content: flex-end;
-    /* Alineamos al final del contenedor */
 }
 
 .chart-section .fila1-columna1,
 .chart-section .fila3-columna1,
 .chart-section .fila5-columna1 {
     align-items: flex-start;
-    /* Alinea el contenido a la izquierda */
     text-align: left;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -81,7 +128,6 @@
 .chart-section .fila4-columna2,
 .chart-section .fila6-columna2 {
     align-items: flex-end;
-    /* Alinea el contenido a la derecha */
     text-align: right;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -94,6 +140,7 @@
 .chart-section .fila5-columna2 {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    padding-left: 20px;
 }
 
 .chart-section .fila2-columna1,
@@ -103,113 +150,7 @@
     border-bottom-left-radius: 15px;
 }
 
-
-
-.chart-section .fila1-columna1 h2,
-.chart-section .fila3-columna1 h2,
-.chart-section .fila5-columna1 h2,
-.chart-section .fila2-columna2 h2,
-.chart-section .fila4-columna2 h2,
-.chart-section .fila6-columna2 h2,
-.chart-section .fila6-column1 h2 {
-    font-size: 40px;
-    letter-spacing: 1.1px;
-    font-family: 'Against';
-
-}
-
-
-.chart-section .fila1-columna1 h1,
-.chart-section .fila3-columna1 h1,
-.chart-section .fila5-columna1 h1,
-.chart-section .fila2-columna2 h1,
-.chart-section .fila4-columna2 h1,
-.chart-section .fila6-columna2 h1 {
-    font-size: 18px;
-    letter-spacing: 1px;
-    opacity: 0.5;
-}
-
-
-.chart-section .fila1-columna2,
-.chart-section .fila2-columna2,
-.chart-section .fila3-columna2,
-.chart-section .fila4-columna2,
-.chart-section .fila5-columna2,
-.chart-section .fila6-columna2 {
-    padding-left: 20px;
-    /* Puedes ajustar el padding según lo que necesites */
-}
-
-.chart-section .fila1-columna1 {
-    /* background-color: #DBBCE9;
-    color: #2A307F; */
-    /* background-color: #DBBCE9; */
-    /* background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6); */
-    background-color: white;
-    color: black;
-}
-
-.chart-section .fila1-columna2 {
-    background-color: #E8E92C;
-}
-
-.chart-section .fila2-columna2 {
-    /* background-color: #4754C6; */
-    background-color: BLACK;
-    /* background: linear-gradient(45deg, black 80%, #E8E92C 100%); */
-    border: 1px solid #E8E92C;
-    color: white;
-}
-
-.chart-section .fila2-columna1 {
-    /* background-color: #2D2F7E; */
-    background: linear-gradient(45deg, #2D2F7E, #BC90FF, #E8E92C, #C6C6C6);
-    color: white;
-
-}
-
-.chart-section .fila3-columna1 {
-    background-color: #BC90FF;
-}
-
-.chart-section .fila3-columna2 {
-    background-color: #F4F3EB;
-}
-
-.chart-section .fila4-columna2 {
-    background-color: white;
-    color: black;
-}
-
-.chart-section .fila4-columna1 {
-    /* background-color: #F6D7E9; */
-    background-color: #E8E92C;
-
-}
-
-.chart-section .fila5-columna1 {
-    /* background-color: #C0C853; */
-    background-color: black;
-    border: 1px solid #E8E92C;
-    color: white;
-
-}
-
-.chart-section .fila5-columna2 {
-    background-color: #F3F2EC;
-}
-
-.chart-section .fila6-columna2 {
-    background-color: #BC90FF;
-}
-
-.chart-section .fila6-columna1 {
-    /* background-color: #F5F244; */
-    background: linear-gradient(90deg, #E8E92C 70%, #BC90FF 100%);
-
-}
-
+/* Gráficos */
 .chart-bar,
 .chart-line,
 .chart-pie {
@@ -217,37 +158,101 @@
     height: 100%;
 }
 
-/* Asegurar que los gráficos ocupen su espacio correctamente */
 .chart-section canvas {
     width: 100% !important;
     height: 100% !important;
 }
 
+/* Colores de fondo */
+.chart-section .fila1-columna1 {
+    background-color: #DBBCE9;
+    color: #2A307F;
+}
 
+.chart-section .fila1-columna2 {
+    background-color: #E49C17;
+}
 
+.chart-section .fila2-columna2 {
+    background-color: #4754C6;
+    color: white;
+}
+
+.chart-section .fila2-columna1 {
+    background-color: #2D2F7E;
+    color: white;
+}
+
+.chart-section .fila3-columna1 {
+    background-color: #F1F425;
+}
+
+.chart-section .fila3-columna2 {
+    background-color: #F4F3EB;
+}
+
+.chart-section .fila4-columna2 {
+    background-color: #E83324;
+}
+
+.chart-section .fila4-columna1 {
+    background-color: #F6D7E9;
+}
+
+.chart-section .fila5-columna1 {
+    background-color: #C0C853;
+}
+
+.chart-section .fila5-columna2 {
+    background-color: #F3F2EC;
+}
+
+.chart-section .fila6-columna2 {
+    background-color: #FFA6EA;
+}
+
+.chart-section .fila6-columna1 {
+    background-color: #F5F244;
+}
+
+/* HeatMap styles */
+.fila7-columna1,
+.fila7-columna2 {
+    flex: 1;
+    padding: 3rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fila7-columna1 {
+    background-color: #F4F3EB;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.fila7-columna2 {
+    background-color: #FFFFFF;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* Media Queries */
 @media screen and (max-width: 768px) {
     .clients-container {
-        width: 100%;
-        /* Eliminar el ancho extra en móvil */
-        margin: 0;
-        /* Eliminar márgenes negativos */
-        padding: 3rem;
-        padding-top: 100px;
         width: 115%;
         margin-left: -7.5%;
         margin-top: -7.5%;
+        padding: 3rem;
+        padding-top: 100px;
     }
 
     .chart-section {
         height: auto;
-        /* Altura automática en lugar de fija */
         flex-direction: column;
         padding: 1rem;
         gap: 0rem;
         margin-bottom: 2rem;
-        /* padding-left: 15rem;
-        padding-right: 15rem; */
-        /* Espacio entre elementos */
     }
 
     .chart-section .fila1-columna1,
@@ -263,13 +268,8 @@
     .chart-section .fila5-columna2,
     .chart-section .fila6-columna2 {
         width: 100%;
-        /* Ocupar todo el ancho disponible */
         padding: 2rem;
-        /* Reducir el padding */
         min-height: 300px;
-        /* Altura mínima para los gráficos */
-        /* border-radius: 15px; */
-        /* Bordes redondeados en todos los lados */
     }
 
     .chart-section .fila1-columna1,
@@ -296,47 +296,30 @@
         border-top-right-radius: 0px;
     }
 
-    /* Ajustar tamaños de texto para móvil */
-    .chart-section h2 {
-        font-size: 20px;
-        /* Reducir tamaño del título */
-    }
-
-    .chart-section h1 {
-        font-size: 14px;
-        /* Reducir tamaño del texto descriptivo */
-    }
-
-    .chart-section .fila1-columna1 h2,
-    .chart-section .fila3-columna1 h2,
-    .chart-section .fila5-columna1 h2,
-    .chart-section .fila2-columna2 h2,
-    .chart-section .fila4-columna2 h2,
-    .chart-section .fila6-columna2 h2 {
-        font-size: 30px;
-        letter-spacing: 1.1px;
-    }
-
-    .chart-section .fila1-columna1 h1,
-    .chart-section .fila3-columna1 h1,
-    .chart-section .fila5-columna1 h1,
-    .chart-section .fila2-columna2 h1,
-    .chart-section .fila4-columna2 h1,
-    .chart-section .fila6-columna2 h1 {
-        font-size: 16px;
-        letter-spacing: 1px;
-        opacity: 0.5;
-    }
-
-    /* Ajustar altura de los gráficos */
     .chart-bar,
     .chart-line,
     .chart-pie {
         height: 250px;
-        /* Altura fija para los gráficos en móvil */
     }
 
-    /* Centrar texto en móvil */
+    .chart-section .fila1-columna1 .chart-container h2,
+    .chart-section .fila3-columna1 .chart-container h2,
+    .chart-section .fila5-columna1 .chart-container h2,
+    .chart-section .fila2-columna2 .chart-container h2,
+    .chart-section .fila4-columna2 .chart-container h2,
+    .chart-section .fila6-columna2 .chart-container h2 {
+        font-size: 30px !important;
+    }
+
+    .chart-section .fila1-columna1 .chart-container h1,
+    .chart-section .fila3-columna1 .chart-container h1,
+    .chart-section .fila5-columna1 .chart-container h1,
+    .chart-section .fila2-columna2 .chart-container h1,
+    .chart-section .fila4-columna2 .chart-container h1,
+    .chart-section .fila6-columna2 .chart-container h1 {
+        font-size: 16px !important;
+    }
+
     .chart-section .fila1-columna1,
     .chart-section .fila3-columna1,
     .chart-section .fila5-columna1,
@@ -346,49 +329,7 @@
         text-align: center;
         align-items: center;
     }
-}
 
-/* Para pantallas muy pequeñas */
-@media screen and (max-width: 480px) {
-    .clients-container {
-        padding-top: 80px;
-    }
-
-    .chart-section {
-        padding: 0.5rem;
-    }
-
-    .chart-section h2 {
-        font-size: 20px;
-    }
-
-    .chart-section h1 {
-        font-size: 14px;
-    }
-}
-
-.fila7-columna1,
-.fila7-columna2 {
-    flex: 1;
-    padding: 3rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.fila7-columna1 {
-    background-color: #F4F3EB;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.fila7-columna2 {
-    background-color: #FFFFFF;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-@media screen and (max-width: 768px) {
     .fila7-columna1,
     .fila7-columna2 {
         width: 100%;
@@ -409,5 +350,39 @@
         border-bottom-right-radius: 15px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .clients-container {
+        padding-top: 80px;
+    }
+
+    .chart-section {
+        padding: 0.5rem;
+    }
+
+    .chart-section h2 {
+        font-size: 20px !important;
+    }
+
+    .chart-section h1 {
+        font-size: 14px !important;
+    }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .chart-container,
+    .chart-container.chart-visible,
+    .chart-container h1,
+    .chart-container h2,
+    .chart-pie .chart-container,
+    .chart-line .chart-container,
+    .chart-bar .chart-container {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 }
