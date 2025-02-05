@@ -333,7 +333,7 @@
 .mobile-column1-line1,
 .mobile-column2-line1 {
     flex: 1;
-    border: 1.5px solid #1542B9;
+    border: 1.5px solid black;
     border-radius: 20px;
     padding-right: 10px;
     padding-left: 10px;
@@ -355,7 +355,7 @@
 
 .mobile-column1-line1 .stat,
 .mobile-column2-line1 .stat {
-    color: #1542B9;
+    color: #747474;
     font-size: 12px;
     margin-bottom: 10px;
 }
@@ -371,7 +371,7 @@
 .mobile-column1-line2,
 .mobile-column2-line2 {
     flex: 1;
-    border: 1.5px solid #1542B9;
+    border: 1.5px solid black;
     border-radius: 20px;
     padding-right: 10px;
     padding-left: 10px;
@@ -402,7 +402,7 @@
 }
 
 .mobile-third-line h4 {
-    color: #1542B9;
+    color: black;
     font-weight: bold;
     margin-bottom: 10px;
     padding-top: 0;
@@ -416,7 +416,9 @@
 }
 
 .mobile-chart {
-    background-color: #FFD450;
+    /* background-color: #FFD450; */
+    background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6);
+
     width: 100%;
     border-radius: 20px;
     padding: 1rem;
@@ -454,7 +456,7 @@
     left: 0;
     width: 100%;
     height: 34px;
-    background-color: #1542B9;
+    background-color: #E8E92C;
     z-index: 1;
 }
 
@@ -465,7 +467,9 @@
     left: 0;
     width: 200%;
     aspect-ratio: 1;
-    background-color: #FEB6B5;
+    /* background-color: #FEB6B5; */
+    background: radial-gradient(circle at center,  #E8E92C, #C6C6C6, #BC90FF);
+
     border-radius: 100%;
     transform: translate(-50%, 50%);
     z-index: 8;
@@ -477,7 +481,7 @@
     right: 0;
     width: 24px;
     height: 100%;
-    background-color: #1542B9;
+    background-color: #E8E92C;
     z-index: 1;
 }
 
