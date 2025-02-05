@@ -78,39 +78,28 @@ const HeatMap = ({ mapaClienteZona }) => {
   const CENTER = [43.26826, -1.97609];
 
   return (
-    // <div className="w-full">
-      <div className="chart-section">
-        <div className="fila6-columna1">
-          <h2 className="text-xl font-bold mb-4">Distribución geográfica de usuarios</h2>
-          <h1>Visualización de la concentración de usuarios por zona</h1>
-        </div>
-        
-        <div className="fila6-columna2 map-container">
-          <div className="map-content-cl">
-            <div className="map-wrapper-cl">
-              <MapContainer 
-                center={CENTER}
-                zoom={ZOOM_LEVEL}
-                className="map"
-                zoomControl={false}
-                scrollWheelZoom={false}
-                dragging={false}
-                touchZoom={false}
-                doubleClickZoom={false}
-                boxZoom={false}
-              >
-                <FixedZoom zoomLevel={ZOOM_LEVEL} />
-                <TileLayer
-                  url="https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png"
-                  attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>'
-                />
-                <HeatMapLayer data={mapaClienteZona} />
-              </MapContainer>
-            </div>
-          </div>
-        </div>
+    <div className="map-content-cl">
+      <div className="map-wrapper-cl">
+        <MapContainer 
+          center={CENTER}
+          zoom={ZOOM_LEVEL}
+          className="map"
+          zoomControl={false}
+          scrollWheelZoom={false}
+          dragging={false}
+          touchZoom={false}
+          doubleClickZoom={false}
+          boxZoom={false}
+        >
+          <FixedZoom zoomLevel={ZOOM_LEVEL} />
+          <TileLayer
+            url="https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>'
+          />
+          <HeatMapLayer data={mapaClienteZona} />
+        </MapContainer>
       </div>
-    // </div>
+    </div>
   );
 };
 

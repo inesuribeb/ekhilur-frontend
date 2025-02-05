@@ -3,8 +3,6 @@ import { getClientData } from '../../utils/apiController';
 import { LanguageContext } from '../../context/LanguageContext';
 import LoadComponent from '../../components/loadComponent/LoadComponent';
 import translate from '../../utils/language';
-import { Bar, Line, Pie } from "react-chartjs-2";
-import HeatMap from './HeatMap';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -18,6 +16,8 @@ import {
     ArcElement,
     Filler
 } from 'chart.js';
+import HeatMap from './HeatMap';
+import { AnimatedSection, AnimatedPieChart, AnimatedLineChart, AnimatedBarChart } from '../../utils/AnimatedComponents';
 import './Clients.css';
 
 ChartJS.register(
@@ -38,7 +38,6 @@ const monthTranslations = {
     5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 
     9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic'
 };
-
 
 function Clients() {
     const [data, setData] = useState(null);
@@ -93,14 +92,10 @@ function Clients() {
         };
 
         fetchData();
-        return () => {
-            cleanupCharts();
-        };
+        return () => cleanupCharts();
     }, []);
 
-    // if (loading) return <div className="p-4">Cargando...</div>;
     if (loading) return <LoadComponent isLoading={loading} />;
-
     if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
     if (!data) return <div className="p-4">No hay datos disponibles</div>;
 
@@ -162,12 +157,10 @@ function Clients() {
                 backgroundColor: [
                     'rgba(230, 234, 41, 1)',
                     'rgba(0, 0, 0, 1)'
-                    
                 ],
                 borderColor: [
                     'rgba(230, 234, 41)',
                     'rgba(0, 0 , 0)'
-                    
                 ],
                 borderWidth: 1
             }]
@@ -228,29 +221,29 @@ function Clients() {
     return (
         <div className="clients-container">
             <div className="charts-grid">
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className='fila1-columna1'>
                         <h2 className="text-xl font-bold mb-4">{translate.ageDistribution[language]}</h2>
                         <h1>{translate.ageDistributionText[language]}</h1>
                     </div>
                     <div className='fila1-columna2'>
                         <div className="chart-bar">
-                            <Bar
-                                ref={ref => { if (ref) chartInstances.current['age'] = ref }}
+                            <AnimatedBarChart
                                 data={chartData.ageDistribution}
                                 options={ageOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['age'] = ref }}
                             />
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className='fila2-columna1'>
                         <div className="chart-line">
-                            <Line
-                                ref={ref => { if (ref) chartInstances.current['evolution'] = ref }}
+                            <AnimatedLineChart
                                 data={chartData.evolution}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['evolution'] = ref }}
                             />
                         </div>
                     </div>
@@ -258,31 +251,31 @@ function Clients() {
                         <h2 className="text-xl font-bold mb-4">{translate.signUpEvolution[language]}</h2>
                         <h1>{translate.signUpEvolutionText[language]}</h1>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className='fila3-columna1'>
                         <h2 className="text-xl font-bold mb-4">{translate.payDistribution[language]}</h2>
                         <h1>{translate.payDistributionText[language]}</h1>
                     </div>
                     <div className='fila3-columna2'>
                         <div className="chart-pie">
-                            <Pie
-                                ref={ref => { if (ref) chartInstances.current['payment'] = ref }}
+                            <AnimatedPieChart
                                 data={chartData.payment}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['payment'] = ref }}
                             />
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className='fila4-columna1'>
                         <div className="chart-bar">
-                            <Bar
-                                ref={ref => { if (ref) chartInstances.current['transactions'] = ref }}
+                            <AnimatedBarChart
                                 data={chartData.transactionsByAge}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['transactions'] = ref }}
                             />
                         </div>
                     </div>
@@ -290,31 +283,31 @@ function Clients() {
                         <h2 className="text-xl font-bold mb-4">{translate.transactionsByAge[language]}</h2>
                         <h1>{translate.transactionsByAgeText[language]}</h1>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className='fila5-columna1'>
                         <h2 className="text-xl font-bold mb-4">{translate.averageTicketByOperationType[language]}</h2>
                         <h1>{translate.averageTicketByOperationTypeText[language]}</h1>
                     </div>
                     <div className='fila5-columna2'>
                         <div className="chart-bar">
-                            <Bar
-                                ref={ref => { if (ref) chartInstances.current['ticketMedio'] = ref }}
+                            <AnimatedBarChart
                                 data={chartData.ticketMedio}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['ticketMedio'] = ref }}
                             />
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className='fila6-columna1'>
                         <div className="chart-line">
-                            <Line
-                                ref={ref => { if (ref) chartInstances.current['hourly'] = ref }}
+                            <AnimatedLineChart
                                 data={chartData.transactionsByHour}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['hourly'] = ref }}
                             />
                         </div>
                     </div>
@@ -322,12 +315,22 @@ function Clients() {
                         <h2 className="text-xl font-bold mb-4">{translate.transactionsPerHour[language]}</h2>
                         <h1>{translate.transactionsPerHourText[language]}</h1>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <HeatMap mapaClienteZona={data.mapaClienteZona} />
+                <AnimatedSection className="heatmap-section">
+                    <div className='heatmap-col-1'>
+                        <h2>Distribución geográfica de usuarios</h2>
+                        <h1>Visualización de la concentración de usuarios por zona</h1>
+                    </div>
+                    <div className='heatmap-col-2'>
+                        <div style={{ width: '100%', height: '100%' }}>
+                            <HeatMap mapaClienteZona={data.mapaClienteZona} />
+                        </div>
+                    </div>
+                </AnimatedSection>
             </div>
         </div>
     );
 }
 
-export default Clients;
+export default Clients
