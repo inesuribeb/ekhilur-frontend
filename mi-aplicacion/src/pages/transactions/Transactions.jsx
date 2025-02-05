@@ -340,9 +340,7 @@ function Transactions() {
                     </div>
                     <div className='fila1-columna2'>
                         <AnimatedChart>
-                            <div className="transaction-type-table-wrapper">
-                                <TransactionTypeTable transactions={data.transactions} />
-                            </div>
+                            <TransactionTypeTable transactions={data.transactions} />
                         </AnimatedChart>
                     </div>
                 </div>
