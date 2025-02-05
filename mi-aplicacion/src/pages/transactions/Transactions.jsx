@@ -239,12 +239,12 @@ function Transactions() {
             datasets: [{
                 data: data.totalWastedVsCashBack.map(item => parseFloat(item.Total || 0)),
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(54, 162, 235, 0.8)'
+                    'rgb(0, 0, 0)',
+                    'rgb(198, 198, 198)'
                 ],
                 borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)'
+                    'rgb(0, 0, 0)',
+                    'rgb(198, 198, 198)'
                 ],
                 borderWidth: 1
             }]
@@ -269,7 +269,7 @@ function Transactions() {
                         .filter(item => new Date(item.Id_fecha) >= new Date('2024-01-31'))
                         .filter((_, index) => index % 14 === 0)
                         .map(item => parseFloat(item.shift_14 || 0)),
-                    borderColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(233, 236, 23)',
                     tension: 0.4,
                     borderWidth: 2,
                     fill: false
@@ -296,8 +296,8 @@ function Transactions() {
                     data: data.transaccionesEntreSemanaYFinDeSemana
                         .filter(item => item.dia_semana === "Entre semana")
                         .map(item => parseFloat(item.Cantidad_total || 0)),
-                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                    borderColor: 'rgb(54, 162, 235)',
+                    backgroundColor: 'rgb(0, 0, 0)',
+                    borderColor: 'rgb(0, 0, 0)',
                     borderWidth: 1
                 },
                 {
@@ -305,8 +305,8 @@ function Transactions() {
                     data: data.transaccionesEntreSemanaYFinDeSemana
                         .filter(item => item.dia_semana === "Fin de semana")
                         .map(item => parseFloat(item.Cantidad_total || 0)),
-                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(187, 145, 255)',
+                    borderColor: 'rgb(187, 145, 255)',
                     borderWidth: 1
                 }
             ]
