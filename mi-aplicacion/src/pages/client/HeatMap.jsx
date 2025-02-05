@@ -41,10 +41,11 @@ const HeatMapLayer = ({ data }) => {
 
   const calculateColor = (users) => {
     const normalized = (users - minUsers) / (maxUsers - minUsers);
-    if (normalized < 0.33) return '#3388ff';
-    if (normalized < 0.66) return '#32cd32';
-    return '#ff0000';
+    if (normalized < 0.33) return '#BC90FF';
+    if (normalized < 0.66) return '#E8E92C';
+    return '#C6C6C6';
   };
+
 
   return data.map((point, index) => (
     <Circle
@@ -81,7 +82,7 @@ const HeatMap = ({ mapaClienteZona }) => {
     // <div className="w-full">
       <div className="chart-section">
         <div className="fila6-columna1">
-          <h2 className="text-xl font-bold mb-4">Distribución geográfica de usuarios</h2>
+          <h2>Distribución geográfica de usuarios</h2>
           <h1>Visualización de la concentración de usuarios por zona</h1>
         </div>
         

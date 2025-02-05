@@ -1,3 +1,36 @@
+.chart-section {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    /* gap:2rem; */
+    /* background-color: red; */
+    padding: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    height: 550px;
+    align-items: flex-end;
+    /* Esto alineará el contenido en la parte inferior */
+}
+
+.chart-section .fila6-columna1 h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 12px;
+    font-size: 40px;
+    letter-spacing: 1.1px;
+    font-family: 'Against';
+  }
+  
+  .chart-section .fila6-columna1 h1 {
+    font-size: 18px;
+    color: #666;
+    text-align: left;
+
+  }
+
 .map-container {
     background-color: rgb(17, 24, 39);
     border-radius: 8px;
