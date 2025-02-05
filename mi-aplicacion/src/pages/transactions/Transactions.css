@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
 .transactions-container {
     padding: 2rem;
     margin: 0 auto;
@@ -6,6 +8,7 @@
     width: 115%;
     margin-left: -7.5%;
     margin-top: -7.5%;
+    font-family: 'Manrope', sans-serif;
 }
 
 .charts-grid {
@@ -45,16 +48,16 @@
 }
 
 /* Estilos específicos para gráficos */
-.chart-section .chart-pie .chart-container,
-.chart-section .chart-line .chart-container,
-.chart-section .chart-bar .chart-container {
+.chart-pie .chart-container,
+.chart-line .chart-container,
+.chart-bar .chart-container {
     opacity: 0;
     transform: scale(0.9);
 }
 
-.chart-section .chart-pie .chart-container.chart-visible,
-.chart-section .chart-line .chart-container.chart-visible,
-.chart-section .chart-bar .chart-container.chart-visible {
+.chart-pie .chart-container.chart-visible,
+.chart-line .chart-container.chart-visible,
+.chart-bar .chart-container.chart-visible {
     opacity: 1;
     transform: scale(1);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -80,6 +83,7 @@
     justify-content: flex-end;
 }
 
+/* Estilos para la primera columna */
 .chart-section .fila1-columna1,
 .chart-section .fila3-columna1,
 .chart-section .fila5-columna1 {
@@ -101,6 +105,59 @@
     border-bottom-right-radius: 15px;
 }
 
+/* Ajuste para mantener el texto en la parte inferior */
+.chart-section .fila1-columna1,
+.chart-section .fila2-columna2,
+.chart-section .fila3-columna1,
+.chart-section .fila4-columna2,
+.chart-section .fila5-columna1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.chart-section .fila1-columna1 .chart-container,
+.chart-section .fila2-columna2 .chart-container,
+.chart-section .fila3-columna1 .chart-container,
+.chart-section .fila4-columna2 .chart-container,
+.chart-section .fila5-columna1 .chart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.chart-section .chart-container > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Ajuste específico para los títulos */
+.chart-section .fila1-columna1 .chart-container h2,
+.chart-section .fila2-columna2 .chart-container h2,
+.chart-section .fila3-columna1 .chart-container h2,
+.chart-section .fila4-columna2 .chart-container h2,
+.chart-section .fila5-columna1 .chart-container h2 {
+    font-size: 40px !important;
+    letter-spacing: 1.1px;
+    margin-bottom: 0.5rem;
+    order: 1;
+}
+
+.chart-section .fila1-columna1 .chart-container h1,
+.chart-section .fila2-columna2 .chart-container h1,
+.chart-section .fila3-columna1 .chart-container h1,
+.chart-section .fila4-columna2 .chart-container h1,
+.chart-section .fila5-columna1 .chart-container h1 {
+    font-size: 18px !important;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    margin-bottom: 0;
+    order: 2;
+}
+
 .chart-section .fila1-columna2,
 .chart-section .fila3-columna2,
 .chart-section .fila5-columna2 {
@@ -114,39 +171,165 @@
     border-bottom-left-radius: 15px;
 }
 
-/* Estilos de títulos */
-.chart-section .chart-container h1,
-.chart-section .chart-container h2 {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: none;
-    will-change: opacity, transform;
-}
-
-.chart-section .chart-container.chart-visible h1,
-.chart-section .chart-container.chart-visible h2 {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.chart-section .fila1-columna1 h2,
-.chart-section .fila3-columna1 h2,
-.chart-section .fila5-columna1 h2,
-.chart-section .fila2-columna2 h2,
-.chart-section .fila4-columna2 h2 {
-    font-size: 40px;
+/* Estilos para títulos */
+.chart-section .fila1-columna1 .chart-container h2,
+.chart-section .fila3-columna1 .chart-container h2,
+.chart-section .fila5-columna1 .chart-container h2,
+.chart-section .fila2-columna2 .chart-container h2,
+.chart-section .fila4-columna2 .chart-container h2 {
+    font-size: 40px !important;
     letter-spacing: 1.1px;
+    margin-bottom: 1rem;
+    font-family: 'Manrope', sans-serif;
 }
 
-.chart-section .fila1-columna1 h1,
-.chart-section .fila3-columna1 h1,
-.chart-section .fila5-columna1 h1,
-.chart-section .fila2-columna2 h1,
-.chart-section .fila4-columna2 h1 {
-    font-size: 18px;
+.chart-section .fila1-columna1 .chart-container h1,
+.chart-section .fila3-columna1 .chart-container h1,
+.chart-section .fila5-columna1 .chart-container h1,
+.chart-section .fila2-columna2 .chart-container h1,
+.chart-section .fila4-columna2 .chart-container h1 {
+    font-size: 18px !important;
     letter-spacing: 1px;
     opacity: 0.5;
+    margin-bottom: 1rem;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Estilos para la tabla */
+.chart-section .fila1-columna2 {
+    background-color: #2D2F7E;
+    overflow: hidden;
+}
+
+.chart-section .fila1-columna2 .chart-container {
+    height: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex;
+    overflow: hidden;
+}
+
+.transaction-type-container {
+    height: 100%;
+    width: 100%;
+    padding: 1.2rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    overflow: hidden;
+}
+
+.transaction-type-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1rem;
+    min-height: 40px;
+}
+
+.month-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.month-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+}
+
+.month-select-input {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.month-select-input:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.month-select-input:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.month-select-input option {
+    background-color: #2D2F7E;
+    color: white;
+    padding: 0.5rem;
+}
+
+.transaction-type-summary {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    min-height: 60px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.summary-label {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+}
+
+.summary-value {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.transaction-type-table-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 0.5rem;
+}
+
+.transaction-type-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    table-layout: fixed;
+}
+
+.transaction-type-table th,
+.transaction-type-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    word-break: break-word;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transaction-type-table th {
+    background-color: rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+.transaction-type-table th:nth-child(1) { width: 35%; }
+.transaction-type-table th:nth-child(2) { width: 20%; }
+.transaction-type-table th:nth-child(3) { width: 25%; }
+.transaction-type-table th:nth-child(4) { width: 20%; }
+
+.transaction-type-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 /* Colores de fondo */
@@ -222,7 +405,7 @@
         height: auto;
         flex-direction: column;
         padding: 1rem;
-        gap: 0rem;
+        gap: 0;
         margin-bottom: 2rem;
     }
 
@@ -247,28 +430,22 @@
         height: 250px;
     }
 
-    .chart-section h2 {
-        font-size: 24px;
+    .transaction-type-summary {
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: auto;
     }
 
-    .chart-section h1 {
-        font-size: 16px;
+    .month-selector {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
     }
 
-    .chart-section .fila1-columna1 h2,
-    .chart-section .fila3-columna1 h2,
-    .chart-section .fila5-columna1 h2,
-    .chart-section .fila2-columna2 h2,
-    .chart-section .fila4-columna2 h2 {
-        font-size: 30px;
-    }
-
-    .chart-section .fila1-columna1 h1,
-    .chart-section .fila3-columna1 h1,
-    .chart-section .fila5-columna1 h1,
-    .chart-section .fila2-columna2 h1,
-    .chart-section .fila4-columna2 h1 {
-        font-size: 16px;
+    .transaction-type-table th,
+    .transaction-type-table td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
     }
 
     .chart-section .fila1-columna1,
@@ -278,10 +455,6 @@
     .chart-section .fila4-columna2 {
         text-align: center;
         align-items: center;
-    }
-
-    .chart-container {
-        transform: translateY(20px);
     }
 }
 
@@ -295,11 +468,11 @@
     }
 
     .chart-section h2 {
-        font-size: 20px;
+        font-size: 20px !important;
     }
 
     .chart-section h1 {
-        font-size: 14px;
+        font-size: 14px !important;
     }
 }
 
@@ -313,110 +486,5 @@
         transform: none !important;
         opacity: 1 !important;
         visibility: visible !important;
-    }
-}
-
-/* Estilos para los títulos dentro del contenedor de animación */
-.chart-section .fila1-columna1 .chart-container h2,
-.chart-section .fila3-columna1 .chart-container h2,
-.chart-section .fila5-columna1 .chart-container h2,
-.chart-section .fila2-columna2 .chart-container h2,
-.chart-section .fila4-columna2 .chart-container h2,
-.chart-section .fila6-columna2 .chart-container h2 {
-    font-size: 40px !important;
-    letter-spacing: 1.1px;
-    margin-bottom: 1rem;
-}
-
-.chart-section .fila1-columna1 .chart-container h1,
-.chart-section .fila3-columna1 .chart-container h1,
-.chart-section .fila5-columna1 .chart-container h1,
-.chart-section .fila2-columna2 .chart-container h1,
-.chart-section .fila4-columna2 .chart-container h1,
-.chart-section .fila6-columna2 .chart-container h1 {
-    font-size: 18px !important;
-    letter-spacing: 1px;
-    opacity: 0.5;
-    margin-bottom: 1rem;
-}
-
-/* Estilos para la tabla */
-.fila1-columna2 .chart-container {
-    padding: 0 !important;
-    height: 100% !important;
-    width: 100% !important;
-}
-
-/* Mantén los estilos originales de la tabla */
-.transaction-type-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.transaction-type-table th,
-.transaction-type-table td {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.transaction-type-table thead {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-.transaction-type-table th {
-    font-weight: 600;
-}
-
-/* Asegura que el contenedor de la tabla mantenga el estilo correcto */
-.transaction-type-table-wrapper {
-    width: 100%;
-    height: calc(100% - 140px);
-    overflow-y: auto;
-}
-
-/* Animaciones ajustadas */
-.chart-section .chart-container {
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: none;
-    will-change: opacity, transform;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.chart-section .chart-container.chart-visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* Asegura que el contenedor no interfiera con los estilos originales */
-.chart-section .fila1-columna2 .chart-container {
-    background-color: inherit;
-    color: inherit;
-}
-
-/* Media queries para responsividad */
-@media screen and (max-width: 768px) {
-    .chart-section .fila1-columna1 .chart-container h2,
-    .chart-section .fila3-columna1 .chart-container h2,
-    .chart-section .fila5-columna1 .chart-container h2,
-    .chart-section .fila2-columna2 .chart-container h2,
-    .chart-section .fila4-columna2 .chart-container h2,
-    .chart-section .fila6-columna2 .chart-container h2 {
-        font-size: 30px !important;
-    }
-
-    .chart-section .fila1-columna1 .chart-container h1,
-    .chart-section .fila3-columna1 .chart-container h1,
-    .chart-section .fila5-columna1 .chart-container h1,
-    .chart-section .fila2-columna2 .chart-container h1,
-    .chart-section .fila4-columna2 .chart-container h1,
-    .chart-section .fila6-columna2 .chart-container h1 {
-        font-size: 16px !important;
     }
 }
