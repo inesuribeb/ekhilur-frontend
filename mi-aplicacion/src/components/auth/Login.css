@@ -91,11 +91,15 @@
     color: #666;
   } */
 
+  .login-wrapper {
+    background-color: black;
+  }
+
 
   .login-container-dsk {
     width: 100%;
     max-width: 400px;
-    background-color: white;
+    background-color: black;
     
     padding: 30px;
     /* border-radius: 16px; */
@@ -105,7 +109,7 @@
 }
 
 /* Añadimos el detalle del cuarto de círculo */
-.login-container-dsk::after {
+/* .login-container-dsk::after {
     content: '';
     position: absolute;
     top: 0;
@@ -115,7 +119,7 @@
     background-color: #FEB6B5;
     border-radius: 0 0 0 100%;
     z-index: 0;
-}
+} */
 
 .login-container-dsk h2 {
     font-family: 'Arial', sans-serif;
@@ -124,7 +128,7 @@
     margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #1542B9;
+    color: white;
     position: relative;
     z-index: 1;
 }
@@ -165,8 +169,9 @@
     padding: 12px;
     margin-top: 25px;
     border: none;
-    background: #1542B9;
-    color: white;
+    /* background: #1542B9; */
+    background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6);
+    color: black;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 1px;
@@ -176,7 +181,8 @@
 }
 
 .login-button-dsk:hover {
-    background: #1542B9;
+    /* background: #1542B9; */
+    filter: brightness(0.5);
     transform: translateY(-1px);
 }
 
