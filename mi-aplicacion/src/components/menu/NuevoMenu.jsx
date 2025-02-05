@@ -16,7 +16,7 @@ import translate from "../../utils/language";
 import { getLandingPageData } from "../../utils/apiController";
 import "./NuevoMenu.css";
 
-function NuevoMenu() {
+  function NuevoMenu() {
   const [isMobile, setIsMobile] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);

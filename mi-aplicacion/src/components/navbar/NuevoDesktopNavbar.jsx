@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Eye, LogOut, Menu as MenuIcon, X } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
+import {logout} from "../../utils/apiController.js"
 // import Logo from '../../utils/proyecto.png';
 import Logo from '../../utils/logo2.png';
 import LanguageButton from '../LanguageButton/LanguageButton';
@@ -20,8 +21,17 @@ const NuevoDesktopNavbar = () => {
   const isMenuPage = location.pathname === '/menus';
   const isHomePage = location.pathname === '/';
 
-  const handleLogout = () => {
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      const response = await logout()
+
+      if (response.success) {
+        navigate('/');
+      }      
+
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
   };
 
   const handleEyeClick = () => {

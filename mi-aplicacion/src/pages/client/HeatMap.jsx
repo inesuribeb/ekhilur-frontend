@@ -86,8 +86,8 @@ const HeatMap = ({ mapaClienteZona }) => {
         </div>
         
         <div className="fila7-columna2 map-container">
-          <div className="map-content">
-            <div className="map-wrapper">
+          <div className="map-content-cl">
+            <div className="map-wrapper-cl">
               <MapContainer 
                 center={CENTER}
                 zoom={ZOOM_LEVEL}
