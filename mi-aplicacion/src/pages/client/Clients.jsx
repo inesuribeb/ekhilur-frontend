@@ -135,8 +135,8 @@ function Clients() {
             datasets: [{
                 label: translate.userNumber[language],
                 data: data.usuariosPorEdad.map(item => item.cantidad_usuarios),
-                borderColor: 'rgb(44, 47, 136)',
-                backgroundColor: 'rgba(44, 47, 136, 0.5)',
+                borderColor: 'rgb(0, 0, 0)',
+                backgroundColor: 'rgb(0, 0, 0)',
                 borderWidth: 1
             }]
         },
@@ -160,12 +160,14 @@ function Clients() {
             datasets: [{
                 data: data.porcentajePagos.map(item => parseFloat(item.porcentaje)),
                 backgroundColor: [
-                    'rgba(242, 152, 188, 0.8)',
-                    'rgba(230, 88, 88, 0.8)'
+                    'rgba(230, 234, 41, 1)',
+                    'rgba(0, 0, 0, 1)'
+                    
                 ],
                 borderColor: [
-                    'rgba(242, 152, 188)',
-                    'rgba(230, 88, 88)'
+                    'rgba(230, 234, 41)',
+                    'rgba(0, 0 , 0)'
+                    
                 ],
                 borderWidth: 1
             }]
@@ -178,8 +180,8 @@ function Clients() {
                     data: data.transaccionesPorEdad
                         .filter(item => item.Id_tipo_operacion === 1)
                         .map(item => item.total_transacciones),
-                    backgroundColor: 'rgba(254, 232, 3, 0.8)',
-                    borderColor: 'rgba(254, 232, 3)',
+                    backgroundColor: 'rgba(0, 0, 0)',
+                    borderColor: 'rgba(0, 0, 0)',
                     borderWidth: 1
                 },
                 {
@@ -187,8 +189,8 @@ function Clients() {
                     data: data.transaccionesPorEdad
                         .filter(item => item.Id_tipo_operacion === 7)
                         .map(item => item.total_transacciones),
-                    backgroundColor: 'rgba(251, 68, 2, 0.8)',
-                    borderColor: 'rgba(251, 68, 2)',
+                    backgroundColor: 'rgba(187, 145, 255, 1)',
+                    borderColor: 'rgba(187, 145, 255',
                     borderWidth: 1
                 }
             ]
@@ -198,8 +200,8 @@ function Clients() {
             datasets: [{
                 label: translate.averageTicket[language],
                 data: data.ticketMedio.map(item => parseFloat(item.Ticket_medio)),
-                backgroundColor: 'rgba(251, 81, 6, 0.5)',
-                borderColor: 'rgba(251, 81, 6, 1)',
+                backgroundColor: 'rgba(187, 145, 255)',
+                borderColor: 'rgba(187, 145, 255)',
                 borderWidth: 1
             }]
         },
@@ -212,13 +214,13 @@ function Clients() {
                 data: data.transaccionesPorHora.map(item => 
                     parseFloat(item.Promedio_Cantidad)
                 ),
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(0, 0, 0, 1)',
+                backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 tension: 0.4,
                 fill: true,
                 pointRadius: 4,
                 pointHoverRadius: 6,
-                pointBackgroundColor: 'rgba(255, 99, 132, 1)'
+                pointBackgroundColor: 'rgba(0, 0, 0, 1)'
             }]
         }
     };
