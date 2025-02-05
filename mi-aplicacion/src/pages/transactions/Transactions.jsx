@@ -99,7 +99,6 @@ const AnimatedChart = ({ children }) => {
         };
     }, [isVisible]);
 
-    // Clona el elemento hijo y le pasa la prop isVisible
     return (
         <div 
             ref={chartRef} 
@@ -110,7 +109,6 @@ const AnimatedChart = ({ children }) => {
     );
 };
 
-// Componentes específicos para cada tipo de gráfico
 const AnimatedPieChart = ({ data, options, onChartRef, animate }) => {
     const chartRef = useRef(null);
 
@@ -374,20 +372,22 @@ function Transactions() {
                 <AnimatedSection className="chart-section">
                     <div className="fila2-columna1">
                         <div className="chart-pie">
-                            <AnimatedPieChart
-                                data={chartData.cashback}
-                                options={{
-                                    ...commonOptions,
-                                    plugins: {
-                                        ...commonOptions.plugins,
-                                        legend: { position: 'bottom' }
-                                    },
-                                    scales: {
-                                        y: { display: false }
-                                    }
-                                }}
-                                onChartRef={ref => { if (ref) chartInstances.current['cashback'] = ref }}
-                            />
+                            <AnimatedChart>
+                                <AnimatedPieChart
+                                    data={chartData.cashback}
+                                    options={{
+                                        ...commonOptions,
+                                        plugins: {
+                                            ...commonOptions.plugins,
+                                            legend: { position: 'bottom' }
+                                        },
+                                        scales: {
+                                            y: { display: false }
+                                        }
+                                    }}
+                                    onChartRef={ref => { if (ref) chartInstances.current['cashback'] = ref }}
+                                />
+                            </AnimatedChart>
                         </div>
                     </div>
                     <div className="fila2-columna2">
@@ -407,11 +407,13 @@ function Transactions() {
                     </div>
                     <div className="fila3-columna2">
                         <div className="chart-line">
-                            <AnimatedLineChart
-                                data={chartData.mobileAverage}
-                                options={commonOptions}
-                                onChartRef={ref => { if (ref) chartInstances.current['mobile'] = ref }}
-                            />
+                            <AnimatedChart>
+                                <AnimatedLineChart
+                                    data={chartData.mobileAverage}
+                                    options={commonOptions}
+                                    onChartRef={ref => { if (ref) chartInstances.current['mobile'] = ref }}
+                                />
+                            </AnimatedChart>
                         </div>
                     </div>
                 </AnimatedSection>
@@ -419,11 +421,13 @@ function Transactions() {
                 <AnimatedSection className="chart-section">
                     <div className="fila4-columna1">
                         <div className="chart-bar">
-                            <AnimatedBarChart
-                                data={chartData.weekdayVsWeekend}
-                                options={commonOptions}
-                                onChartRef={ref => { if (ref) chartInstances.current['weekday'] = ref }}
-                            />
+                            <AnimatedChart>
+                                <AnimatedBarChart
+                                    data={chartData.weekdayVsWeekend}
+                                    options={commonOptions}
+                                    onChartRef={ref => { if (ref) chartInstances.current['weekday'] = ref }}
+                                />
+                            </AnimatedChart>
                         </div>
                     </div>
                     <div className="fila4-columna2">
@@ -443,11 +447,13 @@ function Transactions() {
                     </div>
                     <div className="fila5-columna2">
                         <div className="chart-line">
-                            <AnimatedLineChart
-                                data={chartData.hourlyTransactions}
-                                options={commonOptions}
-                                onChartRef={ref => { if (ref) chartInstances.current['hourly'] = ref }}
-                            />
+                            <AnimatedChart>
+                                <AnimatedLineChart
+                                    data={chartData.hourlyTransactions}
+                                    options={commonOptions}
+                                    onChartRef={ref => { if (ref) chartInstances.current['hourly'] = ref }}
+                                />
+                            </AnimatedChart>
                         </div>
                     </div>
                 </AnimatedSection>
