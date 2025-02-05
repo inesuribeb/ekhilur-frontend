@@ -38,7 +38,7 @@
 .map-wrapper {
     width: 100%;
     padding-bottom: 100%; /* Esto hace que sea un cuadrado perfecto */
-    border-radius: 12px;
+    /* border-radius: 15px; */
     overflow: hidden;
     position: relative;
     max-width: 800px;
@@ -46,7 +46,9 @@
 }
 
 .map {
-    border-radius: 12px;
+    /* border-radius: 12px; */
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
     position: absolute !important;
     top: 0;
     left: 0;

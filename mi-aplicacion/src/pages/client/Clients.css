@@ -34,9 +34,9 @@
 }
 
 
-.chart-section .text-xl {
+/* .chart-section .text-xl {
     font-size: 1.25rem;
-}
+} */
 
 .chart-section .fila1-columna1,
 .chart-section .fila2-columna1,
@@ -110,10 +110,14 @@
 .chart-section .fila5-columna1 h2,
 .chart-section .fila2-columna2 h2,
 .chart-section .fila4-columna2 h2,
-.chart-section .fila6-columna2 h2 {
+.chart-section .fila6-columna2 h2,
+.chart-section .fila6-column1 h2 {
     font-size: 40px;
     letter-spacing: 1.1px;
+    font-family: 'Against';
+
 }
+
 
 .chart-section .fila1-columna1 h1,
 .chart-section .fila3-columna1 h1,
