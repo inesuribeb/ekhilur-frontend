@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import LoadComponent from '../../components/loadComponent/LoadComponent';
+import LoadComponent from '../loadComponent/LoadComponent';
+
 import {
   ComposedChart,
   Bar,
@@ -488,6 +489,7 @@ import "./NuevoMenu.css";
     );
   };
 
+  // if (loading) return <div>Cargando...</div>;
   if (loading) return <LoadComponent isLoading={loading} />;
   if (error) return <div className="error-message">{error}</div>;
   if (!data) return <div>No se pudieron cargar los datos</div>;

@@ -78,14 +78,14 @@ const HeatMap = ({ mapaClienteZona }) => {
   const CENTER = [43.26826, -1.97609];
 
   return (
-    <div className="w-full">
+    // <div className="w-full">
       <div className="chart-section">
-        <div className="fila7-columna1 bg-gray-900">
-          <h2 className="text-xl font-bold mb-4 text-white">Distribución geográfica de usuarios</h2>
-          <h1 className="text-base text-gray-400">Visualización de la concentración de usuarios por zona</h1>
+        <div className="fila6-columna1">
+          <h2 className="text-xl font-bold mb-4">Distribución geográfica de usuarios</h2>
+          <h1>Visualización de la concentración de usuarios por zona</h1>
         </div>
         
-        <div className="fila7-columna2 map-container">
+        <div className="fila6-columna2 map-container">
           <div className="map-content-cl">
             <div className="map-wrapper-cl">
               <MapContainer 
@@ -110,7 +110,7 @@ const HeatMap = ({ mapaClienteZona }) => {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 
