@@ -119,6 +119,14 @@ const translate = {
         Eus: "Aurreikuspenak",
         Es: "Predicciones"
     },
+    mapTextTitle:{
+        Eus:"Bezeroen mugimenduak zonaldearen arabera",
+        Es:"Distribución geográfica de usuarios"
+    },
+    mapTextSubtitle:{
+        Eus:"Erabiltzaileen kontzentrazioaren biztaratzea zonaldearen arabera",
+        Es:"Visualización de la concentración de usuarios por zona"
+    },
 
     // Traducciones para el menú
     menuTitle: {
@@ -379,6 +387,15 @@ const translate = {
         Eus: "Asteburua",
         Es: "Fin de semana"
     },
+    mapTextTitle:{
+        Eus: "Batez besteko tiketaren banaketa gunearen arabera",
+        Es:"Distribucion de ticket medio por zona"
+    },
+    mapTextSubitle:{
+        Eus: "Batez besteko tiketaren bistaratzea eremu geografikoaren arabera",
+        Es: "Visualización del ticket medio por zona geográfica"
+    },
+
     // Tipos de operación en la tabla
     operationTypes: {
         "Pago en tienda": {

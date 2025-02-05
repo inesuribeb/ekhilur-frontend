@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import {LanguageContext} from "../../context/LanguageContext"
+import translate from "../../utils/language"
 import { MapContainer, TileLayer, useMap, Circle, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -93,12 +95,13 @@ const HeatMapLayer = ({ data }) => {
 const TicketMap = ({ mapTicketMedio }) => {
   const ZOOM_LEVEL = 15.5;
   const CENTER = [43.26826, -1.97609];
+  const {language} = useContext(LanguageContext);
 
   return (
     <div className="chart-section">
       <div className="fila6-columna1">
-        <h2 className="text-xl font-bold mb-4">Distribución de ticket medio por zona</h2>
-        <h1 className="text-base opacity-50">Visualización del ticket medio por área geográfica</h1>
+        <h1 className="text-xl font-bold mb-4">{translate.mapTextTitle[language]}</h1>
+        <h2 className="text-base opacity-50">{translate.mapTextSubitle[language]}</h2>
       </div>
       
       <div className="fila6-columna2 map-container">

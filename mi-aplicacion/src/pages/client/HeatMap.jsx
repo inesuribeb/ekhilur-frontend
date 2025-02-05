@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, Circle, Tooltip } from 'react-leaflet';
+import {LanguageContext} from "../../context/LanguageContext"
+import translate from "../../utils/language"
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../../components/map/MapComponent.css';
@@ -76,13 +78,14 @@ const HeatMapLayer = ({ data }) => {
 const HeatMap = ({ mapaClienteZona }) => {
   const ZOOM_LEVEL = 15.5;
   const CENTER = [43.26826, -1.97609];
+  const {language} = useContext(LanguageContext);
 
   return (
     // <div className="w-full">
       <div className="chart-section">
         <div className="fila6-columna1">
-          <h2 className="text-xl font-bold mb-4">Distribución geográfica de usuarios</h2>
-          <h1>Visualización de la concentración de usuarios por zona</h1>
+          <h1 className="text-xl font-bold mb-4">{translate.mapTextTitle[language]}</h1>
+          <h2>{translate.mapTextSubtitle[language]}</h2>
         </div>
         
         <div className="fila6-columna2 map-container">
