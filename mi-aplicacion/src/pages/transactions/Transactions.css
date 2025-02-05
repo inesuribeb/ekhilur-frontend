@@ -28,55 +28,39 @@
     margin-bottom: 5vh;
 }
 
-/* Contenedor de animación */
-.chart-container {
+/* Animaciones de contenedores */
+.chart-section .chart-container {
+    width: 100%;
+    height: 100%;
     opacity: 0;
     transform: translateY(30px);
     transition: none;
-    width: 100%;
-    height: 100%;
     will-change: opacity, transform;
 }
 
-.chart-container.chart-visible {
+.chart-section .chart-container.chart-visible {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 /* Estilos específicos para gráficos */
-.chart-pie .chart-container,
-.chart-line .chart-container,
-.chart-bar .chart-container {
+.chart-section .chart-pie .chart-container,
+.chart-section .chart-line .chart-container,
+.chart-section .chart-bar .chart-container {
     opacity: 0;
     transform: scale(0.9);
 }
 
-.chart-pie .chart-container.chart-visible,
-.chart-line .chart-container.chart-visible,
-.chart-bar .chart-container.chart-visible {
+.chart-section .chart-pie .chart-container.chart-visible,
+.chart-section .chart-line .chart-container.chart-visible,
+.chart-section .chart-bar .chart-container.chart-visible {
     opacity: 1;
     transform: scale(1);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Animación para títulos */
-.chart-container h1,
-.chart-container h2 {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: none;
-    will-change: opacity, transform;
-}
-
-.chart-visible h1,
-.chart-visible h2 {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-/* Estilos de las columnas y filas */
+/* Estilos para columnas */
 .chart-section .fila1-columna1,
 .chart-section .fila2-columna1,
 .chart-section .fila3-columna1,
@@ -130,7 +114,22 @@
     border-bottom-left-radius: 15px;
 }
 
-/* Estilos de los títulos */
+/* Estilos de títulos */
+.chart-section .chart-container h1,
+.chart-section .chart-container h2 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: none;
+    will-change: opacity, transform;
+}
+
+.chart-section .chart-container.chart-visible h1,
+.chart-section .chart-container.chart-visible h2 {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
 .chart-section .fila1-columna1 h2,
 .chart-section .fila3-columna1 h2,
 .chart-section .fila5-columna1 h2,
@@ -150,7 +149,7 @@
     opacity: 0.5;
 }
 
-/* Colores de fondo para cada sección */
+/* Colores de fondo */
 .chart-section .fila1-columna1 {
     background-color: #E49C17;
     color: #ffffff;
@@ -196,12 +195,26 @@
     background-color: #F3F2EC;
 }
 
+/* Gráficos */
+.chart-bar,
+.chart-line,
+.chart-pie {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-section canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .transactions-container {
-        width: 100%;
-        margin: 0;
-        padding: 1rem;
+        width: 115%;
+        margin-left: -7.5%;
+        margin-top: -7.5%;
+        padding: 3rem;
         padding-top: 100px;
     }
 
@@ -209,7 +222,8 @@
         height: auto;
         flex-direction: column;
         padding: 1rem;
-        gap: 1rem;
+        gap: 0rem;
+        margin-bottom: 2rem;
     }
 
     .chart-section .fila1-columna1,
@@ -241,22 +255,168 @@
         font-size: 16px;
     }
 
+    .chart-section .fila1-columna1 h2,
+    .chart-section .fila3-columna1 h2,
+    .chart-section .fila5-columna1 h2,
+    .chart-section .fila2-columna2 h2,
+    .chart-section .fila4-columna2 h2 {
+        font-size: 30px;
+    }
+
+    .chart-section .fila1-columna1 h1,
+    .chart-section .fila3-columna1 h1,
+    .chart-section .fila5-columna1 h1,
+    .chart-section .fila2-columna2 h1,
+    .chart-section .fila4-columna2 h1 {
+        font-size: 16px;
+    }
+
+    .chart-section .fila1-columna1,
+    .chart-section .fila3-columna1,
+    .chart-section .fila5-columna1,
+    .chart-section .fila2-columna2,
+    .chart-section .fila4-columna2 {
+        text-align: center;
+        align-items: center;
+    }
+
     .chart-container {
         transform: translateY(20px);
     }
 }
 
-/* Accesibilidad - Reduced Motion */
+@media screen and (max-width: 480px) {
+    .transactions-container {
+        padding-top: 80px;
+    }
+
+    .chart-section {
+        padding: 0.5rem;
+    }
+
+    .chart-section h2 {
+        font-size: 20px;
+    }
+
+    .chart-section h1 {
+        font-size: 14px;
+    }
+}
+
+/* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
     .chart-container,
     .chart-container.chart-visible,
     .chart-container h1,
-    .chart-container h2,
-    .chart-pie .chart-container,
-    .chart-line .chart-container,
-    .chart-bar .chart-container {
+    .chart-container h2 {
         transition: none !important;
         transform: none !important;
         opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
+/* Estilos para los títulos dentro del contenedor de animación */
+.chart-section .fila1-columna1 .chart-container h2,
+.chart-section .fila3-columna1 .chart-container h2,
+.chart-section .fila5-columna1 .chart-container h2,
+.chart-section .fila2-columna2 .chart-container h2,
+.chart-section .fila4-columna2 .chart-container h2,
+.chart-section .fila6-columna2 .chart-container h2 {
+    font-size: 40px !important;
+    letter-spacing: 1.1px;
+    margin-bottom: 1rem;
+}
+
+.chart-section .fila1-columna1 .chart-container h1,
+.chart-section .fila3-columna1 .chart-container h1,
+.chart-section .fila5-columna1 .chart-container h1,
+.chart-section .fila2-columna2 .chart-container h1,
+.chart-section .fila4-columna2 .chart-container h1,
+.chart-section .fila6-columna2 .chart-container h1 {
+    font-size: 18px !important;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+/* Estilos para la tabla */
+.fila1-columna2 .chart-container {
+    padding: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+/* Mantén los estilos originales de la tabla */
+.transaction-type-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transaction-type-table th,
+.transaction-type-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transaction-type-table thead {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.transaction-type-table th {
+    font-weight: 600;
+}
+
+/* Asegura que el contenedor de la tabla mantenga el estilo correcto */
+.transaction-type-table-wrapper {
+    width: 100%;
+    height: calc(100% - 140px);
+    overflow-y: auto;
+}
+
+/* Animaciones ajustadas */
+.chart-section .chart-container {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: none;
+    will-change: opacity, transform;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.chart-section .chart-container.chart-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Asegura que el contenedor no interfiera con los estilos originales */
+.chart-section .fila1-columna2 .chart-container {
+    background-color: inherit;
+    color: inherit;
+}
+
+/* Media queries para responsividad */
+@media screen and (max-width: 768px) {
+    .chart-section .fila1-columna1 .chart-container h2,
+    .chart-section .fila3-columna1 .chart-container h2,
+    .chart-section .fila5-columna1 .chart-container h2,
+    .chart-section .fila2-columna2 .chart-container h2,
+    .chart-section .fila4-columna2 .chart-container h2,
+    .chart-section .fila6-columna2 .chart-container h2 {
+        font-size: 30px !important;
+    }
+
+    .chart-section .fila1-columna1 .chart-container h1,
+    .chart-section .fila3-columna1 .chart-container h1,
+    .chart-section .fila5-columna1 .chart-container h1,
+    .chart-section .fila2-columna2 .chart-container h1,
+    .chart-section .fila4-columna2 .chart-container h1,
+    .chart-section .fila6-columna2 .chart-container h1 {
+        font-size: 16px !important;
     }
 }

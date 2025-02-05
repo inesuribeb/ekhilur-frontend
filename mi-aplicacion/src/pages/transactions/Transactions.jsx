@@ -62,8 +62,8 @@ const AnimatedChart = ({ children }) => {
     }, [isVisible]);
 
     return (
-        <div 
-            ref={elementRef} 
+        <div
+            ref={elementRef}
             className={`chart-container ${isVisible ? 'chart-visible' : ''}`}
         >
             {React.cloneElement(children, { animate: isVisible })}
@@ -166,7 +166,7 @@ function Transactions() {
         const fetchData = async () => {
             try {
                 const response = await getTransactionData();
-                
+
                 if (!response || !response.data) {
                     throw new Error('No hay datos disponibles');
                 }
@@ -210,7 +210,7 @@ function Transactions() {
             easing: 'easeInOutQuart'
         },
         plugins: {
-            legend: { 
+            legend: {
                 position: 'top',
                 labels: {
                     padding: 20
@@ -223,7 +223,7 @@ function Transactions() {
                 grid: { display: false },
                 border: { display: false },
                 ticks: {
-                    callback: value => value >= 1000 ? `${value/1000}K` : value
+                    callback: value => value >= 1000 ? `${value / 1000}K` : value
                 }
             },
             x: {
@@ -312,7 +312,7 @@ function Transactions() {
             ]
         },
         hourlyTransactions: {
-            labels: data.transaccionesPorHora.map(item => 
+            labels: data.transaccionesPorHora.map(item =>
                 `${String(item.Hora_Dia || 0).padStart(2, '0')}:00`
             ),
             datasets: [{
@@ -338,9 +338,11 @@ function Transactions() {
                             </div>
                         </AnimatedChart>
                     </div>
-                    <div className="fila1-columna2">
+                    <div className='fila1-columna2'>
                         <AnimatedChart>
-                            {data && <TransactionTypeTable transactions={data.transactions} />}
+                            <div className="transaction-type-table-wrapper">
+                                <TransactionTypeTable transactions={data.transactions} />
+                            </div>
                         </AnimatedChart>
                     </div>
                 </div>
