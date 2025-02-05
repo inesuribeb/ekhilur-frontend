@@ -33,6 +33,158 @@ const monthTranslations = {
     9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic'
 };
 
+const AnimatedSection = ({ children, className }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const elementRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !isVisible) {
+                    setIsVisible(true);
+                }
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '-50px'
+            }
+        );
+
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+
+        return () => {
+            if (elementRef.current) {
+                observer.unobserve(elementRef.current);
+            }
+        };
+    }, [isVisible]);
+
+    return (
+        <div
+            ref={elementRef}
+            className={`${className} ${isVisible ? 'animate-visible' : 'animate-hidden'}`}
+        >
+            {children}
+        </div>
+    );
+};
+
+const AnimatedChart = ({ children }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const chartRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !isVisible) {
+                    setIsVisible(true);
+                }
+            },
+            {
+                threshold: 0.3,
+                rootMargin: '-50px'
+            }
+        );
+
+        if (chartRef.current) {
+            observer.observe(chartRef.current);
+        }
+
+        return () => {
+            if (chartRef.current) {
+                observer.unobserve(chartRef.current);
+            }
+        };
+    }, [isVisible]);
+
+    // Clona el elemento hijo y le pasa la prop isVisible
+    return (
+        <div 
+            ref={chartRef} 
+            className={`chart-container ${isVisible ? 'chart-visible' : ''}`}
+        >
+            {React.cloneElement(children, { animate: isVisible })}
+        </div>
+    );
+};
+
+// Componentes específicos para cada tipo de gráfico
+const AnimatedPieChart = ({ data, options, onChartRef, animate }) => {
+    const chartRef = useRef(null);
+
+    const chartOptions = {
+        ...options,
+        animation: {
+            ...options.animation,
+            animateRotate: animate,
+            animateScale: animate,
+            duration: animate ? 1500 : 0
+        }
+    };
+
+    return (
+        <Pie
+            ref={(ref) => {
+                chartRef.current = ref;
+                if (onChartRef) onChartRef(ref);
+            }}
+            data={data}
+            options={chartOptions}
+            redraw={animate}
+        />
+    );
+};
+
+const AnimatedLineChart = ({ data, options, onChartRef, animate }) => {
+    const chartRef = useRef(null);
+
+    const chartOptions = {
+        ...options,
+        animation: {
+            ...options.animation,
+            duration: animate ? 1500 : 0
+        }
+    };
+
+    return (
+        <Line
+            ref={(ref) => {
+                chartRef.current = ref;
+                if (onChartRef) onChartRef(ref);
+            }}
+            data={data}
+            options={chartOptions}
+            redraw={animate}
+        />
+    );
+};
+
+const AnimatedBarChart = ({ data, options, onChartRef, animate }) => {
+    const chartRef = useRef(null);
+
+    const chartOptions = {
+        ...options,
+        animation: {
+            ...options.animation,
+            duration: animate ? 1500 : 0
+        }
+    };
+
+    return (
+        <Bar
+            ref={(ref) => {
+                chartRef.current = ref;
+                if (onChartRef) onChartRef(ref);
+            }}
+            data={data}
+            options={chartOptions}
+            redraw={animate}
+        />
+    );
+};
+
 function Transactions() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -53,7 +205,6 @@ function Transactions() {
         const fetchData = async () => {
             try {
                 const response = await getTransactionData();
-                console.log("Full response:", response);
                 
                 if (!response || !response.data) {
                     throw new Error('No hay datos disponibles');
@@ -208,21 +359,22 @@ function Transactions() {
     return (
         <div className="transactions-container">
             <div className="charts-grid">
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className="fila1-columna1">
-                        <h2 className="text-xl font-bold mb-4">{translate.transactionsDetails[language]}</h2>
-                        <h1>{translate.transactionsDetailsText[language]}</h1>
+                        <div>
+                            <h2 className="text-xl font-bold mb-4">{translate.transactionsDetails[language]}</h2>
+                            <h1>{translate.transactionsDetailsText[language]}</h1>
+                        </div>
                     </div>
                     <div className="fila1-columna2">
                         {data && <TransactionTypeTable transactions={data.transactions} />}
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className="fila2-columna1">
                         <div className="chart-pie">
-                            <Pie
-                                ref={ref => { if (ref) chartInstances.current['cashback'] = ref }}
+                            <AnimatedPieChart
                                 data={chartData.cashback}
                                 options={{
                                     ...commonOptions,
@@ -234,64 +386,75 @@ function Transactions() {
                                         y: { display: false }
                                     }
                                 }}
+                                onChartRef={ref => { if (ref) chartInstances.current['cashback'] = ref }}
                             />
                         </div>
                     </div>
                     <div className="fila2-columna2">
-                        <h2 className="text-xl font-bold mb-4">{translate.cashback[language]}</h2>
-                        <h1>{translate.cashbackText[language]}</h1>
+                        <div>
+                            <h2 className="text-xl font-bold mb-4">{translate.cashback[language]}</h2>
+                            <h1>{translate.cashbackText[language]}</h1>
+                        </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className="fila3-columna1">
-                        <h2 className="text-xl font-bold mb-4">{translate.accumulateBuys[language]}</h2>
-                        <h1>{translate.accumulateBuysText[language]}</h1>
+                        <div>
+                            <h2 className="text-xl font-bold mb-4">{translate.accumulateBuys[language]}</h2>
+                            <h1>{translate.accumulateBuysText[language]}</h1>
+                        </div>
                     </div>
                     <div className="fila3-columna2">
                         <div className="chart-line">
-                            <Line
-                                ref={ref => { if (ref) chartInstances.current['mobile'] = ref }}
+                            <AnimatedLineChart
                                 data={chartData.mobileAverage}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['mobile'] = ref }}
                             />
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className="fila4-columna1">
                         <div className="chart-bar">
-                            <Bar
-                                ref={ref => { if (ref) chartInstances.current['weekday'] = ref }}
+                            <AnimatedBarChart
                                 data={chartData.weekdayVsWeekend}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['weekday'] = ref }}
                             />
                         </div>
                     </div>
                     <div className="fila4-columna2">
-                        <h2 className="text-xl font-bold mb-4">{translate.transactionsWeekend[language]}</h2>
-                        <h1>{translate.transactionsWeekendText[language]}</h1>
+                        <div>
+                            <h2 className="text-xl font-bold mb-4">{translate.transactionsWeekend[language]}</h2>
+                            <h1>{translate.transactionsWeekendText[language]}</h1>
+                        </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <div className="chart-section">
+                <AnimatedSection className="chart-section">
                     <div className="fila5-columna1">
-                        <h2 className="text-xl font-bold mb-4">{translate.transactionsHour[language]}</h2>
-                        <h1>{translate.transactionsHourText[language]}</h1>
+                        <div>
+                            <h2 className="text-xl font-bold mb-4">{translate.transactionsHour[language]}</h2>
+                            <h1>{translate.transactionsHourText[language]}</h1>
+                        </div>
                     </div>
                     <div className="fila5-columna2">
                         <div className="chart-line">
-                            <Line
-                                ref={ref => { if (ref) chartInstances.current['hourly'] = ref }}
+                            <AnimatedLineChart
                                 data={chartData.hourlyTransactions}
                                 options={commonOptions}
+                                onChartRef={ref => { if (ref) chartInstances.current['hourly'] = ref }}
                             />
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
-                <TicketMap mapTicketMedio={data.mapTicketMedio} />
+                <AnimatedSection>
+                    <TicketMap mapTicketMedio={data.mapTicketMedio} />
+                </AnimatedSection>
             </div>
         </div>
     );
