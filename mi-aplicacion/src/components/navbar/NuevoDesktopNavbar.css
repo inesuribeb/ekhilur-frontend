@@ -16,6 +16,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  backdrop-filter: blur(1rem);
 }
 
 .modern-navbar__logo {
