@@ -34,9 +34,9 @@
 }
 
 
-.chart-section .text-xl {
+/* .chart-section .text-xl {
     font-size: 1.25rem;
-}
+} */
 
 .chart-section .fila1-columna1,
 .chart-section .fila2-columna1,
@@ -110,10 +110,14 @@
 .chart-section .fila5-columna1 h2,
 .chart-section .fila2-columna2 h2,
 .chart-section .fila4-columna2 h2,
-.chart-section .fila6-columna2 h2 {
+.chart-section .fila6-columna2 h2,
+.chart-section .fila6-column1 h2 {
     font-size: 40px;
     letter-spacing: 1.1px;
+    font-family: 'Against';
+
 }
+
 
 .chart-section .fila1-columna1 h1,
 .chart-section .fila3-columna1 h1,
@@ -138,27 +142,35 @@
 }
 
 .chart-section .fila1-columna1 {
-    background-color: #DBBCE9;
-    color: #2A307F;
+    /* background-color: #DBBCE9;
+    color: #2A307F; */
+    /* background-color: #DBBCE9; */
+    /* background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6); */
+    background-color: white;
+    color: black;
 }
 
 .chart-section .fila1-columna2 {
-    background-color: #E49C17;
+    background-color: #E8E92C;
 }
 
 .chart-section .fila2-columna2 {
-    background-color: #4754C6;
+    /* background-color: #4754C6; */
+    background-color: BLACK;
+    /* background: linear-gradient(45deg, black 80%, #E8E92C 100%); */
+    border: 1px solid #E8E92C;
     color: white;
 }
 
 .chart-section .fila2-columna1 {
-    background-color: #2D2F7E;
+    /* background-color: #2D2F7E; */
+    background: linear-gradient(45deg, #2D2F7E, #BC90FF, #E8E92C, #C6C6C6);
     color: white;
 
 }
 
 .chart-section .fila3-columna1 {
-    background-color: #F1F425;
+    background-color: #BC90FF;
 }
 
 .chart-section .fila3-columna2 {
@@ -166,15 +178,22 @@
 }
 
 .chart-section .fila4-columna2 {
-    background-color: #E83324;
+    background-color: white;
+    color: black;
 }
 
 .chart-section .fila4-columna1 {
-    background-color: #F6D7E9;
+    /* background-color: #F6D7E9; */
+    background-color: #E8E92C;
+
 }
 
 .chart-section .fila5-columna1 {
-    background-color: #C0C853;
+    /* background-color: #C0C853; */
+    background-color: black;
+    border: 1px solid #E8E92C;
+    color: white;
+
 }
 
 .chart-section .fila5-columna2 {
@@ -182,11 +201,13 @@
 }
 
 .chart-section .fila6-columna2 {
-    background-color: #FFA6EA;
+    background-color: #BC90FF;
 }
 
 .chart-section .fila6-columna1 {
-    background-color: #F5F244;
+    /* background-color: #F5F244; */
+    background: linear-gradient(90deg, #E8E92C 70%, #BC90FF 100%);
+
 }
 
 .chart-bar,
