@@ -107,9 +107,9 @@ function LoadComponent({ isLoading }) {
                     />
                 </svg>
                 <div className="loading-text-center">
-                    <div className="loading-message">
+                    {/* <div className="loading-message">
                         {progress < 100 ? 'Cargando gráficas...' : 'Carga completada'}
-                    </div>
+                    </div> */}
                     <div className="loading-percentage">
                         {Math.min(Math.round(progress), 100)}%
                     </div>
