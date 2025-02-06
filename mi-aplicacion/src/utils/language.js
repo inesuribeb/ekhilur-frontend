@@ -253,6 +253,22 @@ const translate = {
             Es: "Cobro desde QR"
         }
     },
+    mapaClientes:{
+        Eus: "Erabiltzaileen banaketa zonaldearen arabera",
+        Es:"Distibución geográfica de usuarios"
+    },
+    mapaClientesSubtitulo:{
+        Eus: "Erabiltzaileen kontzentrazioaren biztarapena gunearen arabera",
+        Es:"Visualización de la concentración de usuarios por zona"
+    },
+    mapaTickets:{
+        Eus: "Batez besteko tiketaren banaketa zonaren arabera",
+        Es:"Distribución de ticket medio por zona"
+    },
+    mapaTicketsSubtitulo:{
+        Eus: "Batez besteko tiketaren bistaratzea eremu geografikoaren arabera",
+        Es:"Visualización del ticket medio por zona geográfica"
+    },
     // Página predicciones
     prediction: {
         Eus: "IRAGARPENA",
@@ -437,28 +453,13 @@ const translate = {
             Eus: "Bazkidearen hileko kuota",
             Es: "Cuota mensual de socio"
         },
+
     },
 
 
 
 
 
-    // ... mapas ...
-
-    
-    
-    
-    heatMapTitle: {
-        en: "User Distribution by Zone",
-        es: "Distribución de Usuarios por Zona"
-    },
-    heatMapText: {
-        en: "Heat map showing user concentration across different areas",
-        es: "Mapa de calor mostrando la concentración de usuarios por zonas"
-    },
-      
-    
-    
 
     // ... meses ...
     monthsLong: {

@@ -298,8 +298,8 @@ function Transactions() {
 
                 <AnimatedSection className="chart-section">
                     <div className='fila5-columna1'>
-                        <h2 className="text-xl font-bold mb-4">Distribución de ticket medio por zona</h2>
-                        <h1>Visualización del ticket medio por área geográfica</h1>
+                        <h2 className="text-xl font-bold mb-4">{translate.mapaTickets[language]}</h2>
+                        <h1>{translate.mapaTicketsSubtitulo[language]}</h1>
                     </div>
                     <div className='fila5-columna2'>
                         <TicketMap mapTicketMedio={data.mapTicketMedio} />
