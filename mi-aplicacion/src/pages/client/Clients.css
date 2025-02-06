@@ -311,12 +311,28 @@
         border-top-right-radius: 0px;
     }
 
-    .chart-section h2 {
+    /* .chart-section h2 {
+        font-size: 20px;
+    } */
+    .chart-section .fila1-columna1 h2,
+    .chart-section .fila2-columna2 h2,
+    .chart-section .fila3-columna1 h2,
+    .chart-section .fila4-columna2 h2,
+    .chart-section .fila5-columna1 h2,
+    .chart-section .fila6-columna2 h2 {
         font-size: 20px;
     }
-
-    .chart-section h1 {
+    /* .chart-section h1 {
         font-size: 14px;
+    } */
+
+    .chart-section .fila1-columna1 h1,
+    .chart-section .fila2-columna2 h1,
+    .chart-section .fila3-columna1 h1,
+    .chart-section .fila4-columna2 h1,
+    .chart-section .fila5-columna1 h1,
+    .chart-section .fila6-columna2 h1 {
+        font-size: 16px;
     }
 
     .chart-bar,

@@ -222,6 +222,13 @@
 .amount-info {
     padding-top: 80px;
     font-size:50px;
+    font-family: 'N27';
+    color: black;
+}
+
+.segunda-columna-segunda-fila .label-dos {
+    border: 1px solid black;
+    color: black;
 }
 
 /* Media queries específicas */
@@ -265,6 +272,10 @@
         margin-top: -7.5%; */
     }
 
+    .primera-columna-predict {
+    margin-top: 50px;
+    }
+
     .primera-columna-predict,
     .segunda-columna-predict {
         flex: unset;
@@ -287,7 +298,6 @@
         flex-direction: column;
         gap: 1rem;
         /* height: 600px; */
-
     }
 
     .segunda-columna-primera-fila {
