@@ -25,7 +25,7 @@ async function fetchData(route, method = 'GET', data = null) {
         console.log('Request data:', data);
 
         const response = await fetch(url.toString(), fetchOptions);
-        
+        console.log("API REPSONSEEEEEEEEEE", response)
         const responseText = await response.text();
         console.log('Raw response:', responseText);
         
@@ -66,43 +66,37 @@ async function verify2FA(tokenF2A, email) {
     return await fetchData('api/2fa/verify', 'POST', { tokenF2A, email });
 }
 
-async function getAllClients() {
-    return await fetchData('/api/client/all');
-}
 
 async function getLandingPageData() {
     return await fetchData('/api/landing-page/all');
 }
+async function getUpdatedResponseFromRedis(route) {
+    return await fetchData(`api/${route}/data/update`);
+}
+ 
 
 async function getClientData() {
     return await fetchData('/api/client/data');
 }
 
+
 async function getTransactionData() {
     return await fetchData('/api/transaction/data');
 }
+
 
 async function getPrediction(){
     return await fetchData('/api/predict/all');
 }
 
-async function getClientMap(){
-    return await fetchData('/api/map/clients');
-}
-
-async function getTicketMap(){
-    return await fetchData('/api/map/tickets');
-}
 
 export {
     login,
     logout,
-    getAllClients,
     verify2FA,
     getLandingPageData,
     getClientData,
     getTransactionData,
     getPrediction,
-    getClientMap,
-    getTicketMap
+    getUpdatedResponseFromRedis
 };

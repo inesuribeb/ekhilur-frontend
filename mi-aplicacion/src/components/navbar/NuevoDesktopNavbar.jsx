@@ -4,12 +4,12 @@ import { Eye, LogOut, Menu as MenuIcon, X } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 import translate from '../../utils/language';
 import {logout} from "../../utils/apiController.js"
-// import Logo from '../../utils/proyecto.png';
+import {HandleCacheButton} from "../HandleCacheButton/HandleCacheButton.jsx"
 import Logo from '../../utils/logo2.png';
 import LanguageButton from '../LanguageButton/LanguageButton';
 import './NuevoDesktopNavbar.css';
 
-const NuevoDesktopNavbar = () => {
+const NuevoDesktopNavbar = ({ onRefresh }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
@@ -69,10 +69,13 @@ const NuevoDesktopNavbar = () => {
               <Eye className={`eye-icon ${isBlinking ? 'blink' : ''}`} size={24} />
               <LanguageButton isBlinking={isButtonBlinking} />
             </div>
+            {!isHomePage &&(
+            <HandleCacheButton onRefresh={onRefresh}></HandleCacheButton>
+            )}
             {!isHomePage && !isMenuPage && (
               <button
-                className={`hamburger-button ${isHamburgerOpen ? 'open' : ''}`}
-                onClick={() => setIsHamburgerOpen(!isHamburgerOpen)}
+              className={`hamburger-button ${isHamburgerOpen ? 'open' : ''}`}
+              onClick={() => setIsHamburgerOpen(!isHamburgerOpen)}
               >
                 <MenuIcon className="menu-icon menu-icon-bars" size={24} />
                 <X className="menu-icon menu-icon-close" size={24} />
