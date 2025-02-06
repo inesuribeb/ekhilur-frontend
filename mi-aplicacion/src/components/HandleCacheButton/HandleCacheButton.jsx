@@ -7,6 +7,7 @@ import "./HandleCacheButton.css";
 export const HandleCacheButton = ({ onRefresh }) => {
   const location = useLocation();
   const pathname = location.pathname;
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const cacheKeys = {
     "/menu": "landing-page",
@@ -18,6 +19,10 @@ export const HandleCacheButton = ({ onRefresh }) => {
   const cacheKey = cacheKeys[pathname];
 
   const handleClick = async () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
     if (cacheKey) {
         onRefresh(); // Volver a montar el Outlet
       await getUpdatedResponseFromRedis(cacheKey);
@@ -28,7 +33,7 @@ export const HandleCacheButton = ({ onRefresh }) => {
   if (!cacheKey) return null;
 
   return (
-    <button className="HandleUpdateButton" onClick={handleClick}>
+    <button className={isAnimating ? "HandleUpdateButton animate" : "HandleUpdateButton" }onClick={handleClick}>
       <RefreshIcon/>
     </button>
   );

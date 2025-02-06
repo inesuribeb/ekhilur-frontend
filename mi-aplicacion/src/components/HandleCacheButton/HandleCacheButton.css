@@ -5,10 +5,6 @@
     cursor: pointer;
 }
 
-.HandleUpdateButton:hover{
-    animation: rotation 0.25s linear;
-}
-
 @keyframes rotation {
     0% {
         transform: rotate(0deg);
@@ -16,4 +12,9 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+
+.animate{
+    animation: rotation 0.25s linear;
 }
