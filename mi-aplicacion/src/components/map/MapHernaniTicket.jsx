@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, useMap, Circle, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { getTicketMap } from '../../utils/apiController';
 import './MapComponent.css';
 
 const FixedZoom = ({ zoomLevel }) => {
