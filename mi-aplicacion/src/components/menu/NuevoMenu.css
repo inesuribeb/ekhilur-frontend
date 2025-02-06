@@ -305,7 +305,7 @@
 .mobile-menu {
     min-height: 100vh;
     background-color: white;
-    padding-top: 40px;
+    padding-top: 50px;
     padding-right: 40px;
     position: relative;
     overflow: hidden;
@@ -315,7 +315,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0rem;
-    padding-left: 0.75rem;
+    padding-left: 2.25rem;
     position: relative;
     z-index: 10;
     margin-bottom: 30px;
@@ -333,11 +333,11 @@
 .mobile-column1-line1,
 .mobile-column2-line1 {
     flex: 1;
-    border: 1.5px solid black;
+    border: 1.5px solid #E8E92C;
     border-radius: 20px;
     padding-right: 10px;
     padding-left: 10px;
-    background-color: white;
+    background-color: #E8E92C;
 }
 
 .mobile-column1-line1 p:first-child,
@@ -371,11 +371,11 @@
 .mobile-column1-line2,
 .mobile-column2-line2 {
     flex: 1;
-    border: 1.5px solid black;
+    border: 1.5px solid #BC90FF;
     border-radius: 20px;
     padding-right: 10px;
     padding-left: 10px;
-    background-color: white;
+    background-color: #BC90FF;
 }
 
 .mobile-column1-line2 p:first-child,
@@ -393,16 +393,19 @@
 
 .mobile-third-line {
     background-color: white;
+    background-color: black;
+    color: white;
     border-radius: 20px;
     padding-left: 12px;
     padding-right: 12px;
     padding-bottom: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     width: 100%;
+    border: 1px solid black;
 }
 
 .mobile-third-line h4 {
-    color: black;
+    color: white;
     font-weight: bold;
     margin-bottom: 10px;
     padding-top: 0;
@@ -422,7 +425,7 @@
     width: 100%;
     border-radius: 20px;
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     min-height: 250px;
     display: flex;
     flex-direction: column;
@@ -468,8 +471,8 @@
     width: 200%;
     aspect-ratio: 1;
     /* background-color: #FEB6B5; */
-    background: radial-gradient(circle at center,  #E8E92C, #C6C6C6, #BC90FF);
-
+    /* background: radial-gradient(circle at center,  #E8E92C, #C6C6C6, #BC90FF); */
+    background-color: #E8E92C;
     border-radius: 100%;
     transform: translate(-50%, 50%);
     z-index: 8;
@@ -479,7 +482,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 24px;
+    /* width: 24px; */
+    width: 0px;
     height: 100%;
     background-color: #E8E92C;
     z-index: 1;
