@@ -319,8 +319,8 @@ function Clients() {
 
                 <AnimatedSection className="heatmap-section">
                     <div className='heatmap-col-1'>
-                        <h2>Distribución geográfica de usuarios</h2>
-                        <h1>Visualización de la concentración de usuarios por zona</h1>
+                        <h2>{translate.mapaClientes[language]}</h2>
+                        <h1>{translate.mapaClientesSubtitulo[language]}</h1>
                     </div>
                     <div className='heatmap-col-2'>
                         <div style={{ width: '100%', height: '100%' }}>

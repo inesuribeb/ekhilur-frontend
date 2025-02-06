@@ -184,7 +184,7 @@ import "./NuevoMenu.css";
     return (
       <div className="stat">
         <span>{symbol}</span>
-        {`${Math.abs(value).toFixed(1)}% azken hilabetean`}
+        {`${Math.abs(value).toFixed(1)}% ${translate.lastMonth[language]}`}
       </div>
     );
   };
