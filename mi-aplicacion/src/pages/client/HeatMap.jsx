@@ -41,10 +41,11 @@ const HeatMapLayer = ({ data }) => {
 
   const calculateColor = (users) => {
     const normalized = (users - minUsers) / (maxUsers - minUsers);
-    if (normalized < 0.33) return '#3388ff';
-    if (normalized < 0.66) return '#32cd32';
-    return '#ff0000';
+    if (normalized < 0.33) return '#BC90FF';
+    if (normalized < 0.66) return '#E8E92C';
+    return '#66F3B1';
   };
+
 
   return data.map((point, index) => (
     <Circle
