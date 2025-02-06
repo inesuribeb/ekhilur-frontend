@@ -1,11 +1,18 @@
-import LoginForm from '../components/auth/Login'
-function Home () {
+import React from 'react';
+import NuevoDesktopNavbar from '../components/navbar/NuevoDesktopNavbar';
+import LoginForm from '../components/auth/Login';
+import './Home.css';
 
-    return (
-        <div>
-            <LoginForm />
-        </div>
-    )
-}
+
+const Home = () => {
+  return (
+    <div className="home-page">
+      <NuevoDesktopNavbar/>
+      <div className="login-wrapper">
+        <LoginForm />
+      </div>
+    </div>
+  );
+};
 
 export default Home;

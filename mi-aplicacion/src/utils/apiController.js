@@ -3,14 +3,13 @@ const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 async function fetchData(route, method = 'GET', data = null) {
     try {
         let url = new URL(route, BASE_URL);
-        // console.log('URL completa:', url.toString());
-        const token = localStorage.getItem('token');
 
         const fetchOptions = {
             method,
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token ? `Bearer ${token}` : ''
+                'Accept': 'application/json'
             }
         }
 
@@ -22,20 +21,31 @@ async function fetchData(route, method = 'GET', data = null) {
             }
         }
 
-        console.log('Fetching:', url.toString(), fetchOptions);
+        console.log('Sending request to:', url.toString());
+        console.log('Request data:', data);
 
         const response = await fetch(url.toString(), fetchOptions);
-        console.log("response", response)
-        const responseData = await response.json();
+        
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+        
+        let responseData;
+        try {
+            responseData = JSON.parse(responseText);
+            console.log('Parsed response data:', responseData);
+            
+            // Devolver la respuesta en el formato esperado
+            return {
+                success: true,
+                data: responseData,
+                status: response.status
+            };
 
-        if (!response.ok) {
-            throw new Error(responseData.message || 'Error en la peticiÃ³n');
+        } catch (e) {
+            console.error('Error parsing JSON:', e);
+            throw new Error('Invalid JSON response');
         }
 
-        return {
-            success: true,
-            data: responseData
-        };
     } catch (error) {
         console.error('Fetch error:', error);
         return {
@@ -45,12 +55,54 @@ async function fetchData(route, method = 'GET', data = null) {
     }
 }
 
-
 async function login(email, password) {
     return await fetchData('api/login', 'POST', { email, password });
 }
+async function logout() {
+    return await fetchData('api/logout', 'POST', {credentials: 'include'});
+}
 
+async function verify2FA(tokenF2A, email) {
+    return await fetchData('api/2fa/verify', 'POST', { tokenF2A, email });
+}
+
+async function getAllClients() {
+    return await fetchData('/api/client/all');
+}
+
+async function getLandingPageData() {
+    return await fetchData('/api/landing-page/all');
+}
+
+async function getClientData() {
+    return await fetchData('/api/client/data');
+}
+
+async function getTransactionData() {
+    return await fetchData('/api/transaction/data');
+}
+
+async function getPrediction(){
+    return await fetchData('/api/predict/all');
+}
+
+async function getClientMap(){
+    return await fetchData('/api/map/clients');
+}
+
+async function getTicketMap(){
+    return await fetchData('/api/map/tickets');
+}
 
 export {
-    login
+    login,
+    logout,
+    getAllClients,
+    verify2FA,
+    getLandingPageData,
+    getClientData,
+    getTransactionData,
+    getPrediction,
+    getClientMap,
+    getTicketMap
 };

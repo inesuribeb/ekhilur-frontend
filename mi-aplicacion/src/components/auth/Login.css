@@ -1,30 +1,142 @@
-.auth-page {
-    min-height: 100vh;
-    background-color: white;
-    margin: 0;
-    padding: 0;
+/* .login-container-dsk {
     width: 100%;
+    max-width: 400px;
+    background-color: transparent;
+    padding: 20px;
+  }
+  
+  .login-container-dsk h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .form-group-dsk {
+    margin-bottom: 25px;
+  }
+  
+  .form-group-dsk label {
+    display: block;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  
+  .form-group-dsk input {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    background: transparent;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group-dsk input:focus {
+    outline: none;
+    border-bottom-color: #000;
+  }
+  
+  .login-button-dsk {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    border: 1px solid #000;
+    background: transparent;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .login-button-dsk:hover {
+    background: #000;
+    color: #fff;
+  }
+  
+  .link-button {
+    background: none;
+    border: none;
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+  }
+  
+  .error {
+    color: #ff0000;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .success-dsk {
+    color: #28a745;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .login-container-dsk p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+  } */
+
+  .login-wrapper {
+    background-color: black;
+  }
+
+
+  .login-container-dsk {
+    width: 100%;
+    max-width: 400px;
+    background-color: black;
+    
+    padding: 30px;
+    /* border-radius: 16px; */
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); */
+    position: relative;
+    overflow: hidden;
 }
 
-.login-container-dsk {
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 20px;
-    padding-top: 140px;
-    background-color: white;
-}
+/* Añadimos el detalle del cuarto de círculo */
+/* .login-container-dsk::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 160px;
+    height: 160px;
+    background-color: #FEB6B5;
+    border-radius: 0 0 0 100%;
+    z-index: 0;
+} */
 
 .login-container-dsk h2 {
     font-family: 'Arial', sans-serif;
     font-size: 24px;
     font-weight: normal;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: white;
+    position: relative;
+    z-index: 1;
 }
 
 .form-group-dsk {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
 }
 
 .form-group-dsk label {
@@ -41,61 +153,110 @@
     width: 100%;
     padding: 8px 0;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #E5E7EB;
     font-size: 16px;
     background: transparent;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
+    color: white;
 }
 
 .form-group-dsk input:focus {
     outline: none;
-    border-bottom-color: #000;
+    border-bottom-color: #BC90FF;
 }
 
 .login-button-dsk {
     width: 100%;
-    padding: 15px;
-    margin-top: 30px;
-    border: 1px solid #000;
-    background: transparent;
-    color: #000;
+    padding: 12px;
+    margin-top: 25px;
+    border: none;
+    /* background: #1542B9; */
+    background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6);
+    color: black;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
+    /* border-radius: 8px; */
 }
 
 .login-button-dsk:hover {
-    background: #000;
-    color: #fff;
+    /* background: #1542B9; */
+    filter: brightness(0.5);
+    transform: translateY(-1px);
+}
+
+.login-button-dsk:disabled {
+    background-color: #99A3BA;
+    cursor: not-allowed;
 }
 
 .link-button {
     background: none;
     border: none;
-    color: #000;
+    color: #BC90FF;
     text-decoration: underline;
     cursor: pointer;
     font-size: 14px;
     padding: 0;
+    transition: color 0.3s ease;
+}
+
+.link-button:hover {
+    color: #BC90FF;
 }
 
 .error {
-    color: #ff0000;
+    color: #DC2626;
     font-size: 12px;
     margin-top: 5px;
 }
 
 .success-dsk {
-    color: #28a745;
+    color: #059669;
     text-align: center;
     margin-top: 15px;
 }
 
 .login-container-dsk p {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 14px;
     color: #666;
+    position: relative;
+    z-index: 1;
 }
+
+.secret-info {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.secret-info ol {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.secret-info strong {
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #BC90FF;
+}
+
+.form-group-dsk input[type="text"] {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 2px solid #E5E7EB;
+  font-size: 16px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+  

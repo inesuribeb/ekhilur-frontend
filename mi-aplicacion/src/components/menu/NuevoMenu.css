@@ -1,0 +1,490 @@
+/* Variable CSS para control de animación */
+:root {
+    --animation-state: paused;
+}
+
+/* Estados base */
+.menu-center,
+.menu-left-info,
+.menu-right-info,
+.menu-right-info2,
+.menu-right-info3 {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+/* Animaciones base */
+.menu-center {
+    animation: fadeInCenter 2s ease-out forwards;
+    animation-play-state: var(--animation-state);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    /* background-color: #FFD450; */
+    /* background-color: #C6C6C6; */
+    background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6);
+    width: 35%;
+    height: 70%;
+    padding: 2rem;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+.menu-left-info {
+    animation: slideInLeft 2s ease-out forwards;
+    animation-delay: 1.5s;
+    animation-play-state: var(--animation-state);
+    top: 60%;
+    left: 15%;
+    transform: translateX(-70%);
+    background-color: white;
+    width: fit-content;
+    min-width: 300px;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    border: 2px solid black;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-right-info,
+.menu-right-info2,
+.menu-right-info3 {
+    left: 85%;
+    transform: translate(-30%, -50%);
+    background-color: white;
+    width: fit-content;
+    min-width: 300px;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    z-index: 20;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.menu-right-info {
+    animation: slideInRight 2s ease-out forwards;
+    animation-delay: 3s;
+    animation-play-state: var(--animation-state);
+    top: 30%;
+}
+
+.menu-right-info2 {
+    animation: slideInRight 2s ease-out forwards;
+    animation-delay: 4.5s;
+    animation-play-state: var(--animation-state);
+    top: 52%;
+}
+
+.menu-right-info3 {
+    animation: slideInRight 2s ease-out forwards;
+    animation-delay: 6s;
+    animation-play-state: var(--animation-state);
+    top: 76%;
+}
+
+/* Estado final de animaciones */
+:root[style*="--animation-state:finished"] .menu-center,
+:root[style*="--animation-state:finished"] .menu-left-info,
+:root[style*="--animation-state:finished"] .menu-right-info,
+:root[style*="--animation-state:finished"] .menu-right-info2,
+:root[style*="--animation-state:finished"] .menu-right-info3 {
+    opacity: 1;
+    pointer-events: auto;
+    animation: none;
+}
+
+/* Keyframes de animaciones */
+@keyframes fadeInCenter {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -80%);
+        pointer-events: none;
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        pointer-events: auto;
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-70%);
+        pointer-events: none;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%);
+        pointer-events: auto;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translate(-30%, -50%);
+        pointer-events: none;
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        pointer-events: auto;
+    }
+}
+
+/* Layout base */
+.NuevoMenu {
+    width: 100%;
+    height: calc(100vh - 74px);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 20px 20px 0 0;
+    padding-bottom: 10px;
+}
+
+.menu-left {
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    padding: 5rem 4rem;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.menu-left h1 {
+    font-size: 25px;
+    max-width: 250px;
+    font-family: 'Against';
+}
+
+.menu-right {
+    width: 50%;
+    height: 100%;
+    /* background-color: #1542B9; */
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilos de contenido */
+.menu-center .flex {
+    margin-bottom: 2rem;
+}
+
+.menu-center h4 {
+    font-size: 1.45rem;
+    font-weight: normal;
+    margin: 0;
+    color: #000;
+}
+
+.menu-center h4.exits-text,
+.mobile-chart h4.exits-text {
+    color: #FFFFFF;
+}
+
+/* Tooltip styles */
+.custom-tooltip {
+    background: transparent;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    transform: translateY(-20px);
+    white-space: nowrap;
+}
+
+/* Arrow styles */
+.arrow-up,
+.arrow-down {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.arrow-up {
+    transform: rotate(-90deg);
+}
+
+.arrow-down {
+    transform: rotate(90deg);
+}
+
+/* Panel content styles */
+.menu-left-info p {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+.info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.number {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-size: 14px;
+}
+
+.stat > span {
+    font-size: 20px;
+    display: inline-block;
+    margin-right: 4px;
+    font-weight: bold;
+}
+
+.menu-right-info p:first-child,
+.menu-right-info2 p:first-child {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.menu-right-info p:last-child,
+.menu-right-info2 p:last-child {
+    font-size: 1rem;
+    color: #666;
+    margin: 0.5rem 0 0 0;
+}
+
+.menu-right-info3 h5 {
+    color: #0047CC;
+    font-size: 0.875rem;
+    margin: 0 0 1rem 0;
+    letter-spacing: 0.05em;
+}
+
+.menu-right-info3 p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.menu-right-info3 p:last-child {
+    margin-top: 0.25rem;
+}
+
+/* Background elements */
+.menu-right::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200%;
+    aspect-ratio: 1;
+    /* background-color: #FEB6B5; */
+    /* background-color: #BC90FF; */
+    /* background: linear-gradient(45deg, #E8E92C, #BC90FF, #C6C6C6); */
+    background: radial-gradient(circle at center,  #E8E92C, #C6C6C6, #BC90FF);
+
+    border-radius: 100%;
+    transform: translate(50%, 50%);
+    z-index: 8;
+}
+
+/* Mobile styles */
+.mobile-menu {
+    min-height: 100vh;
+    background-color: white;
+    padding-top: 40px;
+    padding-right: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0rem;
+    padding-left: 0.75rem;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 30px;
+}
+
+.mobile-first-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.mobile-column1-line1,
+.mobile-column2-line1 {
+    flex: 1;
+    border: 1.5px solid black;
+    border-radius: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: white;
+}
+
+.mobile-column1-line1 p:first-child,
+.mobile-column2-line1 p:first-child {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.mobile-column1-line1 .mobile-title-1l,
+.mobile-column2-line1 .mobile-title-1l {
+    font-size: 12px;
+}
+
+.mobile-column1-line1 .stat,
+.mobile-column2-line1 .stat {
+    color: #747474;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.mobile-second-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.mobile-column1-line2,
+.mobile-column2-line2 {
+    flex: 1;
+    border: 1.5px solid black;
+    border-radius: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: white;
+}
+
+.mobile-column1-line2 p:first-child,
+.mobile-column2-line2 p:first-child {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.mobile-column1-line2 p:last-child,
+.mobile-column2-line2 p:last-child {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.mobile-third-line {
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.mobile-third-line h4 {
+    color: black;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-top: 0;
+    margin-top: 10px;
+}
+
+.mobile-third-line p {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.mobile-chart {
+    /* background-color: #FFD450; */
+    background: linear-gradient(45deg, #BC90FF, #E8E92C, #C6C6C6);
+
+    width: 100%;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-chart .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+}
+
+.mobile-chart .chart-container {
+    flex-grow: 1;
+    min-height: 200px;
+    width: 100%;
+}
+
+.mobile-chart h4 {
+    font-size: 16px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.mobile-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 34px;
+    background-color: #E8E92C;
+    z-index: 1;
+}
+
+.mobile-menu::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    aspect-ratio: 1;
+    /* background-color: #FEB6B5; */
+    background: radial-gradient(circle at center,  #E8E92C, #C6C6C6, #BC90FF);
+
+    border-radius: 100%;
+    transform: translate(-50%, 50%);
+    z-index: 8;
+}
+
+.blue-stripe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 100%;
+    background-color: #E8E92C;
+    z-index: 1;
+}
+
+.chart-container .recharts-responsive-container {
+    min-height: 200px !important;
+}

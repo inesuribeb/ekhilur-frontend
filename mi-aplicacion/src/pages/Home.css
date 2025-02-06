@@ -1,0 +1,26 @@
+.home-page {
+    height: 100vh;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  .login-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .login-wrapper {
+      padding: 0 1rem;
+    }
+  }

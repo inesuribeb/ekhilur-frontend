@@ -1,0 +1,274 @@
+.transactions-container {
+   padding: 2rem;
+   margin: 0 auto;
+   background-color: black;
+   padding-top: 170px;
+   width: 115%;
+   margin-left: -7.5%;
+   margin-top: -7.5%;
+}
+
+.charts-grid {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+   position: relative;
+}
+
+.chart-section {
+   display: flex;
+   justify-content: space-between;
+   padding: 1rem;
+   padding-left: 5rem;
+   padding-right: 5rem;
+   border-radius: 10px;
+   min-height: 400px;
+   height: 75vh;
+   align-items: flex-end;
+   width: 100%;
+   margin-bottom: 2rem;
+   position: relative;
+   will-change: transform, opacity;
+}
+
+.chart-section h1,
+.chart-section h2 {
+   font-size: 1.25rem;
+   font-weight: bold;
+   margin-bottom: 1rem;
+}
+
+.chart-section .fila1-columna1,
+.chart-section .fila2-columna1,
+.chart-section .fila3-columna1,
+.chart-section .fila4-columna1,
+.chart-section .fila5-columna1,
+.chart-section .fila1-columna2,
+.chart-section .fila2-columna2,
+.chart-section .fila3-columna2,
+.chart-section .fila4-columna2,
+.chart-section .fila5-columna2 {
+   flex: 1;
+   padding: 3rem;
+   height: 100%;
+   display: flex;
+   align-items: flex-end;
+   flex-direction: column;
+   justify-content: flex-end;
+   min-height: 300px;
+   position: relative;
+}
+
+.chart-section .fila1-columna1,
+.chart-section .fila3-columna1,
+.chart-section .fila5-columna1 {
+   align-items: flex-start;
+   text-align: left;
+   padding-left: 3rem;
+   padding-right: 3rem;
+   border-top-left-radius: 15px;
+   border-bottom-left-radius: 15px;
+}
+
+.chart-section .fila2-columna2,
+.chart-section .fila4-columna2 {
+   align-items: flex-end;
+   text-align: right;
+   padding-left: 3rem;
+   padding-right: 3rem;
+   border-top-right-radius: 15px;
+   border-bottom-right-radius: 15px;
+}
+
+.chart-section .fila1-columna2,
+.chart-section .fila3-columna2,
+.chart-section .fila5-columna2 {
+   border-top-right-radius: 15px;
+   border-bottom-right-radius: 15px;
+}
+
+.chart-section .fila2-columna1,
+.chart-section .fila4-columna1 {
+   border-top-left-radius: 15px;
+   border-bottom-left-radius: 15px;
+}
+
+.chart-section .fila1-columna1 h2,
+.chart-section .fila3-columna1 h2,
+.chart-section .fila5-columna1 h2,
+.chart-section .fila2-columna2 h2,
+.chart-section .fila4-columna2 h2 {
+   font-size: 40px;
+   letter-spacing: 1.1px;
+}
+
+.chart-section .fila1-columna1 h1,
+.chart-section .fila3-columna1 h1,
+.chart-section .fila5-columna1 h1,
+.chart-section .fila2-columna2 h1,
+.chart-section .fila4-columna2 h1 {
+   font-size: 18px;
+   letter-spacing: 1px;
+   opacity: 0.5;
+}
+
+.chart-section .fila1-columna2,
+.chart-section .fila2-columna2,
+.chart-section .fila3-columna2,
+.chart-section .fila4-columna2,
+.chart-section .fila5-columna2 {
+   padding-left: 20px;
+}
+
+.chart-section canvas {
+   width: 100% !important;
+   height: 100% !important;
+}
+
+.chart-pie,
+.chart-line,
+.chart-bar {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   min-height: 300px;
+}
+
+/* Tabla */
+.transaction-type-container {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   background-color: transparent;
+}
+
+.transaction-type-table-wrapper {
+   width: 100%;
+   height: calc(100% - 140px);
+   overflow-y: auto;
+}
+
+.transaction-type-table {
+   width: 100%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+   .transactions-container {
+       width: 115%;
+       margin-left: -7.5%;
+       margin-top: -7.5%;
+       padding: 3rem;
+       padding-top: 100px;
+   }
+
+   .chart-section {
+       height: auto;
+       flex-direction: column;
+       padding: 1rem;
+       gap: 0;
+       margin-bottom: 2rem;
+   }
+
+   .chart-section .fila1-columna1,
+   .chart-section .fila2-columna1,
+   .chart-section .fila3-columna1,
+   .chart-section .fila4-columna1,
+   .chart-section .fila5-columna1,
+   .chart-section .fila1-columna2,
+   .chart-section .fila2-columna2,
+   .chart-section .fila3-columna2,
+   .chart-section .fila4-columna2,
+   .chart-section .fila5-columna2 {
+       width: 100%;
+       padding: 2rem;
+       min-height: 300px;
+   }
+
+   .chart-section .fila1-columna1,
+   .chart-section .fila2-columna1,
+   .chart-section .fila3-columna1,
+   .chart-section .fila4-columna1,
+   .chart-section .fila5-columna1 {
+       border-top-left-radius: 15px;
+       border-top-right-radius: 15px;
+       border-bottom-left-radius: 0px;
+       border-bottom-right-radius: 0px;
+   }
+
+   .chart-section .fila1-columna2,
+   .chart-section .fila2-columna2,
+   .chart-section .fila3-columna2,
+   .chart-section .fila4-columna2,
+   .chart-section .fila5-columna2 {
+       border-bottom-left-radius: 15px;
+       border-bottom-right-radius: 15px;
+       border-top-left-radius: 0px;
+       border-top-right-radius: 0px;
+   }
+
+   .chart-section .fila1-columna1 h2,
+   .chart-section .fila3-columna1 h2,
+   .chart-section .fila5-columna1 h2,
+   .chart-section .fila2-columna2 h2,
+   .chart-section .fila4-columna2 h2 {
+       font-size: 30px;
+   }
+
+   .chart-section .fila1-columna1 h1,
+   .chart-section .fila3-columna1 h1,
+   .chart-section .fila5-columna1 h1,
+   .chart-section .fila2-columna2 h1,
+   .chart-section .fila4-columna2 h1 {
+       font-size: 16px;
+   }
+
+   .chart-section .fila1-columna1,
+   .chart-section .fila3-columna1,
+   .chart-section .fila5-columna1,
+   .chart-section .fila2-columna2,
+   .chart-section .fila4-columna2 {
+       text-align: center;
+       align-items: center;
+   }
+
+   .chart-pie,
+   .chart-line,
+   .chart-bar {
+       height: 250px;
+       min-height: 250px;
+   }
+}
+
+@media screen and (max-width: 480px) {
+   .transactions-container {
+       padding-top: 80px;
+   }
+
+   .chart-section {
+       padding: 0.5rem;
+   }
+
+   .chart-section h2 {
+       font-size: 20px;
+   }
+
+   .chart-section h1 {
+       font-size: 14px;
+   }
+
+   .charts-grid {
+       gap: 1rem;
+   }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+   * {
+       transition: none !important;
+       animation: none !important;
+       transform: none !important;
+       opacity: 1 !important;
+   }
+}
